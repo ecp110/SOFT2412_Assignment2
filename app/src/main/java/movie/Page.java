@@ -24,8 +24,19 @@ public abstract class Page {
      * If they are an admin, take them to admin page
      */
     public boolean logIn(String username, String password) {
+        if (username == null || password == null) {
+            return false
+        } else if (username.equals("") || password.equals("")) {
+            return false;
+        }
+        
         // TODO: Write login function for users to login 
         return true;
+    }
+
+    public void logOut() {
+        this.loggedIn = false;
+        this.admin = false;
     }
 
     // GETTERS
