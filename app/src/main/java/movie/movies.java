@@ -1,15 +1,19 @@
+import java.util.ArrayList;
+
 public class movies{
 
     private String title;
     private String description;
     private String length; //in minutes 
     private String classification; 
+    private ArrayList<String> cast;
     
-    public movies(String title, String description, String length, String classification){
+    public movies(String title, String description, String length, String classification, ArrayList<String> cast){
         this.title = title;
         this.description = description;
         this.length = length;
         this.classification = classification;
+        this.cast = cast;
     }
 
     //GETTER METHODS 
@@ -29,6 +33,10 @@ public class movies{
         return classification;
     }
 
+    public ArrayList<String> getCast(){
+        return cast;
+    }
+
 
     //SETTER METHODS 
     public void setTitle(String newTitle){
@@ -46,4 +54,24 @@ public class movies{
     public void setClassification(String newClassification){
         this.classification = newClassification;
     }
+
+    public void setCast(Arraylist<String> newCast){
+        this.cast = newCast;
+    }
+
+    //More methods 
+
+
+    //inserts a new actor/actress into the movie cast
+    public void insertActor(String name){
+
+        //Checking if actor/actress is already in cast
+        if(this.cast.contains(name)){
+            System.out.println("This actor is already included in the movie cast");
+        }
+        else{
+            this.cast.add(name);
+        }
+    }
+
 }
