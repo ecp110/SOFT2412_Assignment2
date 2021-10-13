@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class movies{
 
@@ -55,7 +55,7 @@ public class movies{
         this.classification = newClassification;
     }
 
-    public void setCast(Arraylist<String> newCast){
+    public void setCast(ArrayList<String> newCast){
         this.cast = newCast;
     }
 
@@ -74,4 +74,7 @@ public class movies{
         }
     }
 
+    public void appendDescription(String paragraph){
+        this.description = this.description + " " + paragraph;
+    }
 }
