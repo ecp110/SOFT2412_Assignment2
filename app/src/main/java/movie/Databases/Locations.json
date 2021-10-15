@@ -1,0 +1,26 @@
+[
+    {
+        "locations": [
+            {
+                "Location": "George Street",
+                "Screens": "/app/src/main/java/movie/Databases/Locations/George Street/Screens.csv",
+                "Timetable": "/app/src/main/java/movie/Databases/Locations/George Street/Timetable.csv"
+            },
+            {
+                "Location": "Hurstville",
+                "Screens": "/app/src/main/java/movie/Databases/Locations/Hurstville/Screens.csv",
+                "Timetable": "/app/src/main/java/movie/Databases/Locations/Hurstville/Timetable.csv"
+            },
+            {
+                "Location": "Chatswood",
+                "Screens": "/app/src/main/java/movie/Databases/Locations/Chatswood/Screens.csv",
+                "Timetable": "/app/src/main/java/movie/Databases/Locations/Chatswood/Timetable.csv"
+            },
+            {
+                "Location": "Bondi",
+                "Screens": "/app/src/main/java/movie/Databases/Locations/Bondi/Screens.csv",
+                "Timetable": "/app/src/main/java/movie/Databases/Locations/Bondi/Timetable.csv"
+            },
+        ]
+    }
+]
