@@ -60,9 +60,9 @@ public class HomePage extends Page {
         return output;
     }
 
-    public String cancel() {
+    public Page cancel() {
         this.hasUsername = false;
-        return "";
+        return this;
     }
     
 }

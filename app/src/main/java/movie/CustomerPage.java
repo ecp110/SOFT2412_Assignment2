@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class CustomerPage extends Page {
 
     // User details
@@ -6,7 +9,7 @@ public class CustomerPage extends Page {
     public CustomerPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, User user) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
         this.user = user;
-
+        this.homePageString = "../pages/customer/main.txt";
     }
 
     public String displayInitial() {
@@ -23,6 +26,11 @@ public class CustomerPage extends Page {
         }
 
         return output;
+    }
+
+    public Page cancel() {
+        this.user = null;
+        return new HomePage(this.movieLocation, this.cinemasLocation, this.creditCardLocation, this.giftCardLocation, this.usersLocation);
     }
 
 

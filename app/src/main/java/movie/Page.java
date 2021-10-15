@@ -29,9 +29,9 @@ public abstract class Page {
     public abstract String displayInitial();
 
     /**
-     * What to do & display if at any time the user cancels the current operation
+     * Page to return to & display if at any time the user cancels the current operation
      */
-    public abstract String cancel();
+    public abstract Page cancel();
 
     /** 
      * Parses users into arraylist of users
