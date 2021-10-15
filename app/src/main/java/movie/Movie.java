@@ -1,14 +1,14 @@
 import java.util.*;
 
-public class movies{
+public class Movie {
 
     private String title;
     private String description;
-    private String length; //in minutes 
+    private int length; //in minutes 
     private String classification; 
     private ArrayList<String> cast;
     
-    public movies(String title, String description, String length, String classification, ArrayList<String> cast){
+    public Movie (String title, String description, int length, String classification, ArrayList<String> cast){
         this.title = title;
         this.description = description;
         this.length = length;
@@ -25,7 +25,7 @@ public class movies{
         return description;
     }
 
-    public String getLength(){
+    public int getLength(){
         return length;
     }
 
@@ -47,7 +47,7 @@ public class movies{
         this.description = newDes;
     }
 
-    public void setLength(String newLength){
+    public void setLength(int newLength){
         this.length = newLength;
     }
 
@@ -76,5 +76,9 @@ public class movies{
 
     public void appendDescription(String paragraph){
         this.description = this.description + " " + paragraph;
+    }
+
+    public String toString() {
+        return "Name: " + this.title + "Length: " + this.length + "Rating: " + this.classification;
     }
 }

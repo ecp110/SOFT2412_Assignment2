@@ -6,7 +6,7 @@ public class HomePage extends Page {
 
     public HomePage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
-        this.homePageString = "./pages/greetingPage.txt";
+        this.homePageString = "../pages/init/main.txt";
     }
 
     /**
@@ -14,18 +14,7 @@ public class HomePage extends Page {
      * Asks whether they want to login or not
      */
     public String displayInitial() {
-        String output = "";
-        try {
-            Scanner sc = new Scanner(new File("../pages/greetingPage.txt"));
-            while (sc.hasNextLine()) {
-                output += sc.nextLine();
-                output += "\n";
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE FOUND");
-        }
-
-        return output;
+        return this.parseTxt(this.homePageString, 0);
     }
 
     /**
@@ -34,8 +23,8 @@ public class HomePage extends Page {
      * If nothing has been called, then call will ask for username.
      */
     public String displayLogIn() {
-        String username = "../pages/username.txt";
-        String password = "../pages/password.txt";
+        String username = "../pages/init/username.txt";
+        String password = "../pages/init/password.txt";
         String display;
 
         if (this.hasUsername) {
@@ -60,9 +49,9 @@ public class HomePage extends Page {
         return output;
     }
 
-    public String cancel() {
+    public Page cancel() {
         this.hasUsername = false;
-        return "";
+        return this;
     }
     
 }
