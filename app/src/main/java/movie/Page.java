@@ -2,10 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public abstract class Page {
-    // Boolean status
-    private boolean loggedIn = false;
-    private boolean admin = false;
-
     // Database locations
     private String movieLocation;
     private String cinemasLocation;
@@ -49,24 +45,31 @@ public abstract class Page {
             // Skips the initial line with column names
             sc.nextLine();
             
-            boolean admin;
+            String type;
             // Reads in each of the lines into User objects and stores them in the page
             while (sc.hasNextLine()) {
-                admin = false;
+                type = null;
                 line = sc.nextLine().split(",");
 
                 if (line[0] == null || line[0] == "") {
-                    break;
+                    continue;
                 } else if (line[1] == null) {
-                    break;
+                    continue;
                 } else if (line[2] == null) {
-                    break;
+                    continue;
                 }
 
-                if (!(line[2].equals("customer"))) {
-                    admin = true;
+                if (line[2].toLowerCase().equals("customer")) {
+                    type = "customer";
+                } else if (line[2].toLowerCase().equals("manager")) {
+                    type = "manager";
+                } else if (line[2].toLowerCase().equals("staff")) {
+                    type = "staff";
+                } else {
+                    continue;
                 }
-                this.users.add(new User(line[0], Integer.parseInt(line[1]), admin));
+
+                this.users.add(new User(line[0], Integer.parseInt(line[1]), type));
             }
 
         } catch (FileNotFoundException e) {
@@ -78,38 +81,42 @@ public abstract class Page {
      * Logs anyone in
      * If they are a customer, take them to customer page
      * If they are an admin, take them to admin page
+     * If they are not a recorded user, create them in the database and take them to the customer page
      */
-    public boolean logIn(String username, String password) {
+    public Page logIn(String username, int password) {
+        Page retPage;
+
         if (username == null || password == null) {
             return false;
-        } else if (username.equals("") || password.equals("")) {
+        } else if (username.equals("")) {
             return false;
         }
         
-        
-        return true;
+        // Iterates through all users in the userbase, and if they exist, then returns the page with their details
+        for (User user : this.users) {
+            if (user.getName().equals(username)) {
+                if (user.getPassword() == password) {
+                    if (user.isAdmin()) {
+                        return new AdminPage (
+                            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
+                            this.giftCardLocation, this.usersLocation, user
+                            );
+                    } else {
+                        return new CustomerPage (
+                            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
+                            this.giftCardLocation, this.usersLocation, user
+                        );
+                    }
+                }
+            }
+        }
+
+        // If user doesn't exist, then we will register them and take them to the customer page.
+        User newUser = User(username, password, "customer");
+        return new CustomerPage (
+            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
+            this.giftCardLocation, this.usersLocation, newUser
+        );
+
     }
-
-    public void logOut() {
-        this.loggedIn = false;
-        this.admin = false;
-    }
-
-    // GETTERS
-
-    /**
-     * Returns if any user is logged in or not
-     */
-    public boolean loggedIn() {
-        return this.loggedIn;
-    }
-
-    /**
-     * Returns if this is an admin page or not
-     */
-    public boolean isAdmin() {
-        return this.admin;
-    }
-
-
 }

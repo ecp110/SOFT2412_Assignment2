@@ -3,12 +3,12 @@ public class User {
     // Attributes
     private String name;
     private int password;
-    private boolean isAdmin;
+    private boolean status;
 
-    public User (String name, int password, boolean isAdmin) {
+    public User (String name, int password, String status) {
         this.name = name;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.status = status;
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class User {
         return this.password;
     }
 
-    public boolean isAdmin() {
-        return this.isAdmin;
+    public boolean getType() {
+        return this.status;
     }
 }
