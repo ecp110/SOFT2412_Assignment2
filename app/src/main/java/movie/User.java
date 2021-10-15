@@ -3,7 +3,7 @@ public class User {
     // Attributes
     private String name;
     private int password;
-    private boolean status;
+    private String status;
 
     public User (String name, int password, String status) {
         this.name = name;
@@ -19,7 +19,15 @@ public class User {
         return this.password;
     }
 
-    public boolean getType() {
+    public String getType() {
         return this.status;
+    }
+
+    public boolean isAdmin() {
+        if (this.status.equals("staff") || this.status.equals("manager")) {
+            return true;
+        }
+
+        return false;
     }
 }

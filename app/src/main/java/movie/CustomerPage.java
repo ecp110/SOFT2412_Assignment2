@@ -36,7 +36,9 @@ public class CustomerPage extends Page {
 
     public Page cancel() {
         this.user = null;
-        return new HomePage(this.movieLocation, this.cinemasLocation, this.creditCardLocation, this.giftCardLocation, this.usersLocation);
+        return new HomePage(
+            this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
+            this.GIFT_CARD_LOCATION, this.USERS_LOCATION);
     }
 
     public String listMovies() {

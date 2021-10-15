@@ -3,18 +3,18 @@ import java.io.*;
 
 public abstract class Page {
     // Database locations
-    private final String MOVIE_LOCATION;
-    private final String CINEMAS_LOCATION;
-    private final String CREDIT_CARD_LOCATION;
-    private final String GIFT_CARD_LOCATION;
-    private final String USERS_LOCATION;
-    public String homePageString;
+    protected final String MOVIE_LOCATION;
+    protected final String CINEMAS_LOCATION;
+    protected final String CREDIT_CARD_LOCATION;
+    protected final String GIFT_CARD_LOCATION;
+    protected final String USERS_LOCATION;
+    protected String homePageString;
 
     // User information; stored in an arraylist of User objects
-    private ArrayList<User> users = new ArrayList<User>();
+    protected ArrayList<User> users = new ArrayList<User>();
 
     // Movie information; stored in an arralist of Movie objects
-    private ArrayList<Movie> movies = new ArrayList<Movie>();
+    protected ArrayList<Movie> movies = new ArrayList<Movie>();
 
     public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
         this.MOVIE_LOCATION = movieLocation;
@@ -40,7 +40,7 @@ public abstract class Page {
     /** 
      * Parses users into arraylist of users
      */
-    private void parseUsers() {
+    protected void parseUsers() {
         // Initiates scanner for users file
         try {
             Scanner sc = new Scanner(new File(this.USERS_LOCATION));
@@ -60,11 +60,11 @@ public abstract class Page {
                     continue;
                 }
 
-                if (line[0] == null || line[0] == "") {
+                if (line[0] == null || line[0].equals("")) {
                     continue;
-                } else if (line[1] == null || line[1] == "") {
+                } else if (line[1] == null || line[1].equals("")) {
                     continue;
-                } else if (line[2] == null || line[2] == "") {
+                } else if (line[2] == null || line[2].equals("")) {
                     continue;
                 }
 
@@ -91,7 +91,7 @@ public abstract class Page {
     /** 
      * Parses movies into arraylist of users
      */
-    private void parseMovies() {
+    protected void parseMovies() {
         // Initiates scanner for movies file
         try {
             Scanner sc = new Scanner(new File(this.MOVIE_LOCATION));
@@ -111,11 +111,11 @@ public abstract class Page {
                     continue;
                 }
 
-                if (line[0] == null || line[0] == "") {
+                if (line[0] == null || line[0].equals("")) {
                     continue;
-                } else if (line[1] == null || line[1] = "") {
+                } else if (line[1] == null || line[1].equals("")) {
                     continue;
-                } else if (line[2] == null || line[2] = "") {
+                } else if (line[2] == null || line[2].equals("")) {
                     continue;
                 }
 
@@ -131,15 +131,13 @@ public abstract class Page {
     /**
      * Parses a txt file into a String which it then returns
      */
-    private String parseTxt(String fileLoc, int lineSkip) {
-        output = "";
+    protected String parseTxt(String fileLoc, int lineSkip) {
+        String output = "";
         try {
             Scanner sc = new Scanner(new File(fileLoc));
-            try {
-                for (int i = 0; i < lineSkip; i++) {
-                    sc.nextLine();
-                }
-            } catch (EOFException e) {}
+            for (int i = 0; i < lineSkip; i++) {
+                sc.nextLine();
+            }
 
             while (sc.hasNextLine()) {
                 output += sc.nextLine();
@@ -162,10 +160,10 @@ public abstract class Page {
     public Page logIn(String username, int password) {
         Page retPage;
 
-        if (username == null || password == null) {
-            return false;
+        if (username == null) {
+            return null;
         } else if (username.equals("")) {
-            return false;
+            return null;
         }
         
         // Iterates through all users in the userbase, and if they exist, then returns the page with their details
@@ -188,7 +186,7 @@ public abstract class Page {
         }
 
         // If user doesn't exist, then we will register them and take them to the customer page.
-        User newUser = User(username, password, "customer");
+        User newUser = new User(username, password, "customer");
         return new CustomerPage (
             this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION, newUser

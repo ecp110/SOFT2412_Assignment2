@@ -8,7 +8,7 @@ public class Movie {
     private String classification; 
     private ArrayList<String> cast;
     
-    public movies(String title, String description, int length, String classification, ArrayList<String> cast){
+    public Movie (String title, String description, int length, String classification, ArrayList<String> cast){
         this.title = title;
         this.description = description;
         this.length = length;
