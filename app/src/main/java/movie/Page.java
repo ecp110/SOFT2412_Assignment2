@@ -3,24 +3,28 @@ import java.io.*;
 
 public abstract class Page {
     // Database locations
-    private String movieLocation;
-    private String cinemasLocation;
-    private String creditCardLocation;
-    private String giftCardLocation;
-    private String usersLocation;
+    private final String MOVIE_LOCATION;
+    private final String CINEMAS_LOCATION;
+    private final String CREDIT_CARD_LOCATION;
+    private final String GIFT_CARD_LOCATION;
+    private final String USERS_LOCATION;
     public String homePageString;
 
     // User information; stored in an arraylist of User objects
     private ArrayList<User> users = new ArrayList<User>();
 
+    // Movie information; stored in an arralist of Movie objects
+    private ArrayList<Movie> movies = new ArrayList<Movie>();
+
     public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
-        this.movieLocation = movieLocation;
-        this.cinemasLocation = cinemasLocation;
-        this.creditCardLocation = creditCardLocation;
-        this.giftCardLocation = giftCardLocation;
-        this.usersLocation = usersLocation;
+        this.MOVIE_LOCATION = movieLocation;
+        this.CINEMAS_LOCATION = cinemasLocation;
+        this.CREDIT_CARD_LOCATION = creditCardLocation;
+        this.GIFT_CARD_LOCATION = giftCardLocation;
+        this.USERS_LOCATION = usersLocation;
 
         this.parseUsers();
+        this.parseMovies();
     }
 
     /**
@@ -39,7 +43,7 @@ public abstract class Page {
     private void parseUsers() {
         // Initiates scanner for users file
         try {
-            Scanner sc = new Scanner(new File("this.usersLocation"));
+            Scanner sc = new Scanner(new File(this.USERS_LOCATION));
             String[] line = new String[3];
 
             // Skips the initial line with column names
@@ -51,11 +55,16 @@ public abstract class Page {
                 type = null;
                 line = sc.nextLine().split(",");
 
+                // validity checks
+                if (line.length != 3) {
+                    continue;
+                }
+
                 if (line[0] == null || line[0] == "") {
                     continue;
-                } else if (line[1] == null) {
+                } else if (line[1] == null || line[1] == "") {
                     continue;
-                } else if (line[2] == null) {
+                } else if (line[2] == null || line[2] == "") {
                     continue;
                 }
 
@@ -69,12 +78,79 @@ public abstract class Page {
                     continue;
                 }
 
+                // Adds the user as a user object to the page
                 this.users.add(new User(line[0], Integer.parseInt(line[1]), type));
             }
 
         } catch (FileNotFoundException e) {
             return;
         }
+    }
+
+
+    /** 
+     * Parses movies into arraylist of users
+     */
+    private void parseMovies() {
+        // Initiates scanner for movies file
+        try {
+            Scanner sc = new Scanner(new File(this.MOVIE_LOCATION));
+            String[] line = new String[3];
+
+            // Skips the initial line with column names
+            sc.nextLine();
+            
+            String type;
+            // Reads in each of the lines into User objects and stores them in the page
+            while (sc.hasNextLine()) {
+                type = null;
+                line = sc.nextLine().split(",");
+
+                // validity checks
+                if (line.length != 3) {
+                    continue;
+                }
+
+                if (line[0] == null || line[0] == "") {
+                    continue;
+                } else if (line[1] == null || line[1] = "") {
+                    continue;
+                } else if (line[2] == null || line[2] = "") {
+                    continue;
+                }
+
+                // Adds the user as a movie object to the page
+                this.movies.add(new Movie(line[0], "DESCRIPTION TBD", Integer.parseInt(line[2]), line[1], null));
+            }
+
+        } catch (FileNotFoundException e) {
+            return;
+        }
+    }
+
+    /**
+     * Parses a txt file into a String which it then returns
+     */
+    private String parseTxt(String fileLoc, int lineSkip) {
+        output = "";
+        try {
+            Scanner sc = new Scanner(new File(fileLoc));
+            try {
+                for (int i = 0; i < lineSkip; i++) {
+                    sc.nextLine();
+                }
+            } catch (EOFException e) {}
+
+            while (sc.hasNextLine()) {
+                output += sc.nextLine();
+                output += "\n";
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("NO FILE FOUND");
+        }
+
+        return output;
     }
 
     /**
@@ -98,13 +174,13 @@ public abstract class Page {
                 if (user.getPassword() == password) {
                     if (user.isAdmin()) {
                         return new AdminPage (
-                            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
-                            this.giftCardLocation, this.usersLocation, user
+                            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
+                            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, user
                             );
                     } else {
                         return new CustomerPage (
-                            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
-                            this.giftCardLocation, this.usersLocation, user
+                            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
+                            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, user
                         );
                     }
                 }
@@ -114,9 +190,10 @@ public abstract class Page {
         // If user doesn't exist, then we will register them and take them to the customer page.
         User newUser = User(username, password, "customer");
         return new CustomerPage (
-            this.movieLocation,this.cinemasLocation, this.creditCardLocation,
-            this.giftCardLocation, this.usersLocation, newUser
+            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
+            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, newUser
         );
 
     }
+
 }

@@ -13,18 +13,24 @@ public class CustomerPage extends Page {
     }
 
     public String displayInitial() {
-        String output = ""
+        String output = "";
 
         try {
             Scanner sc = new Scanner(new File(this.homePageString));
-            while (sc.hasNextLine()) {
-                output += sc.nextLine();
-                output += "\n";
-            }
+
+            // Personalisation at start to user logged in
+            output += sc.nextLine();
+            output += " ";
+            output += user.getName();
+            output += "!";
+            output += "\n";
+
         } catch (FileNotFoundException e) {
             System.out.println("NO FILE FOUND");
         }
 
+        output += this.parseTxt(this.homePageString, 1);
+        output += this.listMovies();
         return output;
     }
 
@@ -32,6 +38,18 @@ public class CustomerPage extends Page {
         this.user = null;
         return new HomePage(this.movieLocation, this.cinemasLocation, this.creditCardLocation, this.giftCardLocation, this.usersLocation);
     }
+
+    public String listMovies() {
+        String output = "";
+
+        for (Movie movie : this.movies) {
+            output += movie.toString();
+            output += "\n";
+        }
+
+        return output;
+    }
+
 
 
 }

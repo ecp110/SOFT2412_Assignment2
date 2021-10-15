@@ -14,18 +14,7 @@ public class HomePage extends Page {
      * Asks whether they want to login or not
      */
     public String displayInitial() {
-        String output = "";
-        try {
-            Scanner sc = new Scanner(new File(this.homePageString));
-            while (sc.hasNextLine()) {
-                output += sc.nextLine();
-                output += "\n";
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE FOUND");
-        }
-
-        return output;
+        return this.parseTxt(this.homePageString, 0);
     }
 
     /**
