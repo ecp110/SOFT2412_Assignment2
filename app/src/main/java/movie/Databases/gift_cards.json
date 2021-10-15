@@ -1,0 +1,38 @@
+[
+    {
+        "number": "0000000000000000GC",
+        "redeemed": 0,
+        "issue": 12122020,
+        "expiry": 12122021
+    },
+    {
+        "number": "1234567890123456GC",
+        "redeemed": 0,
+        "issue": 08112020,
+        "expiry": 08112021
+    },
+    {
+        "number": "2345232534540980GC",
+        "redeemed": 0,
+        "issue": 10092020,
+        "expiry": 10092021
+    },
+    {
+        "number": "2346072396842372GC",
+        "redeemed": 1,
+        "issue": 23042020,
+        "expiry": 23042021
+    },
+    {
+        "number": "8950239845702398GC",
+        "redeemed": 0,
+        "issue": 01012020,
+        "expiry": 01012021
+    },
+    {
+        "number": "5464564569084304GC",
+        "redeemed": 1,
+        "issue": 11112020,
+        "expiry": 11112021
+    }
+]
