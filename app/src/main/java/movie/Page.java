@@ -1,4 +1,7 @@
-public abstract class Page {
+import java.util.*;
+import java.io.*;
+
+public class Page {
     // Boolean status
     private boolean loggedIn = false;
     private boolean admin = false;
@@ -9,6 +12,7 @@ public abstract class Page {
     private String creditCardLocation;
     private String giftCardLocation;
     private String usersLocation;
+    private static final String homePageString = "./database/homePage.txt";
 
     public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
         this.movieLocation = movieLocation;
@@ -19,13 +23,18 @@ public abstract class Page {
     }
 
     /**
+     * Displays the home / initial page which a user lands on for the given page
+     */
+    public abstract String displayInitial() {}
+
+    /**
      * Logs anyone in
      * If they are a customer, take them to customer page
      * If they are an admin, take them to admin page
      */
     public boolean logIn(String username, String password) {
         if (username == null || password == null) {
-            return false
+            return false;
         } else if (username.equals("") || password.equals("")) {
             return false;
         }
