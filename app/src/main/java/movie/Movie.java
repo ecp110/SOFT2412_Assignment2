@@ -5,17 +5,23 @@ import java.util.*;
 public class Movie {
 
     private String title;
-    private String description;
-    private int length; //in minutes 
+    private String synopsis;
+    private int runTime; //in minutes 
     private String classification; 
     private ArrayList<String> cast;
+    private String id;
+    private String director;
+    private int releaseDate;
     
-    public Movie (String title, String description, int length, String classification, ArrayList<String> cast){
+    public Movie (String title, String synopsis, int runTime, String classification, ArrayList<String> cast, String director, String id, int releaseDate){
         this.title = title;
-        this.description = description;
-        this.length = length;
+        this.synopsis = synopsis;
+        this.runTime = runTime;
         this.classification = classification;
         this.cast = cast;
+        this.director = director;
+        this.id = id;
+        this.releaseDate = releaseDate;
     }
 
     //GETTER METHODS 
@@ -23,12 +29,12 @@ public class Movie {
         return title;
     }
 
-    public String getDescription(){
-        return description;
+    public String getSynopsis(){
+        return synopsis;
     }
 
-    public int getLength(){
-        return length;
+    public int getRunTime(){
+        return runTime;
     }
 
     public String getClassification(){
@@ -39,18 +45,29 @@ public class Movie {
         return cast;
     }
 
+    public String getDirector(){
+        return director;
+    }
+
+    public String getID(){
+        return id;
+    }
+
+    public int getReleaseDate(){
+        return releaseDate;
+    }
 
     //SETTER METHODS 
     public void setTitle(String newTitle){
         this.title = newTitle;
     }
 
-    public void setDescription(String newDes){
-        this.description = newDes;
+    public void setSynopsis(String newSyn){
+        this.synopsis = newSyn
     }
 
-    public void setLength(int newLength){
-        this.length = newLength;
+    public void setRunTime(int newRunTime){
+        this.runTime = newRunTime;
     }
 
     public void setClassification(String newClassification){
@@ -59,6 +76,18 @@ public class Movie {
 
     public void setCast(ArrayList<String> newCast){
         this.cast = newCast;
+    }
+
+    public void setDirector(String newDirector){
+        this.director = newDirector;
+    }
+
+    public void setID(String newID){
+        this.id = newID
+    }
+
+    public void setReleaseDate(int newReleaseDate){
+        this.releaseDate = newReleaseDate;
     }
 
     //More methods 
@@ -76,11 +105,11 @@ public class Movie {
         }
     }
 
-    public void appendDescription(String paragraph){
-        this.description = this.description + " " + paragraph;
+    public void appendSynopsis(String paragraph){
+        this.synopsis = this.synopsis + " " + paragraph;
     }
 
     public String toString() {
-        return "Name: " + this.title + "Length: " + this.length + "Rating: " + this.classification;
+        return "Name: " + this.title + "Run time: " + this.runTime + "Rating: " + this.classification;
     }
 }
