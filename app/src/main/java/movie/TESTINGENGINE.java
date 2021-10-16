@@ -1,3 +1,5 @@
+package movie;
+
 import java.util.*;
 import java.io.*;
 
@@ -19,7 +21,7 @@ public class TESTINGENGINE {
             System.out.println(landing.displayLogIn());
             String password = sc.nextLine();
 
-            Page nextPage = landing.logIn(username, Integer.parseInt(password));
+            Page nextPage = landing.logIn(username, password);
 
             System.out.println(nextPage.displayInitial());
         }

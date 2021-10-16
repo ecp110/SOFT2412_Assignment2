@@ -1,3 +1,5 @@
-public abstract class ClientPage extends Page {
+package movie;
+
+//public abstract class ClientPage extends Page {
     // TODO
-}
+//}

@@ -1,11 +1,13 @@
+package movie;
+
 public class User {
 
     // Attributes
     private String name;
-    private int password;
+    private String password;
     private String status;
 
-    public User (String name, int password, String status) {
+    public User (String name, String password, String status) {
         this.name = name;
         this.password = password;
         this.status = status;
@@ -15,7 +17,7 @@ public class User {
         return this.name;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return this.password;
     }
 

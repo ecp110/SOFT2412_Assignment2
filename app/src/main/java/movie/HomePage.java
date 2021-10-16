@@ -1,5 +1,9 @@
+package movie;
+
 import java.util.*;
 import java.io.*;
+
+
 
 public class HomePage extends Page {
     private boolean hasUsername = false;
