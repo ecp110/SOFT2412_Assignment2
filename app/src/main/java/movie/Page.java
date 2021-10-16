@@ -1,3 +1,4 @@
+package movie;
 import java.util.*;
 import java.io.*;
 
@@ -79,7 +80,7 @@ public abstract class Page {
                 }
 
                 // Adds the user as a user object to the page
-                this.users.add(new User(line[0], Integer.parseInt(line[1]), type));
+                this.users.add(new User(line[0], line[1], type));
             }
 
         } catch (FileNotFoundException e) {
@@ -157,7 +158,7 @@ public abstract class Page {
      * If they are an admin, take them to admin page
      * If they are not a recorded user, create them in the database and take them to the customer page
      */
-    public Page logIn(String username, int password) {
+    public Page logIn(String username, String password) {
         Page retPage;
 
         if (username == null) {
@@ -169,7 +170,7 @@ public abstract class Page {
         // Iterates through all users in the userbase, and if they exist, then returns the page with their details
         for (User user : this.users) {
             if (user.getName().equals(username)) {
-                if (user.getPassword() == password) {
+                if (user.getPassword().equals(password)) {
                     if (user.isAdmin()) {
                         return new AdminPage (
                             this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
