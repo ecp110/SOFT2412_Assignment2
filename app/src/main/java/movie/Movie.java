@@ -11,9 +11,9 @@ public class Movie {
     private ArrayList<String> cast;
     private String id;
     private String director;
-    private int releaseDate;
+    private Calendar releaseDate;
     
-    public Movie (String title, String synopsis, int runTime, String classification, ArrayList<String> cast, String director, String id, int releaseDate){
+    public Movie (String title, String synopsis, int runTime, String classification, ArrayList<String> cast, String director, String id, Calendar releaseDate){
         this.title = title;
         this.synopsis = synopsis;
         this.runTime = runTime;
@@ -53,7 +53,7 @@ public class Movie {
         return id;
     }
 
-    public int getReleaseDate(){
+    public Calendar getReleaseDate(){
         return releaseDate;
     }
 
@@ -86,7 +86,7 @@ public class Movie {
         this.id = newID
     }
 
-    public void setReleaseDate(int newReleaseDate){
+    public void setReleaseDate(Calendar newReleaseDate){
         this.releaseDate = newReleaseDate;
     }
 
