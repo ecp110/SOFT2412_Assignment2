@@ -1,6 +1,7 @@
 package movie;
 import java.util.*;
 import java.io.*;
+import org.json.simple.*;
 
 public abstract class Page {
     // Database locations
@@ -154,45 +155,109 @@ public abstract class Page {
 
     /**
      * Logs anyone in
-     * If they are a customer, take them to customer page
-     * If they are an admin, take them to admin page
-     * If they are not a recorded user, create them in the database and take them to the customer page
+     * If they are a customer, returns 0
+     * If they are a staff, returns 1
+     * If they are a manager, returns 2
+     * If they are not a recorded user / other error, returns -1
      */
-    public Page logIn(String username, String password) {
-        Page retPage;
 
+     public int logIn(String username, String password) {
         if (username == null) {
-            return null;
+            return -1;
         } else if (username.equals("")) {
-            return null;
+            return -1;
         }
-        
-        // Iterates through all users in the userbase, and if they exist, then returns the page with their details
+
+        if (password == null) {
+            return -1;
+        } else if (password.equals("")) {
+            return -1;
+        }
+
+        // Checks for existing User
+        User foundUser = null;
         for (User user : this.users) {
             if (user.getName().equals(username)) {
                 if (user.getPassword().equals(password)) {
-                    if (user.isAdmin()) {
-                        return new AdminPage (
-                            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
-                            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, user
-                            );
-                    } else {
-                        return new CustomerPage (
-                            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
-                            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, user
-                        );
-                    }
+                    foundUser = user;
+                    break;
                 }
             }
         }
 
-        // If user doesn't exist, then we will register them and take them to the customer page.
-        User newUser = new User(username, password, "customer");
-        return new CustomerPage (
-            this.MOVIE_LOCATION,this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
-            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, newUser
-        );
+        // If user doesn't exist, terminate with error
+        if (foundUser == null) {
+            return -1;
+        }
 
-    }
+        // If user does exist, return right person type code
+        String userType = user.getType().toLowerCase();
+        if (userType.equals("customer")) {
+            return 0;
+        } else if (userType.equals("staff")) {
+            return 1;
+        } else if (userType.equals("manager")) {
+            return 2;
+        }
+
+        return -1;
+     }
+
+     /**
+      * Registers a new user
+      * If user alreay exists, return 0
+      * If user created, return 1
+      * If error, return -1
+      * @param username
+      * @param password
+      * @return
+      */
+
+     public int register(String username, String password) {
+        // Error checking
+        if (username == null) {
+            return -1;
+        } else if (username.equals("")) {
+            return -1;
+        }
+
+        if (password == null) {
+            return -1;
+        } else if (password.equals("")) {
+            return -1;
+        }
+
+        // Checks doesn't exist already
+        for (User user : this.users) {
+            if (user.getName().equals(username)) {
+                return 0;
+            }
+        }
+        
+        // Creates new user and adds to page list
+        User newUser = new User(username, password, "customer");
+        this.users.add(newUser);
+
+        // Adds new user to database
+        try {
+            Object o = jsonParser.parse(new FileReader(this.USERS_LOCATION));
+            JSONArray jsonArray = (JSONArray) o;
+            JSONObject nUser = new JSONObject();
+            nUser.put("username", "password", "type");
+            nUser.put(username, password, "customer");
+            jsonArray.add(nUser);
+            FileWriter f = new FileWriter(this.USERS_LOCATION);
+            f.write(jsonArray.toJSONString());
+            f.flush();
+            f.close();
+            return 1;
+        } catch (ParseException e) {
+            return -1;
+        } catch (IOException e) {
+            return -1;
+        }
+
+        return -1;
+     }
 
 }
