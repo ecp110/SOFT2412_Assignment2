@@ -33,7 +33,7 @@ public class AdminPage extends Page {
         return output;
     }
 
-    public Page cancel() {
+    public HomePage cancel() {
         this.user = null;
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
