@@ -63,7 +63,7 @@ public class Movie {
     }
 
     public void setSynopsis(String newSyn){
-        this.synopsis = newSyn
+        this.synopsis = newSyn;
     }
 
     public void setRunTime(int newRunTime){
@@ -83,7 +83,7 @@ public class Movie {
     }
 
     public void setID(String newID){
-        this.id = newID
+        this.id = newID;
     }
 
     public void setReleaseDate(Calendar newReleaseDate){

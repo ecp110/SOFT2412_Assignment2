@@ -21,9 +21,9 @@ public class TESTINGENGINE {
             System.out.println(landing.displayLogIn());
             String password = sc.nextLine();
 
-            Page nextPage = landing.logIn(username, password);
+            //Page nextPage = landing.logIn(username, password);
 
-            System.out.println(nextPage.displayInitial());
+            //System.out.println(nextPage.displayInitial());
         }
     }
 }
