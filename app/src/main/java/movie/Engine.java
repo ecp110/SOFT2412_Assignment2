@@ -2,6 +2,8 @@ package movie;
 
 import java.util.*;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Engine {
 
@@ -37,9 +39,17 @@ public class Engine {
                     ioe.printStackTrace();
                 }
                 et.stopMasking();
+                
 
-                Page page = Page.logIn(username, password);
-                page.displayInitial();
+                Path currentPath = Paths.get(System.getProperty("user.dir"));
+                String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "Movies.json").toString();
+                String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "Locations").toString();
+                String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "credit_cards.json").toString();
+                String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "gift_cards.json").toString();
+                String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "members.json").toString();
+
+                HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath);
+                home.displayInitial();
 
 
             }
