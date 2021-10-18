@@ -1,202 +1,252 @@
 [
   {
     "name": "Charles",
-    "password": "first2345"
+    "password": "first2345",
+    "status" : "manager"
   },
   {
     "name": "Sergio",
-    "password": "it234"
+    "password": "it234",
+    "status" : "staff"
   },
   {
     "name": "Kasey",
-    "password": "go3456"
+    "password": "go3456",
+    "status" : "staff"
   },
   {
     "name": "Vincent",
-    "password": "viral346"
+    "password": "viral346",
+    "status" : "customer"
   },
   {
     "name": "Ruth",
-    "password": "then346"
+    "password": "then346",
+    "status" : "customer"
   },
   {
     "name": "Donald",
-    "password": "they7345"
+    "password": "they7345",
+    "status" : "customer"
   },
   {
     "name": "Christine",
-    "password": "Get43224"
+    "password": "Get43224",
+    "status" : "customer"
   },
   {
     "name": "Helene",
-    "password": "Digital2734"
+    "password": "Digital2734",
+    "status" : "customer"
   },
   {
     "name": "Brian",
-    "password": "then345"
+    "password": "then345",
+    "status" : "customer"
   },
   {
     "name": "Wanda",
-    "password": "thEy1634"
+    "password": "thEy1634",
+    "status" : "customer"
   },
   {
     "name": "Elaine",
-    "password": "get23654"
+    "password": "get23654",
+    "status" : "customer"
   },
   {
     "name": "Blake",
-    "password": "critical234251"
+    "password": "critical234251",
+    "status" : "customer"
   },
   {
     "name": "Debbie",
-    "password": "no1234"
+    "password": "no1234",
+    "status" : "customer"
   },
   {
     "name": "Felix",
-    "password": "im2345"
+    "password": "im2345",
+    "status" : "customer"
   },
   {
     "name": "John",
-    "password": "not6343"
+    "password": "not6343",
+    "status" : "customer"
   },
   {
     "name": "Deena",
-    "password": "doin6234"
+    "password": "doin6234",
+    "status" : "customer"
   },
   {
     "name": "Joan",
-    "password": "no1235"
+    "password": "no1235",
+    "status" : "customer"
   },
   {
     "name": "Kenneth",
-    "password": "interview234532"
+    "password": "interview234532",
+    "status" : "customer"
   },
   {
     "name": "Audrey",
-    "password": "mask234412"
+    "password": "mask234412",
+    "status" : "customer"
   },
   {
     "name": "Francisco",
-    "password": "on62324"
+    "password": "on62324",
+    "status" : "customer"
   },
   {
     "name": "Christopher",
-    "password": "my2344"
+    "password": "my2344",
+    "status" : "customer"
   },
   {
     "name": "Manuel",
-    "password": "face652"
+    "password": "face652",
+    "status" : "customer"
   },
   {
     "name": "Mark",
-    "password": "you523"
+    "password": "you523",
+    "status" : "customer"
   },
   {
     "name": "William",
-    "password": "cant532341"
+    "password": "cant532341",
+    "status" : "customer"
   },
   {
     "name": "Rebecca",
-    "password": "see12341"
+    "password": "see12341",
+    "status" : "customer"
   },
   {
     "name": "Arthur",
-    "password": "what634534"
+    "password": "what634534",
+    "status" : "customer"
   },
   {
     "name": "Robert",
-    "password": "im6542"
+    "password": "im6542",
+    "status" : "customer"
   },
   {
     "name": "Christopher",
-    "password": "finna23324"
+    "password": "finna23324",
+    "status" : "customer"
   },
   {
     "name": "Edwin",
-    "password": "do16234"
+    "password": "do16234",
+    "status" : "customer"
   },
   {
     "name": "Stacey",
-    "password": "had23623"
+    "password": "had23623",
+    "status" : "customer"
   },
   {
     "name": "Michael",
-    "password": "to234"
+    "password": "to234",
+    "status" : "customer"
   },
   {
     "name": "Janet",
-    "password": "move762345"
+    "password": "move762345",
+    "status" : "customer"
   },
   {
     "name": "Jeremy",
-    "password": "away2345"
+    "password": "away2345",
+    "status" : "customer"
   },
   {
     "name": "Patricia",
-    "password": "from63245"
+    "password": "from63245",
+    "status" : "customer"
   },
   {
     "name": "Julie",
-    "password": "people5734"
+    "password": "people5734",
+    "status" : "customer"
   },
   {
     "name": "Linda",
-    "password": "that8765s"
+    "password": "that8765s",
+    "status" : "customer"
   },
   {
     "name": "Evelyn",
-    "password": "miserable2346"
+    "password": "miserable2346",
+    "status" : "customer"
   },
   {
     "name": "Liana",
-    "password": "dont7634"
+    "password": "dont7634",
+    "status" : "customer"
   },
   {
     "name": "Simone",
-    "password": "wanna236"
+    "password": "wanna236",
+    "status" : "customer"
   },
   {
     "name": "Jeffrey",
-    "password": "link62345"
+    "password": "link62345",
+    "status" : "customer"
   },
   {
     "name": "Elizabeth",
-    "password": "you2345"
+    "password": "you2345",
+    "status" : "customer"
   },
   {
     "name": "Andy",
-    "password": "aint1235"
+    "password": "aint1235",
+    "status" : "customer"
   },
   {
     "name": "Chad",
-    "password": "finna6234"
+    "password": "finna6234",
+    "status" : "customer"
   },
   {
     "name": "James",
-    "password": "sit7643"
+    "password": "sit7643",
+    "status" : "customer"
   },
   {
     "name": "Ruby",
-    "password": "with76345"
+    "password": "with76345",
+    "status" : "customer"
   },
   {
     "name": "Naomi",
-    "password": "you1235"
+    "password": "you1235",
+    "status" : "customer"
   },
   {
     "name": "James",
-    "password": "aint5234"
+    "password": "aint5234",
+    "status" : "customer"
   },
   {
     "name": "Leonard",
-    "password": "off2356"
+    "password": "off2356",
+    "status" : "customer"
   },
   {
     "name": "Marguerite",
-    "password": "the2345"
+    "password": "the2345",
+    "status" : "customer"
   },
   {
     "name": "Maxine",
-    "password": "grid623"
+    "password": "grid623",
+    "status" : "customer"
   }
 ]

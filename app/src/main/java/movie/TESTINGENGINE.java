@@ -25,6 +25,5 @@ public class TESTINGENGINE {
 
             System.out.println(nextPage.displayInitial());
         }
-
     }
 }
