@@ -107,6 +107,10 @@ public class HomePage extends Page {
         return this;
     }
 
+    public boolean hasUsername() {
+        return this.hasUsername;
+    }
+
     
     
 }
