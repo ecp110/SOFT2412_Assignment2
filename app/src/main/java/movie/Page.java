@@ -111,7 +111,7 @@ public abstract class Page {
             JSONArray JSONcast = movie.getJSONArray("cast");
             ArrayList<String> castList = new ArrayList<String>();
             if (JSONcast != null) {
-                for (int j = 0; j < JSONcast; j++) {
+                for (int j = 0; j < JSONcast.length(); j++) {
                     castList.add(JSONcast.getString(i));
                 }
             }

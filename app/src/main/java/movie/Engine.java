@@ -55,11 +55,6 @@ public class Engine {
                 et.stopMasking();
                 
 
-                
-
-                HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath);
-                home.displayInitial();
-
 
             }
             else if (response.trim().equals("")){
