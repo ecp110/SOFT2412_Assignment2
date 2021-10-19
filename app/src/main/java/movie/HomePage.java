@@ -53,7 +53,7 @@ public class HomePage extends Page {
         return output;
     }
 
-    public Page cancel() {
+    public HomePage cancel() {
         this.hasUsername = false;
         return this;
     }
