@@ -1,7 +1,7 @@
 package movie;
 import java.util.*;
 import java.io.*;
-import org.json.simple.*;
+import org.json.*;
 
 public abstract class Page {
     // Database locations
@@ -11,6 +11,10 @@ public abstract class Page {
     protected final String GIFT_CARD_LOCATION;
     protected final String USERS_LOCATION;
     protected String homePageString;
+
+    // JSON Objects
+    private JSONObject json;
+
 
     // User information; stored in an arraylist of User objects
     protected ArrayList<User> users = new ArrayList<User>();
@@ -26,7 +30,7 @@ public abstract class Page {
         this.USERS_LOCATION = usersLocation;
 
         this.parseUsers();
-        this.parseMovies();
+        this.parseMovies(this.json);
     }
 
     /**
@@ -38,6 +42,11 @@ public abstract class Page {
      * Page to return to & display if at any time the user cancels the current operation
      */
     public abstract HomePage cancel();
+
+    public void JSONObjectCreator(String folder, String filename) throws FileNotFoundException {
+        System.err.println(filename);
+        json = new JSONObject(new JSONTokener(new FileReader(folder + "/" + filename)));
+    }
 
     /** 
      * Parses users into arraylist of users
@@ -90,46 +99,25 @@ public abstract class Page {
     }
 
 
-    /** 
-     * Parses movies into arraylist of users
-     */
-    protected void parseMovies() {
-        // Initiates scanner for movies file
-        try {
-            Scanner sc = new Scanner(new File(this.MOVIE_LOCATION));
-            String[] line = new String[3];
-
-            // Skips the initial line with column names
-            sc.nextLine();
-            
-            String type;
-            Movie toAdd;
-            // Reads in each of the lines into movie objects and stores them in the page
-            while (sc.hasNextLine()) {
-                type = null;
-                line = sc.nextLine().split(",");
-
-                // validity checks
-                if (line.length != 3) {
-                    continue;
+    protected void parseMovies(JSONObject json) { 
+        JSONArray JSONmovies = json.getJSONArray("movies");
+        for (int i = 0; i < JSONmovies.length(); i++) {
+            JSONObject movie = JSONmovies.getJSONObject(i);
+            String releaseDate = movie.getString("release date");
+            int day = Integer.parseInt(releaseDate.substring(0,2));
+            int month = Integer.parseInt(releaseDate.substring(2,4));
+            int year = Integer.parseInt(releaseDate.substring(4,8));
+            Calendar relDate = new Calendar(day, month, year);
+            JSONArray JSONcast = movie.getJSONArray("cast");
+            ArrayList<String> castList = new ArrayList<String>();
+            if (JSONcast != null) {
+                for (int j = 0; j < JSONcast; j++) {
+                    castList.add(JSONcast.getString(i));
                 }
-
-                if (line[0] == null || line[0].equals("")) {
-                    continue;
-                } else if (line[1] == null || line[1].equals("")) {
-                    continue;
-                } else if (line[2] == null || line[2].equals("")) {
-                    continue;
-                }
-                
-                // Adds new movie to the this.movies ararylist
-                toAdd = new Movie(line[0], "DESCRIPTION TBD", Integer.parseInt(line[2]), line[1], null, null, null, null);
-                this.movies.add(toAdd);
             }
-
-        } catch (FileNotFoundException e) {
-            return;
+            this.movies.add(new Movie(movie.getString("name"), movie.getString("synopsis"), movie.getInt("runtime"), movie.getString("classification"), castList, movie.getString("director"), movie.getString("id"), relDate));
         }
+        System.out.println(this.movies);
     }
 
     /**
