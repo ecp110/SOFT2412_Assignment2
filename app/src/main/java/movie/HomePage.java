@@ -23,7 +23,7 @@ public class HomePage extends Page {
 
     /**
      * Displays the login screen
-     * If username has been displayed previously, then  call  asks for password
+     * If username has been displayed previously, then call asks for password
      * If nothing has been called, then call will ask for username.
      */
     public String displayLogIn() {
@@ -52,6 +52,55 @@ public class HomePage extends Page {
 
         return output;
     }
+
+    /**
+     * Logs anyone in
+     * If they are a customer, returns 0
+     * If they are a staff, returns 1
+     * If they are a manager, returns 2
+     * If they are not a recorded user / other error, returns -1
+     */
+    public int logIn(String username, String password) {
+        if (username == null) {
+            return -1;
+        } else if (username.equals("")) {
+            return -1;
+        }
+
+        if (password == null) {
+            return -1;
+        } else if (password.equals("")) {
+            return -1;
+        }
+
+        // Checks for existing User
+        User foundUser = null;
+        for (User user : this.users) {
+            if (user.getName().equals(username)) {
+                if (user.getPassword().equals(password)) {
+                    foundUser = user;
+                    break;
+                }
+            }
+        }
+
+        // If user doesn't exist, terminate with error
+        if (foundUser == null) {
+            return -1;
+        }
+
+        // If user does exist, return right person type code
+        String userType = user.getType().toLowerCase();
+        if (userType.equals("customer")) {
+            return 0;
+        } else if (userType.equals("staff")) {
+            return 1;
+        } else if (userType.equals("manager")) {
+            return 2;
+        }
+
+        return -1;
+     }
 
     public HomePage cancel() {
         this.hasUsername = false;
