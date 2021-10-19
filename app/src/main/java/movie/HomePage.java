@@ -55,12 +55,9 @@ public class HomePage extends Page {
 
     /**
      * Logs anyone in
-     * If they are a customer, returns 0
-     * If they are a staff, returns 1
-     * If they are a manager, returns 2
-     * If they are not a recorded user / other error, returns -1
+     * Returns the user if exist; null if not
      */
-    public int logIn(String username, String password) {
+    public User logIn(String username, String password) {
         if (username == null) {
             return -1;
         } else if (username.equals("")) {
@@ -84,27 +81,16 @@ public class HomePage extends Page {
             }
         }
 
-        // If user doesn't exist, terminate with error
-        if (foundUser == null) {
-            return -1;
-        }
-
-        // If user does exist, return right person type code
-        String userType = user.getType().toLowerCase();
-        if (userType.equals("customer")) {
-            return 0;
-        } else if (userType.equals("staff")) {
-            return 1;
-        } else if (userType.equals("manager")) {
-            return 2;
-        }
-
-        return -1;
+        return foundUser;
      }
 
     public HomePage cancel() {
         this.hasUsername = false;
         return this;
+    }
+
+    public boolean hasUsername() {
+        return this.hasUsername;
     }
 
     

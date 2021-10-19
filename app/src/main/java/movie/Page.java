@@ -143,4 +143,12 @@ public abstract class Page {
         return output;
     }
 
+    public ArrayList<User> getUsers() {
+        return this.users;
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return this.movies;
+    }
+
 }

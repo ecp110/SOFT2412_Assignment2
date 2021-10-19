@@ -11,6 +11,7 @@ public class AdminPage extends Page {
     public AdminPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, User user) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
         this.user = user;
+        this.homePageString = "../pages/admin/main.txt";
     }
     public String displayInitial() {
         String output = "";
