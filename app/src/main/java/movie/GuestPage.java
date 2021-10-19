@@ -5,25 +5,7 @@ public class GuestPage extends Page {
     }
 
     public String displayInitial() {
-        String output = "";
-
-        try {
-            Scanner sc = new Scanner(new File(this.homePageString));
-
-            // Personalisation at start to user logged in
-            output += sc.nextLine();
-            output += " ";
-            output += user.getName();
-            output += "!";
-            output += "\n";
-
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE FOUND");
-        }
-
-        output += this.parseTxt(this.homePageString, 1);
-        output += this.listMovies();
-        return output;
+        return this.parseTxt(this.homePageString, 0);
     }
 
     /**
