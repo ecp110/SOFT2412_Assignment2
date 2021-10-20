@@ -94,14 +94,15 @@ public class Movie {
 
 
     //inserts a new actor/actress into the movie cast
-    public void insertActor(String name){
+    public String insertActor(String name){
 
         //Checking if actor/actress is already in cast
         if(this.cast.contains(name)){
-            System.out.println("This actor is already included in the movie cast");
+            return "Error! This actor is already included in the movie cast";
         }
         else{
             this.cast.add(name);
+            return "Actor added to cast!";
         }
     }
 
