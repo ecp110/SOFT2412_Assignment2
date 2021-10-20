@@ -1,3 +1,5 @@
+package movie;
+
 public class GuestPage extends Page {
     public GuestPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
@@ -7,7 +9,7 @@ public class GuestPage extends Page {
     public String displayInitial() {
         return this.parseTxt(this.homePageString, 0);
     }
-
+    
     /**
      * Required abstract function
      * returns HomePage for when page gets cancelled
