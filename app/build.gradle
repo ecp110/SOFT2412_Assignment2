@@ -14,7 +14,7 @@ plugins {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'movie.App'
+        attributes 'Main-Class': 'movie.Engine'
     }
 }
 
