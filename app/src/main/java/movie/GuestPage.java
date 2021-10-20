@@ -16,7 +16,6 @@ public class GuestPage extends Page {
      */
 
     public HomePage cancel() {
-        this.user = null;
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION);
