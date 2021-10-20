@@ -19,7 +19,7 @@ public class Engine {
         String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "members.json").toString();
 
         //create home page
-
+        System.out.println(movieLocationPath);
         HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath);
         //home.displayInitial();
 

@@ -3,6 +3,12 @@ import java.util.*;
 import java.io.*;
 import org.json.*;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public abstract class Page {
     // Database locations
     protected final String MOVIE_LOCATION;
@@ -29,8 +35,9 @@ public abstract class Page {
         this.GIFT_CARD_LOCATION = giftCardLocation;
         this.USERS_LOCATION = usersLocation;
 
+
         this.parseUsers();
-        this.parseMovies(this.json);
+        this.parseMovies();
     }
 
     /**
@@ -43,10 +50,10 @@ public abstract class Page {
      */
     public abstract HomePage cancel();
 
-    public void JSONObjectCreator(String folder, String filename) throws FileNotFoundException {
-        System.err.println(filename);
-        json = new JSONObject(new JSONTokener(new FileReader(folder + "/" + filename)));
-    }
+    //public void JSONObjectCreator(String folder, String filename) throws FileNotFoundException {
+       // System.err.println(filename);
+        //json = new JSONObject(new JSONTokener(new FileReader(folder + "/" + filename)));
+    //}
 
     /** 
      * Parses users into arraylist of users
@@ -98,26 +105,54 @@ public abstract class Page {
         }
     }
 
+    protected void parseMovies(){
 
-    protected void parseMovies(JSONObject json) { 
-        JSONArray JSONmovies = json.getJSONArray("movies");
-        for (int i = 0; i < JSONmovies.length(); i++) {
-            JSONObject movie = JSONmovies.getJSONObject(i);
-            String releaseDate = movie.getString("release date");
-            int day = Integer.parseInt(releaseDate.substring(0,2));
-            int month = Integer.parseInt(releaseDate.substring(2,4));
-            int year = Integer.parseInt(releaseDate.substring(4,8));
-            Calendar relDate = new Calendar(day, month, year);
-            JSONArray JSONcast = movie.getJSONArray("cast");
-            ArrayList<String> castList = new ArrayList<String>();
-            if (JSONcast != null) {
-                for (int j = 0; j < JSONcast.length(); j++) {
-                    castList.add(JSONcast.getString(i));
+            
+    
+            JSONParser parser = new JSONParser();
+            ArrayList<Movie> readMovies = new ArrayList<Movie>();
+    
+            try {
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.MOVIE_LOCATION));
+                JSONArray movies = (JSONArray) jsonObject.get("movies");
+    
+                String title;
+                String id;
+                String classification;
+                int runtime;
+                String director;
+                ArrayList<String> cast = null;
+                Calendar release = null;
+                String synopsis;
+                Movie mFull;
+                
+                for (Object movie : movies) {
+                    JSONObject m = (JSONObject) movie;
+    
+                    title = (String) m.get("name");
+                    id = String.valueOf(m.get("id"));
+                    classification = (String) m.get("classification");
+                    runtime = (int) (long) m.get("runtime");
+                    director = (String) m.get("director");
+                    synopsis = (String) m.get("synopsis");
+    
+                    mFull = new Movie(title, synopsis, runtime, classification, cast, id, director, release);
+                    readMovies.add(mFull);
+                    mFull = null;
                 }
+    
+            } catch (FileNotFoundException e) {
+                System.out.println("NO FILE");
+            } catch (IOException e) {
+                System.out.println("ERROR");
+            } catch (ParseException e) {
+                System.out.println("ERROR");
             }
-            this.movies.add(new Movie(movie.getString("name"), movie.getString("synopsis"), movie.getInt("runtime"), movie.getString("classification"), castList, movie.getString("director"), movie.getString("id"), relDate));
-        }
-        System.out.println(this.movies);
+    
+            for (Movie m : readMovies) {
+                System.out.println(m.toString());
+            }
+        
     }
 
     /**

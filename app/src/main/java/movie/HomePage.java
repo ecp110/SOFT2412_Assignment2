@@ -59,15 +59,15 @@ public class HomePage extends Page {
      */
     public User logIn(String username, String password) {
         if (username == null) {
-            return -1;
+            return null;
         } else if (username.equals("")) {
-            return -1;
+            return null;
         }
 
         if (password == null) {
-            return -1;
+            return null;
         } else if (password.equals("")) {
-            return -1;
+            return null;
         }
 
         // Checks for existing User

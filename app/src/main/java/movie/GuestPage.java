@@ -9,14 +9,13 @@ public class GuestPage extends Page {
     public String displayInitial() {
         return this.parseTxt(this.homePageString, 0);
     }
-    
+
     /**
      * Required abstract function
      * returns HomePage for when page gets cancelled
      */
 
     public HomePage cancel() {
-        this.user = null;
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION);
