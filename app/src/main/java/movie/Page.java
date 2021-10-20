@@ -181,6 +181,7 @@ public abstract class Page {
             retString += movie.toString();
             retString += "\n";
         }
+        return retString;
     }
 
     public ArrayList<User> getUsers() {
