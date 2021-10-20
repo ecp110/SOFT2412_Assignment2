@@ -67,7 +67,7 @@ public class Engine {
             
 
                 if (currentUser == null){
-                    System.out.println("Specified user doesn't exist. Continuing as guest...");
+                    System.out.println("Specified user doesn't exist. Continuing as guest...\n");
                     continue;
                 }
                 else{
