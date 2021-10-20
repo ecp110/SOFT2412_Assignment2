@@ -10,7 +10,7 @@ public class User {
     public User (String name, String password, String status) {
         this.name = name;
         this.password = password;
-        this.status = status.toLowerCase();
+        this.status = status;
     }
 
     public String getName() {

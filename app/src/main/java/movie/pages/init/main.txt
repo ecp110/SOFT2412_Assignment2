@@ -1,6 +1,6 @@
 Hello! Welcome to XYZ Cinemas! We hope you are having a great day.
 
-If you would like to log-in, just type "y".
+If you would like to log-in, just type "l".
 If you would like to register, just type "r".
 If you would like to continue as a guest, type "g".
 

@@ -20,6 +20,7 @@ public class CustomerPage extends Page {
     public String displayInitial() {
         String output = "";
         String fileLoc = this.PAGE_PATH + "/main.txt";
+        System.out.println(fileLoc);
 
         try {
             Scanner sc = new Scanner(new File(fileLoc));
@@ -35,8 +36,8 @@ public class CustomerPage extends Page {
             System.out.println("NO FILE FOUND");
         }
 
-        output += this.parseTxt("/init.txt", 1);
-        output += this.listMovies();
+        output += this.parseTxt("/main.txt", 1);
+        output += this.displayMovies();
         return output;
     }
 
@@ -53,20 +54,7 @@ public class CustomerPage extends Page {
             );
     }
 
-    /**
-     * Lists all the movies for the customer to see
-     * @return
-     */
-    public String listMovies() {
-        String output = "";
-
-        for (Movie movie : this.movies) {
-            output += movie.toString();
-            output += "\n";
-        }
-
-        return output;
-    }
+    
 
 
 

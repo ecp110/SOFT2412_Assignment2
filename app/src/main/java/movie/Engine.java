@@ -16,7 +16,7 @@ public class Engine {
         String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
         String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
         String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
-        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "users.csv").toString();
 
         String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin").toString();
         String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer").toString();
@@ -25,25 +25,28 @@ public class Engine {
         //create home page
         System.out.println(movieLocationPath);
         HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, homePagePath);
-        home.displayInitial();
+
+
+        System.out.println(home.displayInitial());
 
         Scanner scan = new Scanner(System.in);
         boolean endProgram = false;
         boolean loginComplete = false;
+        User currentUser = null;
 
         // prompt for login
 
         while (!loginComplete){
-            System.out.println("Welcome to Fancy Cinemas! Would you like to login or proceed as a guest? \n (L) Login    (P) Proceed as Guest");
             String response = scan.nextLine();
 
             if (response.toLowerCase().equals("l")){
                 loginComplete = true;
-                System.out.println("Please enter your username: ");
+
+                System.out.println(home.displayLogIn());
                 String username = scan.nextLine();
 
                 // masking password
-                String prompt = "Please enter your password: ";
+                String prompt = home.displayLogIn();
                 EraserThread et = new EraserThread(prompt);
                 Thread mask = new Thread(et);
                 mask.start();
@@ -58,17 +61,40 @@ public class Engine {
                 }
                 et.stopMasking();
                 
+                currentUser = home.logIn(username, password);
+
+            
+
+                if (currentUser == null){
+                    System.out.println("User doesn't exist");
+                    continue;
+                }
+                else{
+                    loginComplete = true;
+                }
+                
 
 
             }
             else if (response.trim().equals("")){
-                System.out.println("\nPlease press Y to login or press P to proceed as a guest!\n");
+                System.out.println("\nPlease press L to login or press G to proceed as a guest!\n");
             }
 
             else if (response.toLowerCase().equals("p")){
                 loginComplete = true;
                 //proceed as guest
             }
+        }
+
+        if (currentUser.getType().equals("customer")){
+            CustomerPage customer = new CustomerPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, customerPagePath, currentUser);
+
+            System.out.println(customer.displayInitial());
+        }
+
+        else if(currentUser.getType().equals("staff")){
+            AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
+            System.out.println(admin.displayInitial());
         }
 
 

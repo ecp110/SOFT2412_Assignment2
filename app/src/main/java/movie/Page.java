@@ -69,18 +69,8 @@ public abstract class Page {
                 type = null;
                 line = sc.nextLine().split(",");
 
-                // validity checks
-                if (line.length != 3) {
-                    continue;
-                }
+               
 
-                if (line[0] == null || line[0].equals("")) {
-                    continue;
-                } else if (line[1] == null || line[1].equals("")) {
-                    continue;
-                } else if (line[2] == null || line[2].equals("")) {
-                    continue;
-                }
 
                 if (line[2].toLowerCase().equals("customer")) {
                     type = "customer";
@@ -88,9 +78,10 @@ public abstract class Page {
                     type = "manager";
                 } else if (line[2].toLowerCase().equals("staff")) {
                     type = "staff";
-                } else {
+                } else{
                     continue;
                 }
+
 
                 // Adds the user as a user object to the page
                 this.users.add(new User(line[0], line[1], type));
@@ -142,9 +133,6 @@ public abstract class Page {
                 System.out.println("ERROR");
             }
     
-            for (Movie m : readMovies) {
-                System.out.println(m.toString());
-            }
         
     }
 
@@ -181,6 +169,7 @@ public abstract class Page {
             retString += movie.toString();
             retString += "\n";
         }
+        return retString;
     }
 
     public ArrayList<User> getUsers() {
