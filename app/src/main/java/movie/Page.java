@@ -172,6 +172,17 @@ public abstract class Page {
         return output;
     }
 
+    /**
+     * Returns string with all movies, one movie per line
+     */
+    protected String displayMovies() {
+        String retString = "";
+        for (Movie movie : this.movies) {
+            retString += movie.toString();
+            retString += "\n";
+        }
+    }
+
     public ArrayList<User> getUsers() {
         return this.users;
     }

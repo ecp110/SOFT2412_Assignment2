@@ -110,6 +110,6 @@ public class Movie {
     }
 
     public String toString() {
-        return "Name: " + this.title + "Run time: " + this.runTime + "Rating: " + this.classification;
+        return "Name: " + this.title + " (" + this.director + "). Run time: " + this.runTime + ". Rating: " + this.classification;
     }
 }
