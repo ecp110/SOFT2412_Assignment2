@@ -20,7 +20,6 @@ public class CustomerPage extends Page {
     public String displayInitial() {
         String output = "";
         String fileLoc = this.PAGE_PATH + "/main.txt";
-        System.out.println(fileLoc);
 
         try {
             Scanner sc = new Scanner(new File(fileLoc));

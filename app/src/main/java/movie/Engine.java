@@ -24,7 +24,7 @@ public class Engine {
         String guestPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "guest").toString();
 
         //create home page
-        System.out.println(movieLocationPath);
+        
         HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, homePagePath);
 
 
@@ -67,7 +67,7 @@ public class Engine {
             
 
                 if (currentUser == null){
-                    System.out.println("User doesn't exist");
+                    System.out.println("Specified user doesn't exist. Continuing as guest...");
                     continue;
                 }
                 else{
