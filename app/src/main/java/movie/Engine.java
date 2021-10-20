@@ -21,6 +21,7 @@ public class Engine {
         String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin").toString();
         String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer").toString();
         String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "init").toString();
+        String guestPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "guest").toString();
 
         //create home page
         System.out.println(movieLocationPath);
@@ -76,25 +77,39 @@ public class Engine {
 
 
             }
-            else if (response.trim().equals("")){
-                System.out.println("\nPlease press L to login or press G to proceed as a guest!\n");
-            }
 
-            else if (response.toLowerCase().equals("p")){
+            else if (response.toLowerCase().equals("g")){
                 loginComplete = true;
                 //proceed as guest
             }
+
+            else{
+                System.out.println("\nPlease press L to login or press G to proceed as a guest!\n");
+            }
+
         }
 
-        if (currentUser.getType().equals("customer")){
-            CustomerPage customer = new CustomerPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, customerPagePath, currentUser);
-
-            System.out.println(customer.displayInitial());
+        if (currentUser == null){
+            GuestPage guest = new GuestPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, guestPagePath);
+            System.out.println(guest.displayInitial());
+            System.exit(0);
         }
+        boolean running = true;
+        while (running){
+            if (currentUser.getType().equals("customer")){
+                CustomerPage customer = new CustomerPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, customerPagePath, currentUser);
 
-        else if(currentUser.getType().equals("staff")){
-            AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
-            System.out.println(admin.displayInitial());
+                System.out.println(customer.displayInitial());
+            }
+
+            else if(currentUser.getType().equals("staff") || currentUser.getType().equals("manager")){
+                AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
+                System.out.println(admin.displayInitial());
+            }
+
+            running = false;
+
+
         }
 
 

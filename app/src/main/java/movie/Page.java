@@ -94,7 +94,6 @@ public abstract class Page {
 
     protected void parseMovies(){
             JSONParser parser = new JSONParser();
-            ArrayList<Movie> readMovies = new ArrayList<Movie>();
     
             try {
                 JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.MOVIE_LOCATION));
@@ -121,7 +120,7 @@ public abstract class Page {
                     synopsis = (String) m.get("synopsis");
     
                     mFull = new Movie(title, synopsis, runtime, classification, cast, id, director, release);
-                    readMovies.add(mFull);
+                    this.movies.add(mFull);
                     mFull = null;
                 }
     
