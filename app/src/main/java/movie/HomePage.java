@@ -8,9 +8,8 @@ import java.io.*;
 public class HomePage extends Page {
     private boolean hasUsername = false;
 
-    public HomePage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
-        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
-        this.homePageString = "../pages/init/main.txt";
+    public HomePage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String filePath) {
+        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, filePath);
     }
 
     /**
@@ -18,7 +17,7 @@ public class HomePage extends Page {
      * Asks whether they want to login or not
      */
     public String displayInitial() {
-        return this.parseTxt(this.homePageString, 0);
+        return this.parseTxt("/main.txt", 0);
     }
 
     /**
@@ -27,8 +26,8 @@ public class HomePage extends Page {
      * If nothing has been called, then call will ask for username.
      */
     public String displayLogIn() {
-        String username = "../pages/init/username.txt";
-        String password = "../pages/init/password.txt";
+        String username = this.PAGE_PATH + "/username.txt";
+        String password = this.PAGE_PATH + "/password.txt";
         String display;
 
         if (this.hasUsername) {

@@ -1,13 +1,12 @@
 package movie;
 
 public class GuestPage extends Page {
-    public GuestPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
-        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
-        this.homePageString = "../pages/guest/main.txt";
+    public GuestPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath) {
+        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, pagePath);
     }
 
     public String displayInitial() {
-        return this.parseTxt(this.homePageString, 0);
+        return this.parseTxt("/main.txt", 0);
     }
 
     /**
@@ -18,7 +17,8 @@ public class GuestPage extends Page {
     public HomePage cancel() {
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
-            this.GIFT_CARD_LOCATION, this.USERS_LOCATION);
+            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, this.PAGE_PATH
+            );
     }
 
     /**

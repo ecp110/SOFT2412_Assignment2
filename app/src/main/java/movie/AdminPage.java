@@ -8,16 +8,16 @@ public class AdminPage extends Page {
     // User details
     private User user;
 
-    public AdminPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, User user) {
-        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation);
+    public AdminPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath, User user) {
+        super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, pagePath);
         this.user = user;
-        this.homePageString = "../pages/admin/main.txt";
     }
     public String displayInitial() {
         String output = "";
+        String fileLoc = this.PAGE_PATH + "/main.txt";
 
         try {
-            Scanner sc = new Scanner(new File(this.homePageString));
+            Scanner sc = new Scanner(new File(fileLoc));
 
             // Personalisation at start to user logged in
             output += sc.nextLine();
@@ -29,7 +29,7 @@ public class AdminPage extends Page {
             System.out.println("NO FILE FOUND");
         }
 
-        output += this.parseTxt(this.homePageString, 1);
+        output += this.parseTxt("/main.txt", 1);
 
         return output;
     }
@@ -38,7 +38,7 @@ public class AdminPage extends Page {
         this.user = null;
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
-            this.GIFT_CARD_LOCATION, this.USERS_LOCATION
+            this.GIFT_CARD_LOCATION, this.USERS_LOCATION, this.PAGE_PATH
             );
     }
 

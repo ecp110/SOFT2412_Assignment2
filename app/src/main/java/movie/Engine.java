@@ -12,15 +12,19 @@ public class Engine {
         // database filepaths
 
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "Movies.json").toString();
-        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "Locations").toString();
-        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "credit_cards.json").toString();
-        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "gift_cards.json").toString();
-        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie","Databases", "members.json").toString();
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin", "members.json").toString();
+        String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer", "members.json").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "init", "members.json").toString();
 
         //create home page
         System.out.println(movieLocationPath);
-        HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath);
+        HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, homePagePath);
         //home.displayInitial();
 
         Scanner scan = new Scanner(System.in);

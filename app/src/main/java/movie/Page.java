@@ -16,11 +16,7 @@ public abstract class Page {
     protected final String CREDIT_CARD_LOCATION;
     protected final String GIFT_CARD_LOCATION;
     protected final String USERS_LOCATION;
-    protected String homePageString;
-
-    // JSON Objects
-    private JSONObject json;
-
+    protected final String PAGE_PATH;
 
     // User information; stored in an arraylist of User objects
     protected ArrayList<User> users = new ArrayList<User>();
@@ -28,13 +24,13 @@ public abstract class Page {
     // Movie information; stored in an arralist of Movie objects
     protected ArrayList<Movie> movies = new ArrayList<Movie>();
 
-    public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation) {
+    public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath) {
         this.MOVIE_LOCATION = movieLocation;
         this.CINEMAS_LOCATION = cinemasLocation;
         this.CREDIT_CARD_LOCATION = creditCardLocation;
         this.GIFT_CARD_LOCATION = giftCardLocation;
         this.USERS_LOCATION = usersLocation;
-
+        this.PAGE_PATH = pagePath;
 
         this.parseUsers();
         this.parseMovies();
@@ -106,9 +102,6 @@ public abstract class Page {
     }
 
     protected void parseMovies(){
-
-            
-    
             JSONParser parser = new JSONParser();
             ArrayList<Movie> readMovies = new ArrayList<Movie>();
     
@@ -158,8 +151,9 @@ public abstract class Page {
     /**
      * Parses a txt file into a String which it then returns
      */
-    protected String parseTxt(String fileLoc, int lineSkip) {
+    protected String parseTxt(String fileExtension, int lineSkip) {
         String output = "";
+        String fileLoc = this.PAGE_PATH + fileExtension;
         try {
             Scanner sc = new Scanner(new File(fileLoc));
             for (int i = 0; i < lineSkip; i++) {
