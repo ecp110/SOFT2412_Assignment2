@@ -18,14 +18,14 @@ public class Engine {
         String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
         String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
 
-        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin", "members.json").toString();
-        String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer", "members.json").toString();
-        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "init", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin").toString();
+        String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "init").toString();
 
         //create home page
         System.out.println(movieLocationPath);
         HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, homePagePath);
-        //home.displayInitial();
+        home.displayInitial();
 
         Scanner scan = new Scanner(System.in);
         boolean endProgram = false;
