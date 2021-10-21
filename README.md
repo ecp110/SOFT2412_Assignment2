@@ -35,7 +35,7 @@ Locate your OS in the link below and follow instructions carefully - once both G
 
 **C. Testing the Program:**
 
-- In your terminal, locate the directory, and enter the directory `assignment-1`
+- In your terminal, locate the directory, and enter the directory `assignment-2`
 - Run the command `gradle test`
 - The program will run its test suite, indicating any failed tests
 
