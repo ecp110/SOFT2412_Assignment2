@@ -1,0 +1,543 @@
+commit d8ef1b67bc3a57c61add209af9f70c959557d2d6
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Thu Oct 21 09:57:59 2021 +1100
+
+    print formatting
+
+commit 13fe0ff4b8913f83d19849001a94367dad4a71f9
+Merge: 3b868b1 126d36e
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Thu Oct 21 09:57:03 2021 +1100
+
+    Merge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2
+
+commit 3b868b1f4e256bd26d6d69942eded4a760ec7e82
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Thu Oct 21 09:56:41 2021 +1100
+
+    print formatting
+
+commit 126d36e36b63a438d46e52b37470e12955525445
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Wed Oct 20 23:21:26 2021 +1100
+
+    Edited build.gradle
+
+commit 20ff9fcd4eb84e7abb2cf63ec5b8318afaa0b93d
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 22:39:34 2021 +1100
+
+    final engine functionality for sprint 1
+
+commit da58b282dad95e13fad1e78bdf32ce19f1be306b
+Merge: efa59af f6c1545
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 22:16:33 2021 +1100
+
+    Merge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2
+
+commit efa59af417152effea7a42e566df34d0ba0fd5d6
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 22:15:53 2021 +1100
+
+    Engine implementation
+
+commit f6c1545fbf562af65809dbe336658bafbcff78d1
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Wed Oct 20 21:48:29 2021 +1100
+
+    added ret statement
+
+commit 4a991a8506bfe194d3ff84194b904b7e15e96890
+Merge: 6ab6ad7 2bfb83f
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:56:25 2021 +1100
+
+    Merge pull request #20 from SOFT2412-2021S2/fix-tests
+    
+    Fix tests
+
+commit 6ab6ad795bd26b27d61eb908617f63c7fc4575cc
+Merge: f5d3361 9b749dc
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:56:05 2021 +1100
+
+    Merge pull request #19 from SOFT2412-2021S2/movie-tests
+    
+    added movie tests
+
+commit 2bfb83f74b9943f9977e863b65331f492a856fc9
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:54:50 2021 +1100
+
+    Added guest page main.txt
+
+commit 9b749dc37b8a32fcc7853c4a9aea818a0661875f
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:54:43 2021 +1100
+
+    added movie tests
+
+commit 1f338e321c1bd70d8a64f93dbdc83237bb98602b
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:53:36 2021 +1100
+
+    Fixed a few typos in tests and added guest page txt
+
+commit f5d336105c2657535ae26f674749b1c5b76186bb
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:44:44 2021 +1100
+
+    Display movies
+
+commit 26cab1ba674e468125769a4d4484cd65473e429b
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:29:20 2021 +1100
+
+    FIX PATHS
+
+commit 5457c33b8102d62a591a758b43f6478c32a01df6
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:24:01 2021 +1100
+
+    IT BUILDS
+
+commit 7fb949f54bdf659b2884ed2e666ef70c6f1743c9
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:07:13 2021 +1100
+
+    fixed parser
+
+commit 0596646e8f46b4a9e2ed85bfa2f38e190f7b8df7
+Merge: 68de7b1 dc2be67
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:05:40 2021 +1100
+
+    Merge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2
+
+commit 68de7b103a7ec46da8823726bcd1e39e32416694
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 20:04:53 2021 +1100
+
+    fixed parser
+
+commit dc2be67474efbefffc37666e69d848ed5287e616
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 19:43:56 2021 +1100
+
+    test replacement parser
+
+commit 3973730e802b060d9ff156ebcdad1e14912aef33
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Wed Oct 20 19:21:36 2021 +1100
+
+    Type error fixes
+
+commit 240816d3a3008a2a5c2f6a1afd4626e8359fd23e
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 20 19:12:35 2021 +1100
+
+    minor package fix
+
+commit 2535141c3d0711f814fbcfc61d8a8048ce0c2027
+Merge: 9377f40 c9302c1
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 22:42:26 2021 +1100
+
+    Merge pull request #18 from SOFT2412-2021S2/CalendarTests
+    
+    Calendar tests added
+
+commit c9302c1d7aa11bf46e1a9f2a481cdfa4b809642b
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 22:40:35 2021 +1100
+
+    Calendar tests added
+
+commit 9377f40ce62dbe5a6a6180b0237f55a84f4d8dc3
+Merge: 47fd888 a928f78
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 22:35:56 2021 +1100
+
+    Merge pull request #17 from SOFT2412-2021S2/newRefactor
+    
+    New refactor
+
+commit a928f7854aa5e8e26d791db93c7c65fc2db05bf3
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 22:29:15 2021 +1100
+
+    Lots of testing for pages added + more refactoring
+
+commit e74b6e3f1f1bf5a2137306cf7486749f753ee304
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 22:07:14 2021 +1100
+
+    Continued fixed and refactoring:
+
+commit 47fd888d6bafdec0b704096921c33580a5aaf5bc
+Merge: 2b69d0c 30c2f9f
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 21:43:39 2021 +1100
+
+    Merge pull request #16 from SOFT2412-2021S2/refactor
+    
+    minor refactor
+
+commit 30c2f9f22ae21bfd88e2e341f214a318a1b1d7f0
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Tue Oct 19 21:41:01 2021 +1100
+
+    minor refactor
+
+commit 2b69d0c83dd0caea9275f9c8ad5425829b9a4426
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Tue Oct 19 16:41:20 2021 +1100
+
+    bug fixing minor
+
+commit 8b02ec7286c341ef039cea77246f56e0b477d908
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Tue Oct 19 16:36:53 2021 +1100
+
+    fixed build.gradle to work with JSON
+
+commit e25b75e1d44568c869764c198946c35d087accb4
+Merge: 682368d 6b616f8
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Tue Oct 19 16:32:59 2021 +1100
+
+    Merge pull request #15 from SOFT2412-2021S2/movie_parser
+    
+    movie parser created
+
+commit 6b616f8603630bdeec70d6ca95db69e276723fdf
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Tue Oct 19 16:16:31 2021 +1100
+
+    movie parser created
+
+commit 682368d1237290118be906a28d787881659fd979
+Merge: 43c9aba 4e35160
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Tue Oct 19 13:59:12 2021 +1100
+
+    Merge pull request #14 from SOFT2412-2021S2/engineRefactoring
+    
+    refactoring
+
+commit 4e351607f8bce9a8efb208a1d07b883efd66d7fd
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Tue Oct 19 13:58:32 2021 +1100
+
+    refactoring
+
+commit 43c9aba5adb78fc6ee38a02f93f4081fdf7f4bd7
+Merge: 6db3ae0 5ce21c7
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Tue Oct 19 13:25:47 2021 +1100
+
+    Merge pull request #13 from SOFT2412-2021S2/fixes
+    
+    fixed json parser temp
+
+commit 5ce21c711bd7faad98675f95fe95659c6ffc2d16
+Author: Ethan Proutt <ethan.proutt@gmail.com>
+Date:   Mon Oct 18 23:45:30 2021 +1100
+
+    fixed json parser temp
+
+commit 6db3ae064dbe1467ccc360afce9ec2ec3f54aa1f
+Merge: 21c5d05 8a553ba
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Mon Oct 18 12:44:37 2021 +1100
+
+    Merge pull request #12 from SOFT2412-2021S2/filePathEngine
+    
+    added in functional filepaths + fixed bugs + updated build.gradle to …
+
+commit 8a553ba13838fdd1f5068447be7627de8c37e0b7
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Mon Oct 18 12:43:53 2021 +1100
+
+    added in functional filepaths + fixed bugs + updated build.gradle to work with JSON
+
+commit 21c5d05c1bf11c551748f235695f0034f9728471
+Merge: e54e544 b232ba2
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Mon Oct 18 12:14:00 2021 +1100
+
+    Merge pull request #11 from SOFT2412-2021S2/login
+    
+    Separated login and register functions
+
+commit b232ba216e92e8c1f44ab57b6eaf2a86c7a3b5ca
+Author: Ethan Proutt <ethan.proutt@gmail.com>
+Date:   Sun Oct 17 23:13:28 2021 +1100
+
+    Separated login and register functions
+
+commit e54e544aac9ea080f87618fac60939616b5fe429
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sun Oct 17 01:45:17 2021 +1100
+
+    very minor restructuring + ethan's calendar class
+
+commit 40a5bffced845f5fdad2560355a2567d8f6f4a0f
+Merge: f91ff66 98cac90
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Sat Oct 16 22:36:17 2021 +1100
+
+    Merge pull request #9 from SOFT2412-2021S2/parsers
+    
+    Added attributes to movie + restructured folders + cleanup
+
+commit 98cac90c476c5694fdbc8b2cf1ebd027ae482c79
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 22:21:51 2021 +1100
+
+    Added attributes to movie + restructured folders + cleanup
+
+commit f91ff662487f497088a1461fb8acc9c2a4d4c175
+Merge: 6cb3720 206ef2f
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 12:47:50 2021 +1100
+
+    Merge pull request #8 from SOFT2412-2021S2/EngineBranch
+    
+    Created Engine and began implementing login features + fixed some bugs
+
+commit 206ef2fb206ee96dd76716a56f0dccf0ec3e00b4
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Sat Oct 16 12:43:42 2021 +1100
+
+    Created Engine and began implementing login features + fixed some bugs
+
+commit 6cb37208d54b69b6483626a31381909a399fd8b5
+Merge: 5ad5941 ed07bdc
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Sat Oct 16 08:25:42 2021 +1100
+
+    Merge pull request #7 from SOFT2412-2021S2/Databases
+    
+    Databases
+
+commit ed07bdc84c24714f698e947be0f9e060e4fa0ee3
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 04:44:20 2021 +1100
+
+    databases all setup
+
+commit 6f4921060c128c264cab07cc24dcc91abc523e71
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 04:36:19 2021 +1100
+
+    replaced member csv with json
+
+commit c55bf4f0d141deb4c66d5c12c4cdbf0dabe1433d
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 04:27:34 2021 +1100
+
+    replaced credit card csv with json
+
+commit fac65f2bde2a000729eaf4a9f1b2257b93e4a3dc
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 04:24:27 2021 +1100
+
+    Movies.json
+
+commit 4794cd24f430265d1166550c0e50e910b4233aa7
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:46:09 2021 +1100
+
+    Screen timetables edited
+
+commit a926e7118005262fef357ec0dacb2d38fe493ec2
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:27:57 2021 +1100
+
+    Screen locations edited
+
+commit 1a80e9b96079c197d0708685ff20e69542fb1878
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:25:50 2021 +1100
+
+    All locations provided screen and timetables, to be filled
+
+commit 9b9e8e7cf901664254ea0a0ef05cc434dd578915
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:23:31 2021 +1100
+
+    Locations.json
+
+commit 7524d935e841470d51d7ea4ee4639d4b9ee6e761
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:07:18 2021 +1100
+
+    screens and locations added
+
+commit b94aa11de4a7cbf693ffa2a5637f5aafd2ab60ba
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:02:16 2021 +1100
+
+    creditcard date updates
+
+commit 61566093d3b7556d2a95d293916a7a3805a4adb0
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 03:00:55 2021 +1100
+
+    creditcard year updates
+
+commit ec64c7db1726cca95755600c58a883db3ad0d476
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 02:59:21 2021 +1100
+
+    date updates giftcard
+
+commit efb2cde1b3e55ff4264c1a0d83bc16896b06d83f
+Author: Ronen Bhaumik <rbha6927@uni.sydney.edu.au>
+Date:   Sat Oct 16 02:57:32 2021 +1100
+
+    databases redo
+
+commit 5ad594110bf0d4f10f1888a10a1fac7203b52039
+Merge: 68978d3 d5b62fb
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Fri Oct 15 23:37:18 2021 +1100
+
+    Merge pull request #6 from SOFT2412-2021S2/Pages
+    
+    Pages
+
+commit d5b62fb6633d6e0f336dfec85a15948bf33396a2
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 23:25:45 2021 +1100
+
+    Framework laid out and basics initialised
+
+commit 1e6709f5611776db4be69e0e3dbd471c7cd7e4be
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 23:09:40 2021 +1100
+
+    Continued updating of all page creation
+
+commit 11cc60a2cc0cf5d22c7cf43f4e50857c5f63f101
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 22:38:19 2021 +1100
+
+    Continued updating of all page creation
+
+commit 8dc701766bec4e344552e4abe8fd220c467ecbdb
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 22:34:11 2021 +1100
+
+    Continued updating of all page creation
+
+commit 68978d3f0ecb6eee24bc4f81ab51a61ce999c1dc
+Merge: a519dda 33b106a
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Fri Oct 15 21:21:46 2021 +1100
+
+    Merge pull request #5 from SOFT2412-2021S2/Pages
+    
+    Pages
+
+commit 33b106a2f016d76a12feb4d98b648d5340bec96f
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 21:10:17 2021 +1100
+
+    Main Page and Abstract Page setup part 1
+
+commit 10321fcdf14e574f494960d21b32a05f0ea41746
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 15 20:31:07 2021 +1100
+
+    Updating the pages initialisation
+
+commit a519ddabae3de348320c5d8366b15b69055be8c5
+Merge: 013eb43 0a9c01f
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Thu Oct 14 11:13:08 2021 +1100
+
+    Merge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2
+
+commit 013eb43c319fd583a4f1a0592af90e79bd20c926
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Thu Oct 14 11:12:17 2021 +1100
+
+    added users database
+
+commit 0a9c01f627836ab68f84a383c638692f82e87de7
+Merge: 507009b 9f9c077
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Thu Oct 14 11:10:11 2021 +1100
+
+    Merge pull request #3 from SOFT2412-2021S2/movies
+    
+    initial movies java file, included getter and setter methods
+
+commit 9f9c07729ece02375371d0f032a3a588efd3e6a3
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 14 10:59:03 2021 +1100
+
+    added more description and actor methods for now
+
+commit 5934cdb42d2a3972894c5838f335f862547bf5ee
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 14 10:30:06 2021 +1100
+
+    initial movies java file, included getter and setter method
+
+commit 3e370e9aefb15e9147fbb94d9c7b0835f52b0815
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 14 05:50:41 2021 +1100
+
+    initial movies java file, included getter and setter methods
+
+commit 507009b4f073748129d43ba1f0b567c2a3722986
+Merge: 6aa5b49 ede33b7
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Fri Oct 8 16:16:06 2021 +1100
+
+    Merge pull request #2 from SOFT2412-2021S2/Initial
+    
+    Initial
+
+commit ede33b711cefd180a76eb699ee56ce790867a682
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 8 15:45:37 2021 +1100
+
+    Pages
+
+commit d8aaec2b6592f8d2af65097ccfd1e5119a99e58c
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 8 15:39:46 2021 +1100
+
+    Start Page
+
+commit 6aa5b4959c56933633a8005b60dab772589f56fe
+Merge: 643bd97 ed1b004
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Fri Oct 8 14:54:53 2021 +1100
+
+    Merge pull request #1 from SOFT2412-2021S2/Initial
+    
+    Gradle build
+
+commit ed1b004ccaae7707da0e8224cfc831bc4f755ab7
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Fri Oct 8 14:54:23 2021 +1100
+
+    Gradle build
+
+commit 643bd977a73a2502abb8682239a6f2201ef3a3f3
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Thu Oct 7 11:07:01 2021 +1100
+
+    Changed Readme
+
+commit 238a535ba769ba47349a87854541354332932a1f
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Thu Oct 7 10:53:47 2021 +1100
+
+    Initial commit
