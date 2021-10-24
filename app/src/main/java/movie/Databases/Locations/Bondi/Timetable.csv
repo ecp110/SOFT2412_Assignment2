@@ -1,10 +1,10 @@
-start,day,id,screen_num
-0900,Monday,00000,1
-0900,Monday,63455,4
-0900,Monday,57023,7
-1000,Monday,23468,2
-1000,Monday,95867,6
-1100,Monday,38744,8
+start,day,id,screen_type
+0900,Monday,00000,0
+0900,Monday,63455,1
+0900,Monday,57023,2
+1000,Monday,23468,0
+1000,Monday,95867,1
+1100,Monday,38744,2
 1100,Monday,95867,3
 1200,Monday,24380,5
 1200,Monday,39487,7
