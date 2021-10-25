@@ -25,8 +25,32 @@ public class Viewing{
         return this.screenType;
     }
 
+    public String getScreenName() {
+        if (this.screenType == 0) {
+            return "Bronze";
+        } else if (this.screenType == 1) {
+            return "Silver";
+        } else if (this.screenType == 2) {
+            return "Gold";
+        }
+
+        return null;
+    }
+
     public int getTimeOfDay(){
         return this.timeOfDay;
+    }
+
+    public String getTimeOfDayName() {
+        if (this.timeOfDay == 0) {
+            return "Morning";
+        } else if (this.timeOfDay == 1) {
+            return "Midday";
+        } else if (this.timeOfDay == 2) {
+            return "Evening";
+        }
+
+        return null;
     }
 
     public String getDay(){

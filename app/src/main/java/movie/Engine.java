@@ -16,7 +16,7 @@ public class Engine {
         String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
         String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
         String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
-        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "users.csv").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.csv").toString();
 
         String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin").toString();
         String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer").toString();
