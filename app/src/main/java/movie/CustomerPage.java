@@ -15,6 +15,7 @@ public class CustomerPage extends Page {
     public CustomerPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath, User user) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, pagePath);
         this.user = user;
+        this.parseAll();
     }
 
     public String displayInitial() {
