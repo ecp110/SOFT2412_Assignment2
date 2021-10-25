@@ -1,15 +1,16 @@
 package movie;
 
 import java.util.*;
+import java.io.*;
 
 public class Cinema {
     
     private String name;
-    private String locationPath;
+    private final String LOCATION_PATH;
     private ArrayList<Movie> movies;
 
     private ArrayList<Viewing> monday;
-    private ArrayList<Viewing> tueday;
+    private ArrayList<Viewing> tuesday;
     private ArrayList<Viewing> wednesday;
     private ArrayList<Viewing> thursday;
     private ArrayList<Viewing> friday;
@@ -18,19 +19,19 @@ public class Cinema {
     
 
 
-    public Cinema(String name, String locationPath, ArrayList<Movies> movies){
+    public Cinema(String name, String locationPath, ArrayList<Movie> movies){
         this.name = name;
-        this.locationPath = locationPath;
+        this.LOCATION_PATH = locationPath;
         this.movies = movies;
-        this.viewings = parseViewings();
+        parseViewings();
     }
 
     public String getName(){
         return this.name;
     }
 
-    public String locationPath(){
-        return this.locationPath;
+    public String getLocationPath(){
+        return this.LOCATION_PATH;
     }
 
     public ArrayList<Movie> getMovies(){
@@ -68,7 +69,7 @@ public class Cinema {
     private void parseViewings(){
         // Initiates scanner for users file
         try {
-            Scanner sc = new Scanner(new File(this.locationPath));
+            Scanner sc = new Scanner(new File(this.LOCATION_PATH));
             String[] line = new String[4];
 
             // Skips the initial line with column names
@@ -79,7 +80,7 @@ public class Cinema {
 
                 line = sc.nextLine().split(",");
 
-                String timeOfDay = line[0];
+                int timeOfDay = Integer.valueOf(line[0]);
                 String day = line[1];
                 String movieID = line[2];
                 int screenType = Integer.valueOf(line[3]);
@@ -165,7 +166,7 @@ public class Cinema {
         for (Viewing viewing : currDay){
 
             int timeOfDay = viewing.getTimeOfDay();
-            String session = null;
+            String session = "";
 
             if (timeOfDay == 0){
                 session = "Morning";
@@ -181,19 +182,19 @@ public class Cinema {
             retString += viewing.getMovie().toString() + " | ";
             
             int screenType = viewing.getScreenType();
-            String class = null;
+            String classType = "";
 
             if (screenType == 0){
-                class = "Bronze";
+                classType = "Bronze";
             }
             else if (screenType == 1){
-                class = "Silver";
+                classType = "Silver";
             }
             else if (screenType == 2){
-                class = "Gold";
+                classType = "Gold";
             }
 
-            retString += class;
+            retString += classType;
             
         }
 

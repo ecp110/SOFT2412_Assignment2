@@ -24,6 +24,12 @@ public abstract class Page {
     // Movie information; stored in an arralist of Movie objects
     protected ArrayList<Movie> movies = new ArrayList<Movie>();
 
+    // CreditCard information; stored in an arralist of CreditCard objects
+    protected ArrayList<CreditCard> creditCards = new ArrayList<CreditCard>();
+
+    // GiftCard information; stored in an arralist of GiftCard objects
+    protected ArrayList<GiftCard> giftCards = new ArrayList<GiftCard>();
+
     public Page(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath) {
         this.MOVIE_LOCATION = movieLocation;
         this.CINEMAS_LOCATION = cinemasLocation;
@@ -32,8 +38,7 @@ public abstract class Page {
         this.USERS_LOCATION = usersLocation;
         this.PAGE_PATH = pagePath;
 
-        this.parseUsers();
-        this.parseMovies();
+        this.parseAll();
     }
 
     /**
@@ -51,45 +56,49 @@ public abstract class Page {
         //json = new JSONObject(new JSONTokener(new FileReader(folder + "/" + filename)));
     //}
 
+    private void parseAll() {
+        this.parseUsers();
+        this.parseMovies();
+        this.parseCreditCards();
+        this.parseGiftCards();
+    }
+
     /** 
      * Parses users into arraylist of users
      */
     protected void parseUsers() {
         // Initiates scanner for users file
+        JSONParser parser = new JSONParser();
+    
         try {
-            Scanner sc = new Scanner(new File(this.USERS_LOCATION));
-            String[] line = new String[3];
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.USERS_LOCATION));
+            JSONArray users = (JSONArray) jsonObject.get("users");
 
-            // Skips the initial line with column names
-            sc.nextLine();
+            String name;
+            String password;
+            String status;
+            User uFull;
             
-            String type;
-            // Reads in each of the lines into User objects and stores them in the page
-            while (sc.hasNextLine()) {
-                type = null;
-                line = sc.nextLine().split(",");
+            for (Object user : users) {
+                JSONObject u = (JSONObject) user;
 
-               
+                name = (String) u.get("name");
+                password = (String) u.get("password");
+                status = (String) u.get("status");
 
-
-                if (line[2].toLowerCase().equals("customer")) {
-                    type = "customer";
-                } else if (line[2].toLowerCase().equals("manager")) {
-                    type = "manager";
-                } else if (line[2].toLowerCase().equals("staff")) {
-                    type = "staff";
-                } else{
-                    continue;
-                }
-
-
-                // Adds the user as a user object to the page
-                this.users.add(new User(line[0], line[1], type));
+                uFull = new User(name, password, status);
+                this.users.add(uFull);
+                uFull = null;
             }
 
         } catch (FileNotFoundException e) {
-            return;
+            System.out.println("NO FILE");
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        } catch (ParseException e) {
+            System.out.println("ERROR");
         }
+  
     }
 
     protected void parseMovies(){
@@ -131,8 +140,92 @@ public abstract class Page {
             } catch (ParseException e) {
                 System.out.println("ERROR");
             }
-    
-        
+ 
+    }
+
+    protected void parseCreditCards(){
+        JSONParser parser = new JSONParser();
+
+        try {
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.CREDIT_CARD_LOCATION));
+            JSONArray creditCards = (JSONArray) jsonObject.get("creditcards");
+
+            String name;
+            String number;
+            CreditCard cFull;
+            
+            for (Object card : creditCards) {
+                JSONObject c = (JSONObject) card;
+
+                name = (String) c.get("name");
+                number = (String) c.get("number");
+
+                cFull = new CreditCard(name, number);
+                this.creditCards.add(cFull);
+                cFull = null;
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("NO FILE");
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        } catch (ParseException e) {
+            System.out.println("ERROR");
+        }
+
+    }
+
+    protected void parseGiftCards(){
+        JSONParser parser = new JSONParser();
+
+        try {
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.GIFT_CARD_LOCATION));
+            JSONArray giftCards = (JSONArray) jsonObject.get("giftcards");
+
+            String number;
+            boolean redeemed = false;
+
+            String cParsing;
+            int day;
+            int month;
+            int year;
+
+            Calendar issue;
+            Calendar expiry;
+            GiftCard gFull;
+            
+            for (Object card : giftCards) {
+                JSONObject g = (JSONObject) card;
+
+                number = (String) g.get("number");
+                if ((int) (long) g.get("redeemed") == 1) {
+                    redeemed = true;
+                }
+                cParsing = (String) g.get("issue");
+                day = Integer.valueOf(cParsing.substring(0, 2));
+                month = Integer.valueOf(cParsing.substring(2, 4));
+                year = Integer.valueOf(cParsing.substring(4));
+                issue = new Calendar(day, month, year);
+
+                cParsing = (String) g.get("expiry");
+                day = Integer.valueOf(cParsing.substring(0, 2));
+                month = Integer.valueOf(cParsing.substring(2, 4));
+                year = Integer.valueOf(cParsing.substring(4));
+                expiry = new Calendar(day, month, year);
+
+                gFull = new GiftCard(number, redeemed, issue, expiry);
+                this.giftCards.add(gFull);
+                gFull = null;
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("NO FILE");
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        } catch (ParseException e) {
+            System.out.println("ERROR");
+        }
+
     }
 
     /**

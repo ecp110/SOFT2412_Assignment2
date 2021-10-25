@@ -1,7 +1,8 @@
-[
+{
+  "users": [
   {
     "name": "Charles",
-    "password": "0000",
+    "password": "first2345",
     "status" : "manager"
   },
   {
@@ -250,3 +251,4 @@
     "status" : "customer"
   }
 ]
+} 
