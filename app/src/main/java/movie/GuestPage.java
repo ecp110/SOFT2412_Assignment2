@@ -3,6 +3,7 @@ package movie;
 public class GuestPage extends Page {
     public GuestPage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String pagePath) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, pagePath);
+        this.parseAll();
     }
 
     public String displayInitial() {

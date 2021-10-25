@@ -10,6 +10,7 @@ public class HomePage extends Page {
 
     public HomePage(String movieLocation, String cinemasLocation, String creditCardLocation, String giftCardLocation, String usersLocation, String filePath) {
         super(movieLocation, cinemasLocation, creditCardLocation, giftCardLocation, usersLocation, filePath);
+        this.parseAll();
     }
 
     /**

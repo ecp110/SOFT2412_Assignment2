@@ -40,8 +40,6 @@ public abstract class Page {
         this.GIFT_CARD_LOCATION = giftCardLocation;
         this.USERS_LOCATION = usersLocation;
         this.PAGE_PATH = pagePath;
-
-        this.parseAll();
     }
 
     /**
@@ -59,7 +57,7 @@ public abstract class Page {
         //json = new JSONObject(new JSONTokener(new FileReader(folder + "/" + filename)));
     //}
 
-    private void parseAll() {
+    protected void parseAll() {
         this.parseUsers();
         this.parseMovies();
         this.parseCreditCards();
@@ -433,10 +431,8 @@ public abstract class Page {
                 }
             }
         }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE");
         } catch (IOException e) {
-            System.out.println("ERROR");
+            System.out.println("NO FILE");
         } 
         return locationName;
     }
@@ -480,10 +476,8 @@ public abstract class Page {
                 }
             }
         }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE");
         } catch (IOException e) {
-            System.out.println("ERROR");
+            System.out.println("NO FILE");
         } 
         return locationName;
     }
@@ -537,10 +531,8 @@ public abstract class Page {
             }
             screenClass = null;
         }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE");
         } catch (IOException e) {
-            System.out.println("ERROR");
+            System.out.println("NO FILE");
         } 
         return locationName;
     }
@@ -589,10 +581,8 @@ public abstract class Page {
             }
             screenClass = null;
         }
-        } catch (FileNotFoundException e) {
-            System.out.println("NO FILE");
         } catch (IOException e) {
-            System.out.println("ERROR");
+            System.out.println("NO FILE");
         } 
         return locationName;
     }
@@ -665,10 +655,8 @@ public abstract class Page {
                     screenNumbers.add(line[1]);
                 }
             }
-            } catch (FileNotFoundException e) {
-                System.out.println("NO FILE");
             } catch (IOException e) {
-                System.out.println("ERROR");
+                System.out.println("NO FILE");
             } 
         }
 

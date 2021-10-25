@@ -1,6 +1,0 @@
-Hello! Welcome to XYZ Cinemas! We hope you are having a great day.
-
-If you would like to log-in, just type "l".
-If you would like to continue as a guest, type "g".
-
-Remember, if at any point in your process you would like to cancel and return to this main page, just type "r" and hit enter.

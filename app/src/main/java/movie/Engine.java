@@ -16,12 +16,12 @@ public class Engine {
         String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
         String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
         String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
-        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.csv").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
 
-        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "admin").toString();
-        String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "customer").toString();
-        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "init").toString();
-        String guestPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "guest").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+        String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "customer").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "init").toString();
+        String guestPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "guest").toString();
 
         //create home page
         
@@ -63,8 +63,6 @@ public class Engine {
                 et.stopMasking();
                 
                 currentUser = home.logIn(username, password);
-
-            
 
                 if (currentUser == null){
                     System.out.println("Specified user doesn't exist. Continuing as guest...\n");
