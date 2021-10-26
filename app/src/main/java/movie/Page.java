@@ -273,10 +273,72 @@ public abstract class Page {
         return this.movies;
     }
 
+    //finds User object given username
+    public String getUserByUsername(String username){
+        //extracts all users from members.Json
+        String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        ArrayList<User> allUsers = storeUsers(usersJsonPath);
+        
+        //extracts username if user exists
+        
+        String foundUserName = null;
+        int len = allUsers.size();
+        int i = 0;
+        while (i < len){
+            if(allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase())){
+                foundUserName = allUsers.get(i).getName();
+            }
+            i += 1;
+        }
+
+        return foundUserName;
+    
+    }
+    public void addUser(User user){
+        System.out.println("addUser WIP TODO yeet");
+    }
+
     /*
     ************** All methods in the section below are for the filter method **************
     remember to make methods for converting movie name, location, and screen size to correct format to be inputed into the main filter method
     */
+    //Extracts all movies from Movies.json
+    public ArrayList<User> storeUsers(String locationPath){
+        ArrayList<User> userList = new ArrayList<User>();
+
+        JSONParser parser = new JSONParser();
+    
+            try {
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(locationPath));
+                JSONArray users = (JSONArray) jsonObject.get("users");
+    
+                String name;
+                String password;
+                String status;
+                User uFull;
+                
+                for (Object user : users) {
+                    JSONObject u = (JSONObject) user;
+    
+                    name = (String) u.get("name");
+                    password = (String) u.get("password");
+                    status = (String) u.get("status");
+    
+                    uFull = new User(name,password,status);
+                    userList.add(uFull);
+                    uFull = null;
+                }
+    
+            } catch (FileNotFoundException e) {
+                System.out.println("NO FILE");
+            } catch (IOException e) {
+                System.out.println("ERROR");
+            } catch (ParseException e) {
+                System.out.println("ERROR");
+            }
+
+        return userList;
+    }
 
     //Extracts all movies from Movies.json
     public ArrayList<Movie> storeMovies(String locationPath){
