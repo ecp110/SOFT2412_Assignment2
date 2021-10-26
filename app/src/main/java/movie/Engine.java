@@ -219,6 +219,26 @@ public class Engine {
             else if(currentUser.getType().equals("staff") || currentUser.getType().equals("manager")){
                 AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
                 System.out.println(admin.displayInitial());
+
+                String response = scan.nextLine();
+
+                if (response.equals("1")) {
+                    System.out.println(admin.displayBookingLogPrompt());
+                } else {
+                    break;
+                }
+
+                response = scan.nextLine();
+
+                if (response.equals("1")) {
+                    System.out.println(admin.displayBookingReciepts("George Street"));
+                } else if (response.equals("2")) {
+                    System.out.println(admin.displayBookingReciepts("Chatswood"));
+                } else if (response.equals("3")) {
+                    System.out.println(admin.displayBookingReciepts("Bondi"));
+                } else if (response.equals("4")) {
+                    System.out.println(admin.displayBookingReciepts("Hurstville"));
+                } 
             }
 
 

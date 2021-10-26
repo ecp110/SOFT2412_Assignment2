@@ -1,1 +1,7 @@
-time,customer,seats,movie,screen
+time,customer,cardnum,seats,movie,screen
+0,Stacey,12345,3,634,2
+1,Jimmy,12345,3,000,0
+2,Alex,12345,3,234,1
+1,Charles,12345,3,999,2
+2,Ethan,12345,3,394,2
+0,Scrum Daddy,12345,3,243,2
