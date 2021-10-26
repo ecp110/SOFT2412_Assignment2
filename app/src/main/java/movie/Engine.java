@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.Console;
 
 public class Engine {
 
@@ -47,8 +48,8 @@ public class Engine {
                 String username = scan.nextLine();
 
                 // masking password
-                String prompt = home.displayLogIn();
-                EraserThread et = new EraserThread(prompt);
+                System.out.println(home.displayLogIn());
+                /*EraserThread et = new EraserThread(prompt);
                 Thread mask = new Thread(et);
                 mask.start();
 
@@ -60,7 +61,8 @@ public class Engine {
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
-                et.stopMasking();
+                et.stopMasking();*/
+                String password = PasswordField.readPassword();
                 
                 currentUser = home.logIn(username, password);
 
@@ -112,6 +114,35 @@ public class Engine {
                         
                         //filter()
                     }
+                    if (response.toLowerCase().equals("r")){
+
+                        boolean registered = false;
+
+                        while (!registered) {
+                            System.out.println("Please enter a username (Must be alphanumeric with no spaces): ");
+                            String username = scan.nextLine();
+
+                            if (guest.getUserByUsername(username) == null) {
+                                System.out.println("Valid username! Please enter a password: ");
+                                String password = PasswordField.readPassword();
+                                System.out.println("Please re-enter your password: ");
+                                String password2 = PasswordField.readPassword();
+                                if (password2.equals(password)) {
+                                    System.out.println("Passwords match!");
+                                    guest.addUser(new User(username,password,"customer"));
+                                    registered = true;
+                                    
+                                } else {
+                                    System.out.println("Passwords do not match. Please try again.");
+                                }
+                                
+                            } else {
+                                System.out.println("Username is already taken.");
+                            }
+                            
+                        }
+                        continue;
+                    }
     
                     if(response.toLowerCase().equals("b")) {
                         //guest registration here and then booking
@@ -119,7 +150,9 @@ public class Engine {
                         bookingComplete = true;
                         if (selectedMovie != null) {
                             //register() and book()
-                            System.out.println("To book tickets to "+selectedMovie.getTitle()+", you must have an account.");
+                            System.out.println(
+                                "To book tickets to "+selectedMovie.getTitle()+", you must have an account."+
+                                "\n if you would like to proceed and register, type \"r\"." +"\nOtherwise if you would like to cancel, type anything.");
                             bookingComplete = true;
                         } else {
                             System.out.println("No movie selected, please select a movie and try again!");
@@ -128,8 +161,7 @@ public class Engine {
                     else {
                         selectedMovie = guest.getMovieById(response);
                         if (selectedMovie != null){
-                            System.out.println("Selected Movie: "+selectedMovie.getTitle());
-                            System.out.println("");
+                            System.out.println("Selected Movie: "+selectedMovie.getTitle()+"\n");
                             System.out.println(selectedMovie.getSynopsis());
                             System.out.println("\nIf you would like to book this movie, type \"b\".\nTo view another movie, type in its ID.");
     
@@ -199,8 +231,36 @@ public class Engine {
     }
 }
 
+class PasswordField {
+
+    /**
+     *@param prompt The prompt to display to the user
+     *@return The password as entered by the user
+     */
+    public static String readPassword() {
+       EraserThread et = new EraserThread("");
+       Thread mask = new Thread(et);
+       mask.start();
+ 
+       BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+       String password = "";
+ 
+       try {
+          password = in.readLine();
+       } catch (IOException ioe) {
+         ioe.printStackTrace();
+       }
+       // stop masking
+       et.stopMasking();
+       // return the password entered by the user
+       return password;
+    }
+ }
 
 class EraserThread implements Runnable {
+
+
+
     private boolean stop;
   
     /**
@@ -232,3 +292,4 @@ class EraserThread implements Runnable {
        this.stop = false;
     }
  }
+
