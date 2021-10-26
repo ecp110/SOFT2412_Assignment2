@@ -41,6 +41,7 @@ public class CustomerPage extends Page {
         return output;
     }
 
+
     /**
      * Required abstract function
      * returns HomePage for when page gets cancelled

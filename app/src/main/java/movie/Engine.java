@@ -80,30 +80,115 @@ public class Engine {
                 loginComplete = true;
                 //proceed as guest
             }
+            else if (response.toLowerCase().equals("q")){
+                System.out.println("Quitting. Goodbye!");
+                break;
+            }
 
             else{
-                System.out.println("\nPlease press L to login or press G to proceed as a guest!\n");
+                System.out.println(home.displayInitial());;
             }
 
         }
 
-        if (currentUser == null){
-            GuestPage guest = new GuestPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, guestPagePath);
-            System.out.println(guest.displayInitial());
-            System.exit(0);
-        }
+
         boolean running = true;
         while (running){
-            if (currentUser.getType().equals("customer")){
+            if (currentUser == null){ //GUEST EXPERIENCE
+                GuestPage guest = new GuestPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, guestPagePath);
+                System.out.println(guest.displayInitial());
+    
+                Movie selectedMovie = null;
+                boolean bookingComplete = false;
+                while (!bookingComplete) {
+            
+                    String response = scan.nextLine();
+            
+                    if(response.toLowerCase().equals("f")){
+                        System.out.println("Write filter code here!");
+                        bookingComplete = true;
+    
+    
+                        
+                        //filter()
+                    }
+    
+                    if(response.toLowerCase().equals("b")) {
+                        //guest registration here and then booking
+                        
+                        bookingComplete = true;
+                        if (selectedMovie != null) {
+                            //register() and book()
+                            System.out.println("To book tickets to "+selectedMovie.getTitle()+", you must have an account.");
+                            bookingComplete = true;
+                        } else {
+                            System.out.println("No movie selected, please select a movie and try again!");
+                        }
+                    }
+                    else {
+                        selectedMovie = guest.getMovieById(response);
+                        if (selectedMovie != null){
+                            System.out.println("Selected Movie: "+selectedMovie.getTitle());
+                            System.out.println("");
+                            System.out.println(selectedMovie.getSynopsis());
+                            System.out.println("\nIf you would like to book this movie, type \"b\".\nTo view another movie, type in its ID.");
+    
+                        } else {
+                            System.out.println("Movie not found! Please try again");
+                        }
+    
+                    }
+                }
+            }
+            else if (currentUser.getType().equals("customer")){
                 CustomerPage customer = new CustomerPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, customerPagePath, currentUser);
 
                 System.out.println(customer.displayInitial());
+
+                boolean bookingComplete = false;
+                Movie selectedMovie = null;
+                while (!bookingComplete) {
+            
+                    String response = scan.nextLine();
+            
+                    if(response.toLowerCase().equals("f")){
+                        System.out.println("Write filter code here!");
+                        bookingComplete = true;
+                        //filter()
+                    }
+
+                    if(response.toLowerCase().equals("b")) {
+                        //movie booking shit here
+                        if (selectedMovie != null) {
+                            //book()
+                            System.out.println("Booking "+selectedMovie.getTitle());
+                            bookingComplete = true;
+                        } else {
+                            System.out.println("No movie selected, please select a movie and try again!");
+                        }
+                        
+                    }
+                    else {
+                        selectedMovie = customer.getMovieById(response);
+                        if (selectedMovie != null){
+                            System.out.println("Selected Movie: "+selectedMovie.getTitle());
+                            System.out.println("");
+                            System.out.println(selectedMovie.getSynopsis());
+                            System.out.println("\nIf you would like to book this movie, type \"b\".\nTo view another movie, type in its ID.");
+
+                        } else {
+                            System.out.println("Movie not found! Please try again");
+                        }
+
+                    }
+                }
             }
 
             else if(currentUser.getType().equals("staff") || currentUser.getType().equals("manager")){
                 AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
                 System.out.println(admin.displayInitial());
             }
+
 
             running = false;
 
