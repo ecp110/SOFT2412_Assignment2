@@ -129,7 +129,7 @@ public abstract class Page {
                     director = (String) m.get("director");
                     synopsis = (String) m.get("synopsis");
     
-                    mFull = new Movie(title, synopsis, runtime, classification, cast, id, director, release);
+                    mFull = new Movie(title, synopsis, runtime, classification, cast, director, id, release);
                     this.movies.add(mFull);
                     mFull = null;
                 }
@@ -308,7 +308,7 @@ public abstract class Page {
                     director = (String) m.get("director");
                     synopsis = (String) m.get("synopsis");
     
-                    mFull = new Movie(title, synopsis, runtime, classification, cast, id, director, release);
+                    mFull = new Movie(title, synopsis, runtime, classification, cast, director, id, release);
                     films.add(mFull);
                     mFull = null;
                 }
@@ -343,6 +343,28 @@ public abstract class Page {
         }
 
         return movieId;
+    
+    }
+
+       //finds movie object given movie title
+    public Movie getMovieById(String movieId){
+        //extracts all movies from Movies.Json
+        String movieJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        ArrayList<Movie> allMovies = storeMovies(movieJsonPath);
+        
+        //extracts movie id if movie title is given 
+        
+        Movie movie = null; 
+        int len = allMovies.size();
+        int i = 0;
+        while (i < len){
+            if(allMovies.get(i).getID().equals(movieId)){
+                movie = allMovies.get(i);
+            }
+            i += 1;
+        }
+
+        return movie;
     
     }
 

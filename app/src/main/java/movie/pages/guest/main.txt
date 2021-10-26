@@ -1,1 +1,5 @@
-GUEST OUTPUT
+Welcome, esteemed guest!
+As a guest user, you can explore all of the movies now showing.
+
+If you'd like to select a movie, just type the number that is next to that movie listing.
+If you'd like to filter the movies, press the 'f' key and hit enter, and you'll be prompted to enter either a cinema or movie.
