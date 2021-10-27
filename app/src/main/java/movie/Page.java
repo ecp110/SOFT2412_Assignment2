@@ -557,8 +557,8 @@ public abstract class Page {
         if (location.toLowerCase().equals("bondi")){
             return "Bondi";
         }
-        if (location.toLowerCase().equals("hurtsville")){
-            return "Hurtsville";
+        if (location.toLowerCase().equals("hurstville")){
+            return "Hurstville";
         }
         if (location.toLowerCase().equals("george street")){
             return "George Street";
@@ -741,15 +741,15 @@ public abstract class Page {
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
-            String gs = "Geroge Street";
-            String hurtsville = "Hurtsville";
-
+            String gs = "George Street";
+            String Hurstville = "Hurstville";
+            
             String bondiMovies = findAllMoviesGivenLocationAndScreen(bondi, screenSize);
             String chatswoodMovies = findAllMoviesGivenLocationAndScreen(chatswood, screenSize);
             String gsMovies = findAllMoviesGivenLocationAndScreen(gs, screenSize);
-            String hurtsvilleMovies = findAllMoviesGivenLocationAndScreen(hurtsville, screenSize);
+            String HurstvilleMovies = findAllMoviesGivenLocationAndScreen(Hurstville, screenSize);
 
-            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + hurtsvilleMovies + "\n";
+            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
             System.out.println(finalMessage);
         }
 
@@ -764,15 +764,15 @@ public abstract class Page {
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
-            String gs = "Geroge Street";
-            String hurtsville = "Hurtsville";
+            String gs = "George Street";
+            String Hurstville = "Hurstville";
 
             String bondiMovies = findAllMoviesGivenLocationAndMovie(movieID, bondi);
             String chatswoodMovies = findAllMoviesGivenLocationAndMovie(movieID, chatswood);
             String gsMovies = findAllMoviesGivenLocationAndMovie(movieID, gs);
-            String hurtsvilleMovies = findAllMoviesGivenLocationAndMovie(movieID, hurtsville);
+            String HurstvilleMovies = findAllMoviesGivenLocationAndMovie(movieID, Hurstville);
 
-            String finalMovies = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + hurtsvilleMovies + "\n";
+            String finalMovies = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
             System.out.println(finalMovies);
         }
 
@@ -799,15 +799,15 @@ public abstract class Page {
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
-            String gs = "Geroge Street";
-            String hurtsville = "Hurtsville";
+            String gs = "George Street";
+            String Hurstville = "Hurstville";
 
             String bondiMovies = findAllMoviesGivenAllFilters(movieID, bondi, screenSize);
             String chatswoodMovies = findAllMoviesGivenAllFilters(movieID, chatswood, screenSize);
             String gsMovies = findAllMoviesGivenAllFilters(movieID, gs, screenSize);
-            String hurtsvilleMovies = findAllMoviesGivenAllFilters(movieID, hurtsville, screenSize);
+            String HurstvilleMovies = findAllMoviesGivenAllFilters(movieID, Hurstville, screenSize);
 
-            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + hurtsvilleMovies + "\n";
+            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
             System.out.println(finalMessage);
         }
 
