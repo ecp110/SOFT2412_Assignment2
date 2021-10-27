@@ -6,9 +6,9 @@ Available Cinemas:          Avaliable Screens:
 Bondi                       Gold, Silver, Bronze
 Chatswood                   Gold, Silver, Bronze
 George Street               Gold, Silver, Bronze
-Hurtsville                  Gold, Silver, Bronze
+Hurstville                  Gold, Silver, Bronze
 
-Example: Star Wars, Geroge St, Gold 
+Example: John Wick,George Stree,Gold 
 
 ***Leaving a filter blank will not include that filter in search*** 
 
