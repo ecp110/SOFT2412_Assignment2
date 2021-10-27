@@ -449,7 +449,7 @@ public abstract class Page {
         int len = allMovies.size();
         int i = 0;
         while (i < len){
-            if(allMovies.get(i).getTitle().toLowerCase() == movieName.toLowerCase()){
+            if(allMovies.get(i).getTitle().toLowerCase().equals(movieName.toLowerCase())){
                 movieId = allMovies.get(i).getID();
             }
             i += 1;
@@ -482,13 +482,13 @@ public abstract class Page {
     }
 
     public String getMovieTime(String number){
-        if (number == "0"){
+        if (number.equals("0")){
             return "morning";
         }
-        if (number == "1"){
+        if (number.equals("1")){
             return "midday";
         }
-        if (number == "2"){
+        if (number.equals("2")){
             return "evening";
         }
         else{
@@ -497,13 +497,13 @@ public abstract class Page {
     }
 
     public String getScreenByNum(String screenNum){
-        if (screenNum == "0"){
+        if (screenNum.equals("0")){
             return "Bronze Screen";
         }
-        if (screenNum == "1"){
+        if (screenNum.equals("1")){
             return "Silver Screen";
         }
-        if (screenNum == "2"){
+        if (screenNum.equals("2")){
             return "Gold Screen";
         }
         else{
@@ -536,7 +536,7 @@ public abstract class Page {
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4); //splitting each timetable.csv line into 4 elements in a list
 
-            if (timeLine[3] == screen){ //if array of screen numbers contain the timetable screen num
+            if (timeLine[3].equals(screen)){ //if array of screen numbers contain the timetable screen num
                 filmId = timeLine[2]; //extracts film id of the timetable line
                 Movie foundMovie = getMovieById(filmId);
                 locationName +=  foundMovie.toString();
@@ -561,7 +561,7 @@ public abstract class Page {
         timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
-            if (timeLine[2] == movieId && timeLine[3] == screen){ //if screen number array contains the timetable line screen num and if the film id matches
+            if (timeLine[2].equals(movieId) && timeLine[3].equals(screen)){ //if screen number array contains the timetable line screen num and if the film id matches
                 Movie foundMovie = getMovieById(movieId);
                 locationName +=  foundMovie.toString();
                 locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
@@ -626,9 +626,9 @@ public abstract class Page {
         String selectLocation = attributes[1];
         String selectScreen = attributes[2];
 
-        String location = new String();
-        String movieID = new String();
-        String screenNum = new String();
+        String location = "";
+        String movieID = "";
+        String screenNum = "";
 
         if(!selectLocation.isEmpty()){
             location = convertLocationFormat(selectLocation);
@@ -652,7 +652,7 @@ public abstract class Page {
     public String findAllMoviesGivenLocationAndMovie(String movieId, String location){
 
         String locationName = location + ":\n";
-
+        System.out.println("reached");
         try {
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
@@ -663,8 +663,8 @@ public abstract class Page {
         timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
-            if (timeLine[2] == movieId){
-
+            if (timeLine[2].equals(movieId)){
+                
                 Movie foundMovie = getMovieById(movieId);
                 locationName +=  foundMovie.toString();
                 locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
