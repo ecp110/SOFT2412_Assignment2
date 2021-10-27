@@ -296,6 +296,57 @@ public abstract class Page {
     }
     public void addUser(User user){
         System.out.println("addUser WIP TODO yeet");
+
+        String name = user.getName();
+        String password = user.getPassword();
+        String status = user.getType();
+        /*
+        JSONObject userEntry = new JSONObject({
+            "name":name,
+            "password":password,
+            "status":status
+            }); 
+
+        */
+        JSONParser parser = new JSONParser();
+
+        try {
+            JSONObject jsonObjectInput = (JSONObject) parser.parse(new FileReader(USERS_LOCATION));
+            JSONArray usersArray = (JSONArray) jsonObjectInput.get("users");
+        
+            JSONObject userEntry = new JSONObject();
+            JSONObject users = new JSONObject();
+    
+    
+            userEntry.put("name",name);
+            userEntry.put("password",password);
+            userEntry.put("status",status);
+    
+            usersArray.add(userEntry);
+    
+            users.put("users",usersArray);
+    
+            try (FileWriter file = new FileWriter(USERS_LOCATION)) {
+                file.write(users.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    
+            System.out.print(users);
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException p) {
+            p.printStackTrace();
+        }
+        
+
+
+        
+
+
+
+
     }
 
     /*
