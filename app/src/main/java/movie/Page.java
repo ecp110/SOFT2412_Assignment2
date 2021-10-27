@@ -459,7 +459,7 @@ public abstract class Page {
     
     }
 
-       //finds movie object given movie title
+    //finds movie object given movie title
     public Movie getMovieById(String movieId){
         //extracts all movies from Movies.Json
         String movieJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
@@ -481,33 +481,33 @@ public abstract class Page {
     
     }
 
-    //convert 24hr time in the timetable.csv to 12hour time. eg: 0930 -> 9:30AM 
-    public String convertTime(String fourDigits){
-        final int mid = fourDigits.length() / 2; //get the middle of the String
-        String[] parts = {fourDigits.substring(0, mid),fourDigits.substring(mid)};
-
-        int hr = Integer.parseInt(parts[0]);
-
-        if (hr == 12){
-            String convertedHr = Integer.toString(hr);
-            String convertedTime = convertedHr + ":" + parts[1] + "PM";
-            return convertedTime;
+    public String getMovieTime(String number){
+        if (number == "0"){
+            return "morning";
         }
-
-        if (hr > 12){
-            hr = hr - 12;
-            String convertedHr = Integer.toString(hr);
-            String convertedTime = convertedHr + ":" + parts[1] + "PM";
-            return convertedTime;
+        if (number == "1"){
+            return "midday";
         }
-
-        if (hr < 12){
-            String convertedTime = parts[0] + ":" + parts[1] + "AM";
-            return convertedTime;
+        if (number == "2"){
+            return "evening";
         }
-
         else{
-            return "invalid time";
+            return "invalid movie time";
+        }
+    }
+
+    public String getScreenByNum(String screenNum){
+        if (screenNum == "0"){
+            return "Bronze Screen";
+        }
+        if (screenNum == "1"){
+            return "Silver Screen";
+        }
+        if (screenNum == "2"){
+            return "Gold Screen";
+        }
+        else{
+            return "invalid screen number";
         }
     }
 
@@ -518,24 +518,7 @@ public abstract class Page {
         //initiates location name message to identify which cinema the outputted movies belong to
         String locationName = location + ":\n";
 
-        //arraylist to store all screen numbers respective to given screen size
-        ArrayList<String> screens = new ArrayList<String>();
-
-        //path to screen.csv
-        String screenPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Screens.csv").toString();
-
         try { 
-
-        File screenFile = new File(screenPath);
-        Scanner screenScan = new Scanner(screenFile);
-        
-        //adds all screen numbers which correspond to the given screen size
-        while (screenScan.hasNextLine()){
-            String[] screenLine = screenScan.nextLine().split(",", 3);
-            if (screenLine[2] == screen){
-                screens.add(screenLine[1]);
-            }
-        }
 
         //path to timetable.csv
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
@@ -549,21 +532,15 @@ public abstract class Page {
         String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
         ArrayList<Movie> allFilms = storeMovies(movieLocationPath);
 
-
+        timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4); //splitting each timetable.csv line into 4 elements in a list
 
-            if (screens.contains(timeLine[3])){ //if array of screen numbers contain the timetable screen num
+            if (timeLine[3] == screen){ //if array of screen numbers contain the timetable screen num
                 filmId = timeLine[2]; //extracts film id of the timetable line
-
-                for (Movie film : allFilms){ //parses all movies from Json
-                    if (film.getID() == filmId){ 
-                        String showTime = convertTime(timeLine[0]); //converts 24hr time in timetable line to 12hr
-                        locationName += "\n";
-                        locationName += timeLine[1] + " " + showTime + ":\n";
-                        locationName += film.toString();
-                    }
-                }
+                Movie foundMovie = getMovieById(filmId);
+                locationName +=  foundMovie.toString();
+                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
             }
         }
         } catch (IOException e) {
@@ -573,42 +550,21 @@ public abstract class Page {
     }
 
     //returns a string of movies respective to all filters entered
-    public String findAllMoviesGivenAllFilters(String title, String location, String screen){
+    public String findAllMoviesGivenAllFilters(String movieId, String location, String screen){
         String locationName = location + ":\n";
-        ArrayList<String> screens = new ArrayList<String>();
-        String screenPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Screens.csv").toString();
-
+        
         try { 
-
-        File screenFile = new File(screenPath);
-        Scanner screenScan = new Scanner(screenFile);
-
-        while (screenScan.hasNextLine()){
-            String[] screenLine = screenScan.nextLine().split(",", 3);
-            if (screenLine[2] == screen){
-                screens.add(screenLine[1]);
-            }
-        }
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
         File timeFile = new File(timePath);
         Scanner timeScan = new Scanner(timeFile);
-
-        String filmId = findMovieId(title);
-        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
-        ArrayList<Movie> allFilms = storeMovies(movieLocationPath);
-
+        timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
-            if (screens.contains(timeLine[3]) && timeLine[2] == filmId){ //if screen number array contains the timetable line screen num and if the film id matches
-                for (Movie film : allFilms){
-                    if (film.getID() == filmId){
-                        String showTime = convertTime(timeLine[0]);
-                        locationName += "\n";
-                        locationName += timeLine[1] + " " + showTime + ":\n";
-                        locationName += film.toString();
-                    }
-                }
+            if (timeLine[2] == movieId && timeLine[3] == screen){ //if screen number array contains the timetable line screen num and if the film id matches
+                Movie foundMovie = getMovieById(movieId);
+                locationName +=  foundMovie.toString();
+                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
             }
         }
         } catch (IOException e) {
@@ -617,54 +573,103 @@ public abstract class Page {
         return locationName;
     }
 
+    public String convertScreenToNum(String screenName){
+        if (screenName.toLowerCase().equals("bronze")){
+            return "0";
+        }
+        if (screenName.toLowerCase().equals("silver")){
+            return "1";
+        }
+        if (screenName.toLowerCase().equals("gold")){
+            return "2";
+        }
+        else{
+            return "invalid screen name";
+        }
+    }
+
+    public String convertLocationFormat(String location){
+
+        //System.out.println("location inputted is " + location);
+
+        if (location.toLowerCase().equals("bondi")){
+            return "Bondi";
+        }
+        if (location.toLowerCase().equals("hurtsville")){
+            return "Hurtsville";
+        }
+        if (location.toLowerCase().equals("george street")){
+            return "George Street";
+        }
+        if (location.toLowerCase().equals("chatswood")){
+            return "Chatswood";
+        }
+        else{
+            return "invalid location name:" + location;
+        }
+    }
+
+    public ArrayList<String> readFilterInput() throws IOException{
+        //reads user filter input
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String temp = in.readLine();
+
+        if (temp.toLowerCase().equals("q")){
+            return null; 
+        }
+
+        String[] attributes = temp.split(",", 3);
+
+        //collects each filter
+        String selectMovie = attributes[0];
+        String selectLocation = attributes[1];
+        String selectScreen = attributes[2];
+
+        String location = new String();
+        String movieID = new String();
+        String screenNum = new String();
+
+        if(!selectLocation.isEmpty()){
+            location = convertLocationFormat(selectLocation);
+        }
+        if(!selectMovie.isEmpty()){
+            movieID = findMovieId(selectMovie);
+        }
+        if(!selectScreen.isEmpty()){
+            screenNum = convertScreenToNum(selectScreen);
+        }
+
+        ArrayList<String> filterAttributes = new ArrayList<String>();
+        filterAttributes.add(movieID);
+        filterAttributes.add(location);
+        filterAttributes.add(screenNum);
+
+        return filterAttributes;
+    }
+
     //returns a string of movies given movie name and cinema location
-    public String findAllMoviesGivenLocationAndMovie(String title, String location){
+    public String findAllMoviesGivenLocationAndMovie(String movieId, String location){
 
         String locationName = location + ":\n";
-        ArrayList<String> screens = new ArrayList<String>();
-        String screenPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Screens.csv").toString();
 
         try {
-
-        File screenFile = new File(screenPath);
-        Scanner screenScan = new Scanner(screenFile);
-        screenScan.nextLine();
-        while (screenScan.hasNextLine()){
-            String[] screenLine = screenScan.nextLine().split(",", 3);
-            screens.add(screenLine[1] + ":" + screenLine[2]);
-        }
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
         File timeFile = new File(timePath);
         Scanner timeScan = new Scanner(timeFile);
 
-        String filmId = findMovieId(title);
-        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
-        ArrayList<Movie> allFilms = storeMovies(movieLocationPath);
         String screenClass = new String();
-
+        timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
-            if (timeLine[2] == filmId){
+            if (timeLine[2] == movieId){
 
-                for(String numAndClass : screens){
-                    String[] splittedScreen = numAndClass.split(":", 2);
-                    if (splittedScreen[0] == timeLine[3]){
-                        screenClass = splittedScreen[1]; //matches the screen number to the class (eg gold)
-                    }
-                }
-
-                for (Movie film : allFilms){
-                    if (film.getID() == filmId){
-                        String showTime = convertTime(timeLine[0]);
-                        locationName += "\n";
-                        locationName += timeLine[1] + " " + showTime + ":\n";
-                        locationName += "Screen: " + screenClass + "\n"; //shows the screen class of the movie 
-                        locationName += film.toString();
-                    }
-                }
+                Movie foundMovie = getMovieById(movieId);
+                locationName +=  foundMovie.toString();
+                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
+                
             }
-            screenClass = null;
         }
         } catch (IOException e) {
             System.out.println("NO FILE");
@@ -674,47 +679,20 @@ public abstract class Page {
 
     //returns a string of movies given cinema location
     public String findAllMoviesGivenLocation(String location){
+
         String locationName = location + ":\n";
-        ArrayList<String> screens = new ArrayList<String>();
-        String screenPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Screens.csv").toString();
 
         try {
-
-        File screenFile = new File(screenPath);
-        Scanner screenScan = new Scanner(screenFile);
-        screenScan.nextLine();
-        while (screenScan.hasNextLine()){
-            String[] screenLine = screenScan.nextLine().split(",", 3);
-            screens.add(screenLine[1] + ":" + screenLine[2]);
-        }
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
         File timeFile = new File(timePath);
         Scanner timeScan = new Scanner(timeFile);
-
-        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
-        ArrayList<Movie> allFilms = storeMovies(movieLocationPath);
-        String screenClass = new String();
-
+        timeScan.nextLine();
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
-            
-            for(String numAndClass : screens){
-                String[] splittedScreen = numAndClass.split(":", 2);
-                if (splittedScreen[0] == timeLine[3]){
-                    screenClass = splittedScreen[1];
-                }
-            }
-            for (Movie film : allFilms){
-                if (film.getID() == timeLine[2]){
-                    String showTime = convertTime(timeLine[0]);
-                    locationName += "\n";
-                    locationName += timeLine[1] + " " + showTime + ":\n";
-                    locationName += "Screen: " + screenClass + "\n";
-                    locationName += film.toString();
-                }
-            }
-            screenClass = null;
+            Movie foundMovie = getMovieById(timeLine[2]);
+            locationName +=  foundMovie.toString();
+            locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
         }
         } catch (IOException e) {
             System.out.println("NO FILE");
@@ -722,12 +700,24 @@ public abstract class Page {
         return locationName;
     }
 
+    public void displayFilterMessage(){
+        try{
+        String filterPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "filter", "main.txt").toString();
+        File message = new File(filterPagePath);
+        Scanner filterMessage = new Scanner(message);
+        while(filterMessage.hasNextLine()){
+            System.out.println(filterMessage.nextLine());
+        }
+        } catch (FileNotFoundException e){
+            System.out.println("file not found");
+        }
+    }
+
     //main filtering method incorporating the scenario methods above 
-    public void filterMovies(String movieName, String cinLocation, String screenSize) {
+    public void filterMovies(String movieID, String cinLocation, String screenSize) {
 
         //prints opening message
-        String filterPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "pages", "filter").toString();
-        this.parseTxt("/main.txt", 1);
+        this.displayFilterMessage();
 
         /*
         extract movie id from json
@@ -756,18 +746,7 @@ public abstract class Page {
         String selectMovie = attributes[0];
         String selectLocation = attributes[1];
         String selectScreen = attributes[2];
-        */
 
-        //extracts all movies from Movies.Json
-        String movieJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
-        ArrayList<Movie> allMovies = storeMovies(movieJsonPath);
-
-        //gets movie id
-        if (!movieName.isEmpty()){
-            String movieId = findMovieId(movieName);
-        }
-        
-        
         //extracts screen num from location if both filters given
         if (!screenSize.isEmpty() && !cinLocation.isEmpty()){
 
@@ -794,9 +773,10 @@ public abstract class Page {
                 System.out.println("NO FILE");
             } 
         }
+        */
 
         //finds time of all movies with only given screen size
-        if (movieName.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
+        if (movieID.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
@@ -813,62 +793,63 @@ public abstract class Page {
         }
 
         //finds time of all movies given only location
-        if (movieName.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
+        if (movieID.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
             String movieFromLocation = findAllMoviesGivenLocation(cinLocation);
             System.out.println(movieFromLocation);
         }
 
-        //finds time of all movies given only movie title
-        if (!movieName.isEmpty() && cinLocation.isEmpty() && screenSize.isEmpty()){
+        //finds time of all movies given only movie id
+        if (!movieID.isEmpty() && cinLocation.isEmpty() && screenSize.isEmpty()){
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
             String gs = "Geroge Street";
             String hurtsville = "Hurtsville";
 
-            String bondiMovies = findAllMoviesGivenLocationAndMovie(movieName, bondi);
-            String chatswoodMovies = findAllMoviesGivenLocationAndMovie(movieName, chatswood);
-            String gsMovies = findAllMoviesGivenLocationAndMovie(movieName, gs);
-            String hurtsvilleMovies = findAllMoviesGivenLocationAndMovie(movieName, hurtsville);
+            String bondiMovies = findAllMoviesGivenLocationAndMovie(movieID, bondi);
+            String chatswoodMovies = findAllMoviesGivenLocationAndMovie(movieID, chatswood);
+            String gsMovies = findAllMoviesGivenLocationAndMovie(movieID, gs);
+            String hurtsvilleMovies = findAllMoviesGivenLocationAndMovie(movieID, hurtsville);
 
             String finalMovies = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + hurtsvilleMovies + "\n";
             System.out.println(finalMovies);
         }
 
         //finds time of all movies given all filters 
-        if (!movieName.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
-            String movieFromAllFilter = findAllMoviesGivenAllFilters(movieName, cinLocation, screenSize);
+        if (!movieID.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
+            String movieFromAllFilter = findAllMoviesGivenAllFilters(movieID, cinLocation, screenSize);
             System.out.println(movieFromAllFilter);
         }
 
         //finds time of all movies given location and screen
-        if (movieName.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
+        if (movieID.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
             String movieFromLocationAndScreen = findAllMoviesGivenLocationAndScreen(cinLocation, screenSize);
             System.out.println(movieFromLocationAndScreen);
         }
 
         //finds time of all movies given location and movie
-        if (!movieName.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
-            String movieFromLocationAndFilm = findAllMoviesGivenLocationAndMovie(movieName, cinLocation);
+        if (!movieID.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
+            String movieFromLocationAndFilm = findAllMoviesGivenLocationAndMovie(movieID, cinLocation);
             System.out.println(movieFromLocationAndFilm);
         }
 
         //finds time of all movies given movie and screen
-        if (!movieName.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
+        if (!movieID.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
 
             String bondi = "Bondi";
             String chatswood = "Chatswood";
             String gs = "Geroge Street";
             String hurtsville = "Hurtsville";
 
-            String bondiMovies = findAllMoviesGivenAllFilters(movieName, bondi, screenSize);
-            String chatswoodMovies = findAllMoviesGivenAllFilters(movieName, chatswood, screenSize);
-            String gsMovies = findAllMoviesGivenAllFilters(movieName, gs, screenSize);
-            String hurtsvilleMovies = findAllMoviesGivenAllFilters(movieName, hurtsville, screenSize);
+            String bondiMovies = findAllMoviesGivenAllFilters(movieID, bondi, screenSize);
+            String chatswoodMovies = findAllMoviesGivenAllFilters(movieID, chatswood, screenSize);
+            String gsMovies = findAllMoviesGivenAllFilters(movieID, gs, screenSize);
+            String hurtsvilleMovies = findAllMoviesGivenAllFilters(movieID, hurtsville, screenSize);
 
             String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + hurtsvilleMovies + "\n";
             System.out.println(finalMessage);
         }
 
     } 
+
 }

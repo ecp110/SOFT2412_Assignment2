@@ -109,10 +109,26 @@ public class Engine {
                     if(response.toLowerCase().equals("f")){
                         System.out.println("Write filter code here!");
                         bookingComplete = true;
-    
-    
+
+                        try{
+
+                        while (true){
+                            guest.displayFilterMessage();
+                            ArrayList<String> filteredInput = guest.readFilterInput();
+                            if (filteredInput != null){
+                                guest.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        }catch (IOException e){
+                            System.out.println("input not found");
+                        }
                         
-                        //filter()
+                        //ask for input 
+
+                        //loop filter request 
                     }
                     if (response.toLowerCase().equals("r")){
 
@@ -187,6 +203,21 @@ public class Engine {
                         System.out.println("Write filter code here!");
                         bookingComplete = true;
                         //filter()
+                        try{
+
+                            while (true){
+                                customer.displayFilterMessage();
+                                ArrayList<String> filteredInput = customer.readFilterInput();
+                                if (filteredInput != null){
+                                    customer.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
+                                }
+                                else{
+                                    break;
+                                }
+                            }
+                        }catch (IOException e){
+                            System.out.println("input not found");
+                        }
                     }
 
                     if(response.toLowerCase().equals("b")) {
