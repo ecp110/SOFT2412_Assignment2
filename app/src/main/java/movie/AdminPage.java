@@ -139,6 +139,11 @@ public class AdminPage extends Page {
             title,id,classification,runtime,director,cast,releaseDate,synopsis
             If not applicable then leave blank (ie ,,)
         */
+
+        if (movie == null || editData == null || editData.equals("")) {
+            return false;
+        }
+
         JSONParser parser = new JSONParser();
         String[] newAttributes = editData.split(",");
 
@@ -150,26 +155,29 @@ public class AdminPage extends Page {
         String director = movie.getDirector();
         //String releaseDate = movie.getReleaseDate().getDate();
         String synopsis = movie.getSynopsis();
+        try{ 
+            for (int i = 0; i < newAttributes.length; i++) {
+                if (!(newAttributes[i].equals(""))) {
+                    if (i == 0) {
+                        title = newAttributes[i];
+                    } else if (i == 1) {
+                        id = newAttributes[i];
+                    } else if (i == 2) {
+                        classification = newAttributes[i];
+                    } else if (i == 3) {
+                        runtime = Integer.valueOf(newAttributes[i]);
+                    } else if (i == 4) {
+                        director = newAttributes[i];
+                    //} else if (i == 6) {
+                        //releaseDate = newAttributes[i];
+                    } else if (i == 7) {
+                        synopsis = newAttributes[i];
+                    }
 
-        for (int i = 0; i < newAttributes.length; i++) {
-            if (!(newAttributes[i].equals(""))) {
-                if (i == 0) {
-                    title = newAttributes[i];
-                } else if (i == 1) {
-                    id = newAttributes[i];
-                } else if (i == 2) {
-                    classification = newAttributes[i];
-                } else if (i == 3) {
-                    runtime = Integer.valueOf(newAttributes[i]);
-                } else if (i == 4) {
-                    director = newAttributes[i];
-                //} else if (i == 6) {
-                    //releaseDate = newAttributes[i];
-                } else if (i == 7) {
-                    synopsis = newAttributes[i];
                 }
-
             }
+        } catch (Exception e) {
+            return false;
         }
 
         try {

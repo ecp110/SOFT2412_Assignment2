@@ -132,6 +132,10 @@ public class Cinema {
 
     public String dayToString(String day){
 
+        if (day == null || day.equals("")) {
+            return null;
+        }
+
         ArrayList<Viewing> currDay = null;
         String retString = null;
 
