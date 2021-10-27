@@ -257,8 +257,6 @@ public abstract class Page {
     
     }
     public void addUser(User user){
-        System.out.println("addUser WIP TODO yeet");
-
         String name = user.getName();
         String password = user.getPassword();
         String status = user.getType();
@@ -301,14 +299,6 @@ public abstract class Page {
         } catch (ParseException p) {
             p.printStackTrace();
         }
-        
-
-
-        
-
-
-
-
     }
 
     /*
