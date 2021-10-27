@@ -432,15 +432,21 @@ public abstract class Page {
         Movie movie = null; 
         int len = allMovies.size();
         int i = 0;
+        boolean found = false;
         while (i < len){
             if(allMovies.get(i).getID().equals(movieId)){
                 movie = allMovies.get(i);
+                found = true;
             }
             i += 1;
         }
 
-        return movie;
-    
+        if (found == true){
+            return movie;
+        }
+        else{
+            return null;
+        }
     }
 
     public String getMovieTime(String number){
@@ -501,6 +507,9 @@ public abstract class Page {
             if (timeLine[3].equals(screen)){ //if array of screen numbers contain the timetable screen num
                 filmId = timeLine[2]; //extracts film id of the timetable line
                 Movie foundMovie = getMovieById(filmId);
+                if (foundMovie == null){
+                    continue;
+                }
                 locationName +=  foundMovie.toString();
                 locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
             }
@@ -525,6 +534,9 @@ public abstract class Page {
             String[] timeLine = timeScan.nextLine().split(",", 4);
             if (timeLine[2].equals(movieId) && timeLine[3].equals(screen)){ //if screen number array contains the timetable line screen num and if the film id matches
                 Movie foundMovie = getMovieById(movieId);
+                if (foundMovie == null){
+                    continue;
+                }
                 locationName +=  foundMovie.toString();
                 locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
             }
@@ -627,6 +639,9 @@ public abstract class Page {
             if (timeLine[2].equals(movieId)){
                 
                 Movie foundMovie = getMovieById(movieId);
+                if (foundMovie == null){
+                    continue;
+                }
                 locationName +=  foundMovie.toString();
                 locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
                 
@@ -652,6 +667,9 @@ public abstract class Page {
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
             Movie foundMovie = getMovieById(timeLine[2]);
+            if (foundMovie == null){
+                continue;
+            }
             locationName +=  foundMovie.toString();
             locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
         }
