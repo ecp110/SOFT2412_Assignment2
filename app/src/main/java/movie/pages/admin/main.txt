@@ -2,5 +2,5 @@ Greetings,
 
 What would you like to do today?
 (1) Display booking log
-(2) ASD
+(2) Edit movie information
 (3) ASD

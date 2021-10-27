@@ -255,21 +255,81 @@ public class Engine {
 
                 if (response.equals("1")) {
                     System.out.println(admin.displayBookingLogPrompt());
+                    response = scan.nextLine();
+                    if (response.equals("1")) {
+                        System.out.println(admin.displayBookingReciepts("George Street"));
+                    } else if (response.equals("2")) {
+                        System.out.println(admin.displayBookingReciepts("Chatswood"));
+                    } else if (response.equals("3")) {
+                        System.out.println(admin.displayBookingReciepts("Bondi"));
+                    } else if (response.equals("4")) {
+                        System.out.println(admin.displayBookingReciepts("Hurstville"));
+                    } 
+
+                } else if (response.equals("2")) {
+                    System.out.println(admin.displayMovieEditPrompt());
+                    System.out.println(admin.displayMovies());
+                    System.out.println();
+                    String movieID = scan.nextLine();
+                    Movie toEdit = null;
+                    for (Movie movie : admin.getMovies()) {
+                        if (movie.getID().equals(movieID)) {
+                            toEdit = movie;
+                            System.out.println(admin.displayFoundEditableMovie());
+                            System.out.println(movie.toString());
+                        }
+                    }
+                    if (toEdit == null) {
+                        System.out.println("Sorry, that is not a valid movie ID.");
+                    } else {
+                        System.out.println(admin.displayEditStringPrompt());
+                        String editString = "";
+
+                        System.out.print("Title: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        System.out.print("ID: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        System.out.print("Classification: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        System.out.print("Runtime: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        System.out.print("Director: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        //Cast = TODO
+                        editString += ",";
+
+                        System.out.print("Release Date (ddmmyyyy): ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+                        editString += ",";
+
+                        System.out.print("Synopsis: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (admin.editMovie(toEdit, editString)) {
+                            System.out.println(admin.displayCompletedEdit()); 
+                        } else {
+                            System.out.println("ERROR");
+                        }
+                    }
+
+
                 } else {
                     break;
                 }
 
-                response = scan.nextLine();
+                
 
-                if (response.equals("1")) {
-                    System.out.println(admin.displayBookingReciepts("George Street"));
-                } else if (response.equals("2")) {
-                    System.out.println(admin.displayBookingReciepts("Chatswood"));
-                } else if (response.equals("3")) {
-                    System.out.println(admin.displayBookingReciepts("Bondi"));
-                } else if (response.equals("4")) {
-                    System.out.println(admin.displayBookingReciepts("Hurstville"));
-                } 
+
             }
 
 
