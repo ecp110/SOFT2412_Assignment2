@@ -21,9 +21,9 @@ class UserTests {
 
         // GetName
         assertEquals(user1.getType(), "customer"); // Positive Case
-        assertEquals(user1.getType(), "staff"); // Positive Case
-        assertEquals(user1.getType(), "manager"); // Positive Case
-        assertEquals(user2.getType(), "customer"); // Edge Case
+        assertEquals(user3.getType(), "staff"); // Positive Case
+        assertEquals(user4.getType(), "manager"); // Positive Case
+        assertEquals(user2.getType(), "cUsToMeR"); // Edge Case
     }
 
     @Test
