@@ -652,7 +652,6 @@ public abstract class Page {
     public String findAllMoviesGivenLocationAndMovie(String movieId, String location){
 
         String locationName = location + ":\n";
-        System.out.println("reached");
         try {
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
