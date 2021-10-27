@@ -12,5 +12,4 @@ Example: Star Wars, Geroge St, Gold
 
 ***Leaving a filter blank will not include that filter in search*** 
 
-
-
+***press q to quit filtering***
