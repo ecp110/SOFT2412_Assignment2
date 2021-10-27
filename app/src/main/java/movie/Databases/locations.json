@@ -1,0 +1,20 @@
+{
+    "locations" : [
+        {
+            "name" : "Bondi",
+            "id" : 0
+        },
+        {
+            "name" : "Chatswood",
+            "id" : 1
+        },
+        {
+            "name" : "George St",
+            "id" : 2
+        },
+        {
+            "name" : "Hurstville",
+            "id" : 3
+        }
+    ]
+}

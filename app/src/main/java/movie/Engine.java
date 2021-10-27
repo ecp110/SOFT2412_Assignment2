@@ -35,6 +35,7 @@ public class Engine {
         boolean endProgram = false;
         boolean loginComplete = false;
         User currentUser = null;
+        boolean running = true;
 
         // prompt for login
 
@@ -84,6 +85,7 @@ public class Engine {
             }
             else if (response.toLowerCase().equals("q")){
                 System.out.println("Quitting. Goodbye!");
+                running = false;
                 break;
             }
 
@@ -94,7 +96,7 @@ public class Engine {
         }
 
 
-        boolean running = true;
+        
         while (running){
             if (currentUser == null){ //GUEST EXPERIENCE
                 GuestPage guest = new GuestPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, guestPagePath);
