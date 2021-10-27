@@ -200,7 +200,7 @@ public class Engine {
                     String response = scan.nextLine();
             
                     if(response.toLowerCase().equals("f")){
-                        System.out.println("Write filter code here!");
+                        //System.out.println("Write filter code here!");
                         bookingComplete = true;
                         //filter()
                         try{
