@@ -1,5 +1,7 @@
 package movie;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,13 +9,22 @@ class HomePageTests {
 
     @Test
     public void displayInitialTest() {
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "init").toString();
+        
         HomePage hPage = new HomePage(
-            "app/src/main/java/movie/Databases/Movies.json", 
-            "app/src/main/java/movie/Databases/Locations.json", 
-            "app/src/main/java/movie/Databases/credit_cards.json", 
-            "app/src/main/java/movie/Databases/gift_cards.json", 
-            "app/src/main/java/movie/Databases/members.json",
-            "app/src/main/init/"); //make sure correct folder TODO
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            homePagePath
+            ); 
         String homePageString = "Hello! Welcome to XYZ Cinemas! We hope you are having a great day.\nIf you would like to log-in, just type \"y\".\nIf you would like to register, just type \"r\".\nIf you would like to continue as a guest, type \"g\".\n\nRemember, if at any point in your process you would like to cancel and return to this main page, just type \"c\" and hit enter.";
 
         assertEquals(hPage.displayInitial(), homePageString);
@@ -21,13 +32,21 @@ class HomePageTests {
 
     @Test
     public void displayLogInTest() {
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "init").toString();
         HomePage hPage = new HomePage(
-            "app/src/main/java/movie/Databases/Movies.json", 
-            "app/src/main/java/movie/Databases/Locations.json", 
-            "app/src/main/java/movie/Databases/credit_cards.json", 
-            "app/src/main/java/movie/Databases/gift_cards.json", 
-            "app/src/main/java/movie/Databases/members.json",
-            "app/src/main/java/movie/pages/init");
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            homePagePath
+            );
         
         assertEquals(hPage.displayLogIn(), "Please input your username:");
         assertEquals(hPage.displayLogIn(), "Please enter your password. Remember, you won't be able to see it on the screen for security sake, but be assured that we are still keeping track!");
@@ -39,13 +58,21 @@ class HomePageTests {
 
     @Test
     public void logInTest() {
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String homePagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "init").toString();
         HomePage hPage = new HomePage(
-            "app/src/main/java/movie/Databases/Movies.json", 
-            "app/src/main/java/movie/Databases/Locations.json", 
-            "app/src/main/java/movie/Databases/credit_cards.json", 
-            "app/src/main/java/movie/Databases/gift_cards.json", 
-            "app/src/main/java/movie/Databases/members.json",
-            "app/src/main/java/movie/pages/init");
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            homePagePath
+            );
 
         User user1 = hPage.logIn("Charles", "first2345"); // manager
         User user2 = hPage.logIn("Sergio", "it234"); // staff
