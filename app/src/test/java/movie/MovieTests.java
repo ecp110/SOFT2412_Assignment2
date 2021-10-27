@@ -73,4 +73,90 @@ class MovieTests {
 
     }
 
+    @Test
+    public void getDirector(){
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        assertEquals(movie1.getDirector(), "peter");
+    }
+
+    @Test
+    public void testGetID(){
+
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        assertEquals(movie1.getID(), "1234");
+    }
+
+    @Test
+    public void testGetReleaseDate(){
+
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        assertEquals(movie1.getReleaseDate(), cal);
+    }
+
+    @Test
+    public void testSetCast(){
+
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        assertEquals(movie1.getCast(), cast);
+
+        ArrayList<String> cast2 = new ArrayList<String>();
+        movie1.setCast(cast2);
+        assertEquals(movie1.getCast(), cast2);
+    }
+
+    @Test
+    public void testSetClassification(){
+
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        assertEquals(movie1.getClassification(), "PG");
+
+        ArrayList<String> cast2 = new ArrayList<String>();
+        movie1.setClassification("M");
+        assertEquals(movie1.getClassification(), "M");
+    }
+
+    @Test
+    public void testSetters(){
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Daniel");
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
+
+        movie1.setDirector("Pierre");
+        movie1.setID("50");
+        Calendar cal2 = new Calendar(2, 1, 2021);
+        movie1.setReleaseDate(cal2);
+        movie1.setRunTime(50);
+        movie1.setSynopsis("50");
+        movie1.setTitle("test");
+
+        assertEquals(movie1.getDirector(), "Pierre");
+        assertEquals(movie1.getID(), "50");
+        assertEquals(movie1.getReleaseDate(), cal2);
+        assertEquals(movie1.getRunTime(), 50);
+        assertEquals(movie1.getSynopsis(), "50");
+        assertEquals(movie1.getTitle(), "test");
+    }
+    
+
 }
