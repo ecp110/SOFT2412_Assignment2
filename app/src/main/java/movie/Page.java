@@ -103,45 +103,7 @@ public abstract class Page {
     }
 
     protected void parseMovies(){
-            JSONParser parser = new JSONParser();
-    
-            try {
-                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(this.MOVIE_LOCATION));
-                JSONArray movies = (JSONArray) jsonObject.get("movies");
-    
-                String title;
-                String id;
-                String classification;
-                int runtime;
-                String director;
-                ArrayList<String> cast = null;
-                Calendar release = null;
-                String synopsis;
-                Movie mFull;
-                
-                for (Object movie : movies) {
-                    JSONObject m = (JSONObject) movie;
-    
-                    title = (String) m.get("name");
-                    id = String.valueOf(m.get("id"));
-                    classification = (String) m.get("classification");
-                    runtime = (int) (long) m.get("runtime");
-                    director = (String) m.get("director");
-                    synopsis = (String) m.get("synopsis");
-    
-                    mFull = new Movie(title, synopsis, runtime, classification, cast, director, id, release);
-                    this.movies.add(mFull);
-                    mFull = null;
-                }
-    
-            } catch (FileNotFoundException e) {
-                System.out.println("NO FILE");
-            } catch (IOException e) {
-                System.out.println("ERROR");
-            } catch (ParseException e) {
-                System.out.println("ERROR");
-            }
- 
+            this.movies = storeMovies(this.MOVIE_LOCATION);
     }
 
     protected void parseCreditCards(){
@@ -353,7 +315,7 @@ public abstract class Page {
     ************** All methods in the section below are for the filter method **************
     remember to make methods for converting movie name, location, and screen size to correct format to be inputed into the main filter method
     */
-    //Extracts all movies from Movies.json
+    //Extracts all users from Users.json
     public ArrayList<User> storeUsers(String locationPath){
         ArrayList<User> userList = new ArrayList<User>();
 
