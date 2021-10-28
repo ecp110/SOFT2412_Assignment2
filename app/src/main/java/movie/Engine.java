@@ -248,85 +248,131 @@ public class Engine {
                     }
                 }
             }
-
+            //ADMIN and STAFF EXPERIENCE
             else if(currentUser.getType().equals("staff") || currentUser.getType().equals("manager")){
                 AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
                 System.out.println(admin.displayInitial());
 
-                String response = scan.nextLine();
-
-                if (response.equals("1")) {
-                    System.out.println(admin.displayBookingLogPrompt());
-                    response = scan.nextLine();
+                
+                boolean functionChosen = false;
+                while (!functionChosen) {
+                    String response = scan.nextLine();
                     if (response.equals("1")) {
-                        System.out.println(admin.displayBookingReciepts("George Street"));
+                        functionChosen = true;
+                        System.out.println(admin.displayBookingLogPrompt());
+                        response = scan.nextLine();
+                        if (response.equals("1")) {
+                            System.out.println(admin.displayBookingReciepts("George Street"));
+                        } else if (response.equals("2")) {
+                            System.out.println(admin.displayBookingReciepts("Chatswood"));
+                        } else if (response.equals("3")) {
+                            System.out.println(admin.displayBookingReciepts("Bondi"));
+                        } else if (response.equals("4")) {
+                            System.out.println(admin.displayBookingReciepts("Hurstville"));
+                        } 
+
                     } else if (response.equals("2")) {
-                        System.out.println(admin.displayBookingReciepts("Chatswood"));
-                    } else if (response.equals("3")) {
-                        System.out.println(admin.displayBookingReciepts("Bondi"));
-                    } else if (response.equals("4")) {
-                        System.out.println(admin.displayBookingReciepts("Hurstville"));
-                    } 
-
-                } else if (response.equals("2")) {
-                    System.out.println(admin.displayMovieEditPrompt());
-                    System.out.println(admin.displayMovies());
-                    System.out.println();
-                    String movieID = scan.nextLine();
-                    Movie toEdit = null;
-                    for (Movie movie : admin.getMovies()) {
-                        if (movie.getID().equals(movieID)) {
-                            toEdit = movie;
-                            System.out.println(admin.displayFoundEditableMovie());
-                            System.out.println(movie.toString());
+                        functionChosen = true;
+                        System.out.println(admin.displayMovieEditPrompt());
+                        System.out.println(admin.displayMovies());
+                        System.out.println();
+                        String movieID = scan.nextLine();
+                        Movie toEdit = null;
+                        for (Movie movie : admin.getMovies()) {
+                            if (movie.getID().equals(movieID)) {
+                                toEdit = movie;
+                                System.out.println(admin.displayFoundEditableMovie());
+                                System.out.println(movie.toString());
+                            }
                         }
-                    }
-                    if (toEdit == null) {
-                        System.out.println("Sorry, that is not a valid movie ID.");
-                    } else {
-                        System.out.println(admin.displayEditStringPrompt());
-                        String editString = "";
-
-                        System.out.print("Title: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        System.out.print("ID: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        System.out.print("Classification: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        System.out.print("Runtime: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        System.out.print("Director: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        //Cast = TODO
-                        editString += ",";
-
-                        System.out.print("Release Date (ddmmyyyy): ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-                        editString += ",";
-
-                        System.out.print("Synopsis: ");
-                        editString += scan.nextLine().replaceAll("\n", "");
-
-                        if (admin.editMovie(toEdit, editString)) {
-                            System.out.println(admin.displayCompletedEdit()); 
+                        if (toEdit == null) {
+                            System.out.println("Sorry, that is not a valid movie ID.");
                         } else {
-                            System.out.println("ERROR");
+                            System.out.println(admin.displayEditStringPrompt());
+                            String editString = "";
+
+                            System.out.print("Title: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            System.out.print("ID: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            System.out.print("Classification: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            System.out.print("Runtime: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            System.out.print("Director: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            //Cast = TODO
+                            editString += ",";
+
+                            System.out.print("Release Date (ddmmyyyy): ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+                            editString += ",";
+
+                            System.out.print("Synopsis: ");
+                            editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (admin.editMovie(toEdit, editString)) {
+                                System.out.println(admin.displayCompletedEdit()); 
+                            } else {
+                                System.out.println("ERROR");
+                            }
                         }
+
+
+                    } else if (response.equals("4") && currentUser.getType().equals("manager")) {
+                        functionChosen = true;
+                        System.out.println(admin.displayManageStaffPrompt());
+                        response = scan.nextLine();
+                        if (response.equals("1")){
+                            boolean registered = false;
+
+                            while (!registered) {
+                                System.out.println("Please enter a username (Must be alphanumeric with no spaces): ");
+                                String username = scan.nextLine();
+
+                                if (admin.getUserByUsername(username) == null) {
+                                    System.out.println("Valid username! Please enter a password: ");
+                                    String password = PasswordField.readPassword();
+                                    System.out.println("Please re-enter your password: ");
+                                    String password2 = PasswordField.readPassword();
+                                    if (password2.equals(password)) {
+                                        System.out.println("Passwords match!");
+                                        admin.addUser(new User(username,password,"s"));
+                                        registered = true;
+                                        
+                                    } else {
+                                        System.out.println("Passwords do not match. Please try again.");
+                                    }
+                                    
+                                } else {
+                                    System.out.println("Username is already taken.");
+                                }
+                                
+                            }
+                            continue;
+                        } else if (response.equals("2")) {
+                            System.out.println("Please type in the username of the staff account you wish to remove: ");
+                            String username = scan.nextLine();
+                            admin.removeUser(username);
+                        }
+                    } else if (response.equals("4") && currentUser.getType().equals("staff")) {
+                        System.out.println("You do not have access to this function.");
+                    } else if (response.equals("c")) {
+                        System.out.println("Cancelling, goodbye!");
+                        functionChosen = true;
+                    } else {
+                        break;
                     }
-
-
-                } else {
-                    break;
                 }
 
                 

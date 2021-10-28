@@ -301,6 +301,62 @@ public abstract class Page {
         }
     }
 
+    public void removeUser(String username){
+        //extracts all users from members.Json
+        String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        ArrayList<User> allUsers = storeUsers(usersJsonPath);
+        
+        //extracts username if user exists
+        
+        String foundUserName = null;
+        int len = allUsers.size();
+        int i = 0;
+        while (i < len){
+            if(allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase())){
+                allUsers.remove(i);
+            }
+            i += 1;
+        }
+
+        System.out.println(allUsers);
+
+        JSONParser parser = new JSONParser();
+
+
+        JSONObject jsonObjectInput = new JSONObject();
+        JSONArray usersArray = new JSONArray();
+    
+        JSONObject users = new JSONObject();
+
+        for (User user : allUsers) {
+            JSONObject userEntry = new JSONObject();
+            userEntry.put("name",user.getName());
+            userEntry.put("password",user.getPassword());
+            userEntry.put("status",user.getType());
+    
+            usersArray.add(userEntry);
+        }
+        users.put("users",usersArray);
+
+        try (FileWriter file = new FileWriter(USERS_LOCATION)) {
+            file.write(users.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.print(users);
+    }
+
+
+        /*
+        JSONObject userEntry = new JSONObject({
+            "name":name,
+            "password":password,
+            "status":status
+            }); 
+
+        */
+
     /*
     ************** All methods in the section below are for the filter method **************
     remember to make methods for converting movie name, location, and screen size to correct format to be inputed into the main filter method
