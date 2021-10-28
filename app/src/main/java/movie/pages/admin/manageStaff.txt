@@ -2,4 +2,4 @@ Greetings,
 
 Please select an option
 (1) Add staff account
-(2) Remove user account
+(2) Remove staff account

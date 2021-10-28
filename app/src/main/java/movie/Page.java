@@ -256,6 +256,29 @@ public abstract class Page {
         return foundUserName;
     
     }
+
+    public String getStaffByUsername(String username){
+        //extracts all users from members.Json
+        String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        ArrayList<User> allUsers = storeUsers(usersJsonPath);
+        
+        //extracts username if user exists
+        
+        String foundUserName = null;
+        int len = allUsers.size();
+        int i = 0;
+        while (i < len){
+            if(
+                allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase()) &&
+                allUsers.get(i).getType().equals("staff")){
+                foundUserName = allUsers.get(i).getName();
+            }
+            i += 1;
+        }
+
+        return foundUserName;
+    
+    }
     public void addUser(User user){
         String name = user.getName();
         String password = user.getPassword();
@@ -291,8 +314,6 @@ public abstract class Page {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-    
-            System.out.print(users);
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -318,8 +339,6 @@ public abstract class Page {
             i += 1;
         }
 
-        System.out.println(allUsers);
-
         JSONParser parser = new JSONParser();
 
 
@@ -344,7 +363,6 @@ public abstract class Page {
             e.printStackTrace();
         }
 
-        System.out.print(users);
     }
 
 
