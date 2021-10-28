@@ -1,3 +1,323 @@
+commit 56e6ac72be639c56c2e4f3e75b5cefa840e1f6f8
+Author: Eddie <edwardkranz@dwardmbp.local>
+Date:   Thu Oct 28 10:02:03 2021 +1100
+
+    Fixed quitting
+
+commit 98f89e375247f0e10f71bf779c05aec77d3a0419
+Merge: 0e9d85f e03496d
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Thu Oct 28 07:42:50 2021 +1100
+
+    Merge pull request #37 from SOFT2412-2021S2/AdminEditMovieData
+    
+    Added more tests
+
+commit e03496d67debbc7333f8384378553cef9e868c21
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Thu Oct 28 07:41:42 2021 +1100
+
+    Added more tests
+
+commit 0e9d85fae0c5dc52c2d1b3fb3c7c489065a3242a
+Merge: 24f1239 a7195bf
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Thu Oct 28 01:20:40 2021 +1100
+
+    Merge pull request #36 from SOFT2412-2021S2/AdminEditMovieData
+    
+    Fully functional movie editor
+
+commit a7195bf72211cf6df9b8e2674af91e009f0273ad
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Thu Oct 28 01:18:03 2021 +1100
+
+    Fully functional movie editor
+
+commit 24f12396100b4e0e39076c9614d74d99f5b31e82
+Merge: db04f9c bbabc18
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Thu Oct 28 00:40:37 2021 +1100
+
+    Merge pull request #35 from SOFT2412-2021S2/filter
+    
+    Filter
+
+commit bbabc18f4ab41abf66533a7cecd32052d3a9106b
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 28 00:36:49 2021 +1100
+
+    fixed typo
+
+commit bc2c6ae683ddb0af126bf85268e432ad693c4813
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 28 00:34:18 2021 +1100
+
+    added error catcher in filter for invalid movies
+
+commit db04f9c79fbc708d0aeffc3d140a571ea2c72565
+Merge: 194dd69 6a08955
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Thu Oct 28 00:21:59 2021 +1100
+
+    Merge pull request #34 from SOFT2412-2021S2/filter
+    
+    finally fixed spelling mistake in filter
+
+commit 6a08955f9609cb70c141c0605514ce1c4614c51a
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Thu Oct 28 00:19:25 2021 +1100
+
+    finally fixed spelling mistake in filter
+
+commit 194dd697c1477ca9534d28c2b21e9fe03205ec4e
+Merge: 865f18a f73c82a
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Wed Oct 27 22:48:01 2021 +1100
+
+    Merge pull request #33 from SOFT2412-2021S2/testingMovie
+    
+    Testing movie
+
+commit f73c82a1e39359500bd5668b6d2b469a8d08a357
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 27 22:47:22 2021 +1100
+
+    added more movie tests
+
+commit 865f18a8a544e5a0e024524c9c9099a220b59599
+Merge: 583a40d d0dd113
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Wed Oct 27 22:13:35 2021 +1100
+
+    Merge pull request #32 from SOFT2412-2021S2/remove-duplicate-storemovies
+    
+    fixed
+
+commit d0dd1138a5012f979079a9706461e09e9c1f6e37
+Author: Eddie <edwardkranz@dwardmbp.local>
+Date:   Wed Oct 27 22:09:57 2021 +1100
+
+    fixed
+
+commit fa7141a2434ea8a2370fcf9f0c1fdff989485aff
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 27 22:08:11 2021 +1100
+
+    fixed test
+
+commit 583a40d13753505cae23ecfa5b101aa4acd4f2d8
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 27 21:04:07 2021 +1100
+
+    credit card tests
+
+commit 8d1fae38d7c9bded22fd369c72839e4875ac2350
+Merge: 5eb423a f892525
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Wed Oct 27 20:52:34 2021 +1100
+
+    Merge pull request #31 from SOFT2412-2021S2/testing
+    
+    tests for gift card, cinema and viewings
+
+commit f892525bcc91e414ec9298fdddf4dc454a2bdd91
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Wed Oct 27 20:51:07 2021 +1100
+
+    tests for gift card, cinema and viewings
+
+commit 5eb423a824b271e45c77b84513d7ed781aea45dc
+Merge: 8781451 08b08f6
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Wed Oct 27 19:29:10 2021 +1100
+
+    Merge pull request #30 from SOFT2412-2021S2/filter
+    
+    finished filter function, implemented it in customer and guest sectio…
+
+commit 08b08f6b898bdb6b279b007d23ebfd6d1b315d83
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Wed Oct 27 19:17:16 2021 +1100
+
+    fixed some filter errors
+
+commit 2a1d36cdbc26ef2b67b3160c9efc172fdb42635c
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Wed Oct 27 18:16:41 2021 +1100
+
+    fixed some filter errors
+
+commit 18ea94e9d6139190b72971ee695c1c436cdc4aba
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Wed Oct 27 17:35:35 2021 +1100
+
+    finished filter function, implemented it in customer and guest sections in Engine.java
+
+commit 87814512153c2981e938b117d061695a5d007607
+Merge: 5264faf a275766
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Wed Oct 27 14:14:32 2021 +1100
+
+    Merge pull request #29 from SOFT2412-2021S2/guest-registration
+    
+    Guest registration is online. Our new json db is not pretty however.
+
+commit a275766d4c21e4b9a902fa2c4f759a5b51d9c495
+Author: Eddie <edwardkranz@dwardmbp.local>
+Date:   Wed Oct 27 14:10:48 2021 +1100
+
+    Guest registration is online. Our new json db is not pretty however.
+
+commit 5264faf868eba5618bb17c4c123288ccc2789e8f
+Merge: 1fb5eb7 4cc1252
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Tue Oct 26 22:42:22 2021 +1100
+
+    Merge pull request #28 from SOFT2412-2021S2/AdminLog
+    
+    Added full functionality to access and display booking receipts for a…
+
+commit 4cc1252c742016fd210f783cf49cd659cae56ff0
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Tue Oct 26 22:40:42 2021 +1100
+
+    Added full functionality to access and display booking receipts for admin at each location
+
+commit 1fb5eb71950b35434cda20f664bb7026cee8af2a
+Merge: 85fb951 49bd87b
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Tue Oct 26 21:54:44 2021 +1100
+
+    Merge pull request #27 from SOFT2412-2021S2/guest-registration
+    
+    Added front end for registration
+
+commit 49bd87b41dd2964fb50bb3f35fb7e5d10597ef7d
+Author: Eddie <edwardkranz@dwardmbp.local>
+Date:   Tue Oct 26 21:30:42 2021 +1100
+
+    Added front end for registration
+
+commit 85fb9512fc04f74cf153ee91ff8ab07cc8ea3040
+Merge: b31aefe c25509b
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Tue Oct 26 20:16:16 2021 +1100
+
+    Merge pull request #26 from SOFT2412-2021S2/Eddie
+    
+    Customers and guests can now see movies and their details, and CLI bo…
+
+commit c25509ba08d4c028fedd585eaa0559dee029ddb1
+Author: Eddie <edwardkranz@dwardmbp.local>
+Date:   Tue Oct 26 19:21:43 2021 +1100
+
+    Customers and guests can now see movies and their details, and CLI booking now has an entry point TODO: booking. Fixed some errors where ID and Director were switched.
+
+commit b31aefe02d21979358def08f14c3cebda39f50bb
+Merge: e375b66 cfacd9a
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 18:58:24 2021 +1100
+
+    Merge pull request #25 from SOFT2412-2021S2/loginFix
+    
+    Fixed the login function to work with the JSON
+
+commit cfacd9a0fc75d9d7e65178fa6afcf773db919299
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 18:57:42 2021 +1100
+
+    Fixed the login function to work with the JSON
+
+commit e375b66efde0c3a87e4db99c8d7e6ee0161569b4
+Merge: 1b6a2d9 044ce42
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 18:38:53 2021 +1100
+
+    Merge pull request #22 from SOFT2412-2021S2/filter
+    
+    added filter message
+
+commit 1b6a2d936e65e82c1a664ef35a163f37e022a61e
+Merge: 8782b41 fd1fec5
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 18:38:26 2021 +1100
+
+    Merge pull request #24 from SOFT2412-2021S2/Booking
+    
+    (1) Added initial booking framework. (2) Fixed CreditCard and GiftCar…
+
+commit fd1fec57a9ea7307b712710763c6cf7e753b22de
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 18:37:45 2021 +1100
+
+    (1) Added initial booking framework. (2) Fixed CreditCard and GiftCard databases, and added parsers to Page. (3) Created CreditCard and GiftCard classes to hold information.
+
+commit 8782b41e91a3742b65440c1f90dd3238725876d0
+Merge: bb7987e cdd611f
+Author: Ethan Proutt <epro3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 17:58:37 2021 +1100
+
+    Merge pull request #23 from SOFT2412-2021S2/Database_fix
+    
+    Fixed database for new location / session / cinema structure
+
+commit 044ce420483f7514b21ccf2ccc8823a355f02c43
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Mon Oct 25 15:09:37 2021 +1100
+
+    added filtering method and helper methods
+
+commit cdd611f2e67ad16e3e54193c3981d6ff3dd2a358
+Author: Ethan Proutt <eprou3000@uni.sydney.edu.au>
+Date:   Mon Oct 25 15:09:00 2021 +1100
+
+    Fixed database for new location / session / cinema structure
+
+commit 04cd2b6ec899595ae4e52f8ec8058d496a11bcaf
+Merge: 6bb4015 bb7987e
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Mon Oct 25 14:44:30 2021 +1100
+
+    Merge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2 into filter
+
+commit 6bb4015ff822ed19a9d8fa7474015a3adc3b2587
+Author: MyNameDaniel02 <zzho0684@uni.sydney.edu.au>
+Date:   Mon Oct 25 14:43:47 2021 +1100
+
+    added filter message
+
+commit bb7987ed6bec2db1565d6e1feb705e0c964b1a85
+Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
+Date:   Sun Oct 24 22:39:54 2021 +1100
+
+    Created cinema and viewing classes
+
+commit 8ef7311692372119da3c292b730dd18c5d64cc5c
+Merge: c5ae966 bf74025
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Fri Oct 22 12:41:49 2021 +1100
+
+    erge branch 'master' of https://github.sydney.edu.au/SOFT2412-2021S2/assignment-2
+
+commit c5ae9667a56d9505d6e9289bd9eafa9c924a72a8
+Author: Edward Kranz <ekra8718@uni.sydney.edu.au>
+Date:   Fri Oct 22 12:41:41 2021 +1100
+
+    Made git log for sprint 1 report submission, update when needed with 'git log > gitlog.txt'
+
+commit bf740254efdc4bdc6e7a26b34f9338806434a5ae
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Thu Oct 21 21:30:40 2021 +1100
+
+    Update README.md
+
+commit 926cef498c56cab1accde599b9e4495d82ea82cd
+Author: Sameer Gupta <sameer.gupta@sydney.edu.au>
+Date:   Thu Oct 21 21:30:19 2021 +1100
+
+    Update README.md
+
 commit d8ef1b67bc3a57c61add209af9f70c959557d2d6
 Author: Sameer Gupta <sgup8630@uni.sydney.edu.au>
 Date:   Thu Oct 21 09:57:59 2021 +1100
