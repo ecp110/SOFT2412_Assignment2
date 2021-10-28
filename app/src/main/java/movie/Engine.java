@@ -347,7 +347,7 @@ public class Engine {
                                     String password2 = PasswordField.readPassword();
                                     if (password2.equals(password)) {
                                         System.out.println("Passwords match!");
-                                        admin.addUser(new User(username,password,"s"));
+                                        admin.addUser(new User(username,password,"staff"));
                                         registered = true;
                                         
                                     } else {
@@ -361,9 +361,17 @@ public class Engine {
                             }
                             continue;
                         } else if (response.equals("2")) {
-                            System.out.println("Please type in the username of the staff account you wish to remove: ");
-                            String username = scan.nextLine();
-                            admin.removeUser(username);
+                            boolean validUsername = false;
+                            while(!validUsername) {
+                                System.out.println("Please type in the username of the staff account you wish to remove: ");
+                                String username = scan.nextLine();
+                                if(admin.getStaffByUsername(username) != null){
+                                    admin.removeUser(username);
+                                    validUsername = true;
+                                } else {
+                                    System.out.println("Error, user doesn't exist, or is not a staff user.");
+                                }
+                            }
                         }
                     } else if (response.equals("4") && currentUser.getType().equals("staff")) {
                         System.out.println("You do not have access to this function.");
