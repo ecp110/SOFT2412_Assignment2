@@ -44,6 +44,10 @@ public class AdminPage extends Page {
         return output;
     }
 
+    public String displayManageStaffPrompt() {
+        return this.parseTxt("/manageStaff.txt", 0);
+    }
+
     public String displayBookingLogPrompt() {
         return this.parseTxt("/askForLocation.txt", 0);
     }
@@ -132,6 +136,7 @@ public class AdminPage extends Page {
     public String displayCompletedEdit() {
         return this.parseTxt("/completedEdit.txt", 0);
     }
+    
 
     public boolean editMovie(Movie movie, String editData) {
         /*
