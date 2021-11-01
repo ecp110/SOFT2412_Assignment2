@@ -100,37 +100,47 @@ public class Engine {
         while (running){
             if (currentUser == null){ //GUEST EXPERIENCE
                 GuestPage guest = new GuestPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, guestPagePath);
-                System.out.println(guest.displayInitial());
+                //System.out.println(guest.displayInitial());
     
                 Movie selectedMovie = null;
                 boolean bookingComplete = false;
                 while (!bookingComplete) {
-            
+                    
+                    System.out.println(guest.displayInitial());
                     String response = scan.nextLine();
             
                     if(response.toLowerCase().equals("f")){
-                        System.out.println("Write filter code here!");
+                        //System.out.println("Write filter code here!");
                         bookingComplete = true;
 
+                        //filtering
                         try{
 
                         while (true){
                             guest.displayFilterMessage();
                             ArrayList<String> filteredInput = guest.readFilterInput();
-                            if (filteredInput != null){
+                            if (filteredInput == null){
+                                System.out.println("Would you like to filter again?\nPress y to filter again or any key to quit filter");
+                                //reads user filter input
+                                Scanner nullInputScan = new Scanner(System.in);
+                                String option = nullInputScan.nextLine();
+                                if (option.toLowerCase().equals("y")){
+                                    continue;
+                                }
+                                else{
+                                    break;
+                                }
+                            }
+                            else if (filteredInput != null){
                                 guest.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
-                            }
-                            else{
-                                break;
+                                System.out.println("If you would like to book a movie, please exit the filter page and login.\n\n");
                             }
                         }
-                        }catch (IOException e){
-                            System.out.println("input not found");
+                        }catch (Exception e){
+                            System.out.println("something went wrong in engine guest filter");
                         }
-                        
-                        //ask for input 
-
-                        //loop filter request 
+                        System.out.println("ended filter");
+                        continue;
                     }
                     if (response.toLowerCase().equals("r")){
 
@@ -204,22 +214,33 @@ public class Engine {
                     if(response.toLowerCase().equals("f")){
                         //System.out.println("Write filter code here!");
                         bookingComplete = true;
-                        //filter()
+                        //filtering
                         try{
 
                             while (true){
                                 customer.displayFilterMessage();
                                 ArrayList<String> filteredInput = customer.readFilterInput();
-                                if (filteredInput != null){
-                                    customer.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
+                                if (filteredInput == null){
+                                    System.out.println("Would you like to filter again?\nPress y to filter again or any key to quit filter");
+                                    //reads user filter input
+                                    Scanner nullInputScan = new Scanner(System.in);
+                                    String option = nullInputScan.nextLine();
+                                    if (option.toLowerCase().equals("y")){
+                                        continue;
+                                    }
+                                    else{
+                                        break;
+                                    }
                                 }
-                                else{
-                                    break;
+                                else if (filteredInput != null){
+                                    customer.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
+                                    System.out.println("If you would like to book a movie, please exit the filter page and login.\n\n");
                                 }
                             }
-                        }catch (IOException e){
-                            System.out.println("input not found");
+                        }catch (Exception e){
+                            System.out.println("something went wrong in engine guest filter");
                         }
+                        continue;
                     }
 
                     if(response.toLowerCase().equals("b")) {

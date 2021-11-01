@@ -543,12 +543,19 @@ public abstract class Page {
         }
     }
 
+    public String formatFilteredMovie(Movie film, String screen, String time){
+        String returnFilm = "(" + film.getID() + ")" + ";" + film.getTitle() + ";" + "(" + film.getDirector() + ")" + ";" + "Run Time: " + film.getRunTime() + ";" + "Rating: " + film.getClassification() + "\n;" + screen + " > ;" + time + "\n";
+        return returnFilm;
+    }
 
-    //returns a string of all movies given location and screen size
-    public String findAllMoviesGivenLocationAndScreen(String location, String screen){
+    //returns a hashmap of all movies given location and screen size
+    public HashMap<String, String> findAllMoviesGivenLocationAndScreen(String location, String screen){
 
-        //initiates location name message to identify which cinema the outputted movies belong to
-        String locationName = location + ":\n";
+        //hashmap to be returned 
+        HashMap<String, String> filteredMovies = new HashMap<String, String>();
+
+        //initiates location in hashmap
+        filteredMovies.put("location", location);
 
         try { 
 
@@ -565,6 +572,7 @@ public abstract class Page {
         ArrayList<Movie> allFilms = storeMovies(movieLocationPath);
 
         timeScan.nextLine();
+        int i = 1;
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4); //splitting each timetable.csv line into 4 elements in a list
 
@@ -574,19 +582,29 @@ public abstract class Page {
                 if (foundMovie == null){
                     continue;
                 }
-                locationName +=  foundMovie.toString();
-                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
+                String movieTime = timeLine[1] + " " + getMovieTime(timeLine[0]);
+                filteredMovies.put(Integer.toString(i), formatFilteredMovie(foundMovie, getScreenByNum(timeLine[3]), movieTime));
+                i += 1;
             }
         }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("NO FILE");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("array out of bounds");
+        } catch (Exception e) {
+            System.out.println("something went wrong");
         } 
-        return locationName;
+        return filteredMovies;
     }
 
-    //returns a string of movies respective to all filters entered
-    public String findAllMoviesGivenAllFilters(String movieId, String location, String screen){
-        String locationName = location + ":\n";
+    //returns a hashmap of movies respective to all filters entered
+    public HashMap<String, String> findAllMoviesGivenAllFilters(String movieId, String location, String screen){
+        
+        //hashmap to be returned 
+        HashMap<String, String> filteredMovies = new HashMap<String, String>();
+
+        //initiates location in hashmap
+        filteredMovies.put("location", location);
         
         try { 
 
@@ -594,6 +612,8 @@ public abstract class Page {
         File timeFile = new File(timePath);
         Scanner timeScan = new Scanner(timeFile);
         timeScan.nextLine();
+
+        int i = 1;
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
             if (timeLine[2].equals(movieId) && timeLine[3].equals(screen)){ //if screen number array contains the timetable line screen num and if the film id matches
@@ -601,14 +621,15 @@ public abstract class Page {
                 if (foundMovie == null){
                     continue;
                 }
-                locationName +=  foundMovie.toString();
-                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
+                String movieTime = timeLine[1] + " " + getMovieTime(timeLine[0]);
+                filteredMovies.put(Integer.toString(i), formatFilteredMovie(foundMovie, getScreenByNum(timeLine[3]), movieTime));
+                i += 1;
             }
         }
         } catch (IOException e) {
             System.out.println("NO FILE");
         } 
-        return locationName;
+        return filteredMovies;
     }
 
     public String convertScreenToNum(String screenName){
@@ -648,21 +669,66 @@ public abstract class Page {
     }
 
     public ArrayList<String> readFilterInput() throws IOException{
-        //reads user filter input
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String temp = in.readLine();
-
-        if (temp.toLowerCase().equals("q")){
-            return null; 
+        //making sure of correct movie input 
+        String movieJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        ArrayList<Movie> allMovies = storeMovies(movieJsonPath);
+        ArrayList<String> allTitles = new ArrayList<String>();
+        for (Movie films : allMovies){
+            allTitles.add(films.getTitle().toLowerCase());
         }
 
-        String[] attributes = temp.split(",", 3);
+        //making sure of correct location input 
+        ArrayList<String> allLocations = new ArrayList<String>();
+        allLocations.add("Bondi");
+        allLocations.add("Chatswood");
+        allLocations.add("George Street");
+        allLocations.add("Hurstville");
 
-        //collects each filter
-        String selectMovie = attributes[0];
-        String selectLocation = attributes[1];
-        String selectScreen = attributes[2];
+        //making sure of correct screen input 
+        ArrayList<String> allScreens = new ArrayList<String>();
+        allScreens.add("0");
+        allScreens.add("1");
+        allScreens.add("2");
+
+        //reads user filter input
+        Scanner scan = new Scanner(System.in);
+
+        //ask for movie name
+        System.out.print("Enter Movie Name: ");
+        String selectMovie = scan.nextLine();
+        selectMovie = selectMovie.trim();
+        if (selectMovie.toLowerCase().equals("q")){
+            return null; 
+        }
+        else if(!selectMovie.equals("") && !allTitles.contains(selectMovie.toLowerCase())){
+            System.out.println("*****Invalid Input*****");
+            return null;
+        }
+
+        //ask for location
+        System.out.print("Enter Location: ");
+        String selectLocation = scan.nextLine();
+        selectLocation = selectLocation.trim();
+        if (selectLocation.toLowerCase().equals("q")){
+            return null; 
+        }
+        else if(!selectLocation.equals("") && !allLocations.contains(convertLocationFormat(selectLocation))){
+            System.out.println("*****Invalid Input*****");
+            return null;
+        }
+
+        //ask for screen
+        System.out.print("Enter a Screen Class: ");
+        String selectScreen = scan.nextLine();
+        selectScreen = selectScreen.trim();
+        if (selectScreen.toLowerCase().equals("q")){
+            return null; 
+        }
+        else if(!selectScreen.equals("") && !allScreens.contains(convertScreenToNum(selectScreen))){
+            System.out.println("*****Invalid Input*****");
+            return null;
+        }
 
         String location = "";
         String movieID = "";
@@ -686,18 +752,23 @@ public abstract class Page {
         return filterAttributes;
     }
 
-    //returns a string of movies given movie name and cinema location
-    public String findAllMoviesGivenLocationAndMovie(String movieId, String location){
+    //returns a hashmap of movies given movie name and cinema location
+    public HashMap<String, String> findAllMoviesGivenLocationAndMovie(String movieId, String location){
 
-        String locationName = location + ":\n";
+        //hashmap to be returned 
+        HashMap<String, String> filteredMovies = new HashMap<String, String>();
+
+        //initiates location in hashmap
+        filteredMovies.put("location", location);
+
         try {
 
         String timePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", location, "Timetable.csv").toString();
         File timeFile = new File(timePath);
-        Scanner timeScan = new Scanner(timeFile);
-
-        String screenClass = new String();
+        Scanner timeScan = new Scanner(timeFile);        
         timeScan.nextLine();
+
+        int i = 1;
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
             if (timeLine[2].equals(movieId)){
@@ -706,21 +777,25 @@ public abstract class Page {
                 if (foundMovie == null){
                     continue;
                 }
-                locationName +=  foundMovie.toString();
-                locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
-                
+                String movieTime = timeLine[1] + " " + getMovieTime(timeLine[0]);
+                filteredMovies.put(Integer.toString(i), formatFilteredMovie(foundMovie, getScreenByNum(timeLine[3]), movieTime));
+                i += 1;
             }
         }
         } catch (IOException e) {
             System.out.println("NO FILE");
         } 
-        return locationName;
+        return filteredMovies;
     }
 
-    //returns a string of movies given cinema location
-    public String findAllMoviesGivenLocation(String location){
+    //returns a hashmap of movies given cinema location
+    public HashMap<String, String> findAllMoviesGivenLocation(String location){
 
-        String locationName = location + ":\n";
+        //hashmap to be returned 
+        HashMap<String, String> filteredMovies = new HashMap<String, String>();
+
+        //initiates location in hashmap
+        filteredMovies.put("location", location);
 
         try {
 
@@ -728,19 +803,22 @@ public abstract class Page {
         File timeFile = new File(timePath);
         Scanner timeScan = new Scanner(timeFile);
         timeScan.nextLine();
+
+        int i = 1;
         while (timeScan.hasNextLine()){
             String[] timeLine = timeScan.nextLine().split(",", 4);
             Movie foundMovie = getMovieById(timeLine[2]);
             if (foundMovie == null){
                 continue;
             }
-            locationName +=  foundMovie.toString();
-            locationName += "\n" + getScreenByNum(timeLine[3]) + "   " + timeLine[1] + " " + getMovieTime(timeLine[0]) + "\n\n";
+            String movieTime = timeLine[1] + " " + getMovieTime(timeLine[0]);
+            filteredMovies.put(Integer.toString(i), formatFilteredMovie(foundMovie, getScreenByNum(timeLine[3]), movieTime));
+            i += 1;
         }
         } catch (IOException e) {
             System.out.println("NO FILE");
         } 
-        return locationName;
+        return filteredMovies;
     }
 
     public void displayFilterMessage(){
@@ -756,67 +834,24 @@ public abstract class Page {
         }
     }
 
+    public String unformatHashMapValue(String value){
+        value = value.replace(";", " ");
+        return value;
+    }
+
+    public String outputHashMap(HashMap<String, String> hm){
+        String message = hm.get("location") + "\n";
+        for (int i = 1; i < (hm.size()); i++){
+            message += Integer.toString(i) + ": " + unformatHashMapValue(hm.get(Integer.toString(i))) + "\n";
+        }
+        return message;
+    }
+
     //main filtering method incorporating the scenario methods above 
     public void filterMovies(String movieID, String cinLocation, String screenSize) {
 
         //prints opening message
         this.displayFilterMessage();
-
-        /*
-        extract movie id from json
-        filter the screen number at the location cinema 
-
-        if we are given all attributes:
-            then we filter the location timetable for the times with movie id and screen number
-
-        if we are given movie and location:
-            then we filter the time table in the location folder and look for all movies with the id
-
-        if we are given location and screen:
-            then we filter the screen in the location folder and find the 1 or more screen number 
-            then we the time table in the location folder and look for all times with screen number 
-        
-        if we are given movie and screen:
-            then we filter the screens for their numbers 
-            then we filter timetable for the matching movie id and screen number in the screen number array
-
-        //reads user filter input
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String temp = in.readLine();
-        String[] attributes = temp.split(",", 3);
-
-        //collects each filter
-        String selectMovie = attributes[0];
-        String selectLocation = attributes[1];
-        String selectScreen = attributes[2];
-
-        //extracts screen num from location if both filters given
-        if (!screenSize.isEmpty() && !cinLocation.isEmpty()){
-
-            //find cinema location screen path (Screens.csv)
-            String screenPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", cinLocation, "Screens.csv").toString();
-
-            //prepare to store all screen nums in an arraylist
-            ArrayList<String> screenNumbers = new ArrayList<String>();
-
-            //reading Screens.csv
-            try {
-            File file = new File(screenPath);
-            Scanner scan =  new Scanner(file);
-        
-
-            while (scan.hasNextLine()) {
-                //we split each line into a elements in an array
-                String[] line = scan.nextLine().split(",", 3);
-                if (line[2] == screenSize){
-                    screenNumbers.add(line[1]);
-                }
-            }
-            } catch (IOException e) {
-                System.out.println("NO FILE");
-            } 
-        }
-        */
 
         //finds time of all movies with only given screen size
         if (movieID.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
@@ -826,19 +861,21 @@ public abstract class Page {
             String gs = "George Street";
             String Hurstville = "Hurstville";
             
-            String bondiMovies = findAllMoviesGivenLocationAndScreen(bondi, screenSize);
-            String chatswoodMovies = findAllMoviesGivenLocationAndScreen(chatswood, screenSize);
-            String gsMovies = findAllMoviesGivenLocationAndScreen(gs, screenSize);
-            String HurstvilleMovies = findAllMoviesGivenLocationAndScreen(Hurstville, screenSize);
+            HashMap<String, String> bondiMovies = findAllMoviesGivenLocationAndScreen(bondi, screenSize);
+            HashMap<String, String> chatswoodMovies = findAllMoviesGivenLocationAndScreen(chatswood, screenSize);
+            HashMap<String, String> gsMovies = findAllMoviesGivenLocationAndScreen(gs, screenSize);
+            HashMap<String, String> HurstvilleMovies = findAllMoviesGivenLocationAndScreen(Hurstville, screenSize);
 
-            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
-            System.out.println(finalMessage);
+            System.out.println(outputHashMap(bondiMovies));
+            System.out.println(outputHashMap(chatswoodMovies));
+            System.out.println(outputHashMap(gsMovies));
+            System.out.println(outputHashMap(HurstvilleMovies));
         }
-
+        
         //finds time of all movies given only location
         if (movieID.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
-            String movieFromLocation = findAllMoviesGivenLocation(cinLocation);
-            System.out.println(movieFromLocation);
+            HashMap<String, String> movieFromLocation = findAllMoviesGivenLocation(cinLocation);
+            System.out.println(outputHashMap(movieFromLocation));
         }
 
         //finds time of all movies given only movie id
@@ -849,31 +886,33 @@ public abstract class Page {
             String gs = "George Street";
             String Hurstville = "Hurstville";
 
-            String bondiMovies = findAllMoviesGivenLocationAndMovie(movieID, bondi);
-            String chatswoodMovies = findAllMoviesGivenLocationAndMovie(movieID, chatswood);
-            String gsMovies = findAllMoviesGivenLocationAndMovie(movieID, gs);
-            String HurstvilleMovies = findAllMoviesGivenLocationAndMovie(movieID, Hurstville);
+            HashMap<String, String> bondiMovies = findAllMoviesGivenLocationAndMovie(movieID, bondi);
+            HashMap<String, String> chatswoodMovies = findAllMoviesGivenLocationAndMovie(movieID, chatswood);
+            HashMap<String, String> gsMovies = findAllMoviesGivenLocationAndMovie(movieID, gs);
+            HashMap<String, String> HurstvilleMovies = findAllMoviesGivenLocationAndMovie(movieID, Hurstville);
 
-            String finalMovies = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
-            System.out.println(finalMovies);
+            System.out.println(outputHashMap(bondiMovies));
+            System.out.println(outputHashMap(chatswoodMovies));
+            System.out.println(outputHashMap(gsMovies));
+            System.out.println(outputHashMap(HurstvilleMovies));
         }
 
         //finds time of all movies given all filters 
         if (!movieID.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
-            String movieFromAllFilter = findAllMoviesGivenAllFilters(movieID, cinLocation, screenSize);
-            System.out.println(movieFromAllFilter);
+            HashMap<String, String> movieFromAllFilter = findAllMoviesGivenAllFilters(movieID, cinLocation, screenSize);
+            System.out.println(outputHashMap(movieFromAllFilter));
         }
 
         //finds time of all movies given location and screen
         if (movieID.isEmpty() && !screenSize.isEmpty() && !cinLocation.isEmpty()){
-            String movieFromLocationAndScreen = findAllMoviesGivenLocationAndScreen(cinLocation, screenSize);
-            System.out.println(movieFromLocationAndScreen);
+            HashMap<String, String> movieFromLocationAndScreen = findAllMoviesGivenLocationAndScreen(cinLocation, screenSize);
+            System.out.println(outputHashMap(movieFromLocationAndScreen));
         }
 
         //finds time of all movies given location and movie
         if (!movieID.isEmpty() && !cinLocation.isEmpty() && screenSize.isEmpty()){
-            String movieFromLocationAndFilm = findAllMoviesGivenLocationAndMovie(movieID, cinLocation);
-            System.out.println(movieFromLocationAndFilm);
+            HashMap<String, String> movieFromLocationAndFilm = findAllMoviesGivenLocationAndMovie(movieID, cinLocation);
+            System.out.println(outputHashMap(movieFromLocationAndFilm));
         }
 
         //finds time of all movies given movie and screen
@@ -884,15 +923,36 @@ public abstract class Page {
             String gs = "George Street";
             String Hurstville = "Hurstville";
 
-            String bondiMovies = findAllMoviesGivenAllFilters(movieID, bondi, screenSize);
-            String chatswoodMovies = findAllMoviesGivenAllFilters(movieID, chatswood, screenSize);
-            String gsMovies = findAllMoviesGivenAllFilters(movieID, gs, screenSize);
-            String HurstvilleMovies = findAllMoviesGivenAllFilters(movieID, Hurstville, screenSize);
+            HashMap<String, String> bondiMovies = findAllMoviesGivenAllFilters(movieID, bondi, screenSize);
+            HashMap<String, String> chatswoodMovies = findAllMoviesGivenAllFilters(movieID, chatswood, screenSize);
+            HashMap<String, String> gsMovies = findAllMoviesGivenAllFilters(movieID, gs, screenSize);
+            HashMap<String, String> HurstvilleMovies = findAllMoviesGivenAllFilters(movieID, Hurstville, screenSize);
 
-            String finalMessage = bondiMovies + "\n" + chatswoodMovies + "\n" + gsMovies + "\n" + HurstvilleMovies + "\n";
-            System.out.println(finalMessage);
+            System.out.println(outputHashMap(bondiMovies));
+            System.out.println(outputHashMap(chatswoodMovies));
+            System.out.println(outputHashMap(gsMovies));
+            System.out.println(outputHashMap(HurstvilleMovies));
         }
 
+        //if no filters are given 
+        if (movieID.isEmpty() && cinLocation.isEmpty() && screenSize.isEmpty()){
+
+            String bondi = "Bondi";
+            String chatswood = "Chatswood";
+            String gs = "George Street";
+            String Hurstville = "Hurstville";
+
+            HashMap<String, String> bondiMovies = findAllMoviesGivenLocation(bondi);
+            HashMap<String, String> chatswoodMovies = findAllMoviesGivenLocation(chatswood);
+            HashMap<String, String> gsMovies = findAllMoviesGivenLocation(gs);
+            HashMap<String, String> HurstvilleMovies = findAllMoviesGivenLocation(Hurstville);
+
+            System.out.println(outputHashMap(bondiMovies));
+            System.out.println(outputHashMap(chatswoodMovies));
+            System.out.println(outputHashMap(gsMovies));
+            System.out.println(outputHashMap(HurstvilleMovies));
+        }
+        
     } 
 
 }

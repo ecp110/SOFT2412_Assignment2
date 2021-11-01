@@ -1,6 +1,8 @@
-Please enter filter in the following order: 
+***************Please enter filter in the following format***************
 
-Movie Name,Location,Screen Class 
+Enter a Movie Name: Movie Name
+Enter a Location: Location
+Enter a Screen Class: Screen Class
 
 Available Cinemas:          Available Screens:
 Bondi                       Gold, Silver, Bronze
@@ -8,8 +10,5 @@ Chatswood                   Gold, Silver, Bronze
 George Street               Gold, Silver, Bronze
 Hurstville                  Gold, Silver, Bronze
 
-Example: John Wick,George Street,Gold 
-
 ***Leaving a filter blank will not include that filter in search*** 
-
 ***press q to quit filtering***
