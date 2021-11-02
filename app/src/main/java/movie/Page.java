@@ -325,6 +325,7 @@ public abstract class Page {
     }
 
     public void removeUser(String username){
+        System.out.println("Removing "+username);
         //extracts all users from members.Json
         String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
         ArrayList<User> allUsers = storeUsers(usersJsonPath);
@@ -337,6 +338,7 @@ public abstract class Page {
         while (i < len){
             if(allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase())){
                 allUsers.remove(i);
+                break;
             }
             i += 1;
         }
@@ -364,7 +366,7 @@ public abstract class Page {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Staff member "+username+" removed.");
     }
 
 
