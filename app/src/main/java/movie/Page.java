@@ -12,8 +12,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public abstract class Page {
-    private String cancellationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "cancellations.csv").toString();
-
     // Database locations
     protected final String MOVIE_LOCATION;
     protected final String CINEMAS_LOCATION;
@@ -22,6 +20,8 @@ public abstract class Page {
     protected final String USERS_LOCATION;
     protected final String PAGE_PATH;
     protected final Path currentPath = Paths.get(System.getProperty("user.dir"));
+    protected String cancellationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "cancellations.csv").toString();
+
 
     // User information; stored in an arraylist of User objects
     protected ArrayList<User> users = new ArrayList<User>();

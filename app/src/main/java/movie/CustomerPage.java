@@ -47,7 +47,7 @@ public class CustomerPage extends Page {
      * returns HomePage for when page gets cancelled
      */
 
-    public HomePage cancel() {.
+    public HomePage cancel() {
         Engine.logCancellation(this.user, "user cancellation", this.cancellationPath);
         this.user = null;
         return new HomePage(
