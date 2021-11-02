@@ -12,6 +12,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public abstract class Page {
+    private String cancellationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "cancellations.csv").toString();
+
     // Database locations
     protected final String MOVIE_LOCATION;
     protected final String CINEMAS_LOCATION;
