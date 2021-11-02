@@ -851,7 +851,8 @@ public abstract class Page {
     public void filterMovies(String movieID, String cinLocation, String screenSize) {
 
         //prints opening message
-        this.displayFilterMessage();
+        //this.displayFilterMessage();
+        System.out.println("\n");
 
         //finds time of all movies with only given screen size
         if (movieID.isEmpty() && cinLocation.isEmpty() && !screenSize.isEmpty()){
