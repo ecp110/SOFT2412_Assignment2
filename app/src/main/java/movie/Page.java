@@ -283,6 +283,7 @@ public abstract class Page {
         String name = user.getName();
         String password = user.getPassword();
         String status = user.getType();
+        this.users.add(user);
         /*
         JSONObject userEntry = new JSONObject({
             "name":name,
@@ -330,11 +331,12 @@ public abstract class Page {
         //extracts username if user exists
         
         String foundUserName = null;
-        int len = allUsers.size();
         int i = 0;
-        while (i < len){
+        while (i < allUsers.size()){
             if(allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase())){
+                this.users.remove(allUsers.get(i));
                 allUsers.remove(i);
+                break;
             }
             i += 1;
         }
