@@ -36,6 +36,7 @@ public class Engine {
         boolean loginComplete = false;
         User currentUser = null;
         boolean running = true;
+        idleTimer idler = new idleTimer();
 
         // prompt for login
 
@@ -94,6 +95,7 @@ public class Engine {
             }
 
         }
+        
 
 
         
@@ -417,7 +419,36 @@ public class Engine {
 
 
     }
+
+    
 }
+
+class idleTimer {
+    public Timer timer = new java.util.Timer();
+
+    public void startTimer(){
+        timer.schedule( 
+            new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println("You have been logged in for 5 seconds");
+                    timer.cancel();
+                }
+            }, 
+            5000
+        );
+    }
+
+    public void stopTimer(){
+        timer.cancel();
+    }
+
+    public void resetTimer(){
+        stopTimer();
+        startTimer();
+    }
+}
+
 
 class PasswordField {
 
