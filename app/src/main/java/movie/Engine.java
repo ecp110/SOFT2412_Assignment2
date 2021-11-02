@@ -18,6 +18,7 @@ public class Engine {
         String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
         String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
         String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String cancellationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "cancellations.csv").toString();
 
         String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
         String customerPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "customer").toString();
@@ -84,8 +85,9 @@ public class Engine {
                 loginComplete = true;
                 //proceed as guest
             }
-            else if (response.toLowerCase().equals("q")){
+            else if (response.toLowerCase().equals("c")){
                 System.out.println("Quitting. Goodbye!");
+                Engine.logCancellation(null, "user cancellation", cancellationPath);
                 running = false;
                 break;
             }
@@ -292,7 +294,12 @@ public class Engine {
                             System.out.println(admin.displayBookingReciepts("Bondi"));
                         } else if (response.equals("4")) {
                             System.out.println(admin.displayBookingReciepts("Hurstville"));
-                        } 
+                        } else if (response.equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            functionChosen = true;
+                            break;
+                        }
 
                     } else if (response.equals("2")) {
                         functionChosen = true;
@@ -300,6 +307,14 @@ public class Engine {
                         System.out.println(admin.displayMovies());
                         System.out.println();
                         String movieID = scan.nextLine();
+
+                        if (movieID.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            functionChosen = true;
+                            break;
+                        }
+
                         Movie toEdit = null;
                         for (Movie movie : admin.getMovies()) {
                             if (movie.getID().equals(movieID)) {
@@ -316,22 +331,62 @@ public class Engine {
 
                             System.out.print("Title: ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
                             editString += ",";
 
                             System.out.print("ID: ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
                             editString += ",";
 
                             System.out.print("Classification: ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
                             editString += ",";
 
                             System.out.print("Runtime: ");
                             editString += scan.nextLine().replaceAll("\n", "");
-                            editString += ",";
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
+                                    editString += ",";
 
                             System.out.print("Director: ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
                             editString += ",";
 
                             //Cast = TODO
@@ -339,10 +394,25 @@ public class Engine {
 
                             System.out.print("Release Date (ddmmyyyy): ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
+
                             editString += ",";
 
                             System.out.print("Synopsis: ");
                             editString += scan.nextLine().replaceAll("\n", "");
+
+                            if (editString.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                functionChosen = true;
+                                break;
+                            }
 
                             if (admin.editMovie(toEdit, editString)) {
                                 System.out.println(admin.displayCompletedEdit()); 
@@ -395,29 +465,46 @@ public class Engine {
                                     System.out.println("Error, user doesn't exist, or is not a staff user.");
                                 }
                             }
+                        } else if (response.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            functionChosen = true;
+                            break;
                         }
+                        
                     } else if (response.equals("4") && currentUser.getType().equals("staff")) {
                         System.out.println("You do not have access to this function.");
                     } else if (response.equals("c")) {
                         System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
                         functionChosen = true;
-                    } else {
-                        break;
                     }
                 }
-
-                
-
-
             }
-
-
             running = false;
-
-
         }
+    }
 
+    public static boolean logCancellation(User user, String reason, String cancellationPath) {
+        String userName;
 
+        if (user == null) {
+            userName = "anon";
+        } else {
+            userName = user.getName();
+        }
+        String datetime = java.util.Calendar.getInstance().getTime().toString();
+        String cancellationString = "\n" + datetime + "," + userName + "," + reason;
+
+        try {
+            FileWriter fw = new FileWriter(cancellationPath, true);
+            fw.append(cancellationString);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     }
 
     

@@ -86,6 +86,7 @@ public class HomePage extends Page {
 
     public HomePage cancel() {
         this.hasUsername = false;
+        Engine.logCancellation(null, "user cancellation", this.cancellationPath);
         return this;
     }
 

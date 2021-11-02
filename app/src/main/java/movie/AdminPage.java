@@ -231,7 +231,61 @@ public class AdminPage extends Page {
         }
     }
 
+    public String displayCancellations() {
+        String status = this.user.getType();
+
+        if (!(status.toLowerCase().equals("manager"))) {
+            return "Sorry, you are not a manager. This functionality is not available to you.";
+        }
+
+        String cancellationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "cancellations.csv").toString();
+        String retString = "";
+        try {
+            Scanner sc = new Scanner(new File(cancellationPath));
+            sc.nextLine();
+
+            String datetime;
+            String user;
+            String reason;
+            
+            while (sc.hasNextLine()) {
+                String[] attribs = sc.nextLine().split(",");
+
+                datetime = attribs[0];
+                user = attribs[1];
+                reason = attribs[2];
+
+                retString += this.formatCancellation(datetime, user, reason);
+            }
+        } catch (IOException e) {}
+
+
+        return retString;
+    }
+
+    private String formatCancellation(String datetime, String user, String reason) {
+        if (datetime == null || user == null || reason == null) {
+            return "";
+        } else if (datetime.equals("") || user.equals("") || reason.equals("")) {
+            return "";
+        }
+
+        String retString = "";
+
+        retString += "On ";
+        retString += datetime;
+        retString += ", ";
+        retString += user;
+        retString += " cancelled the trasaction because ";
+        retString += reason + ".";
+        retString += "/n";
+
+        return retString;
+    }
+
+    
     public HomePage cancel() {
+        Engine.logCancellation(this.user, "user cancellation", this.cancellationPath);
         this.user = null;
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,

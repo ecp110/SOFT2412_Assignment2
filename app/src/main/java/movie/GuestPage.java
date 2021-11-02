@@ -16,6 +16,7 @@ public class GuestPage extends Page {
      */
 
     public HomePage cancel() {
+        Engine.logCancellation(null, "user cancellation", this.cancellationPath);
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION, this.PAGE_PATH
