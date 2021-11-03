@@ -65,17 +65,13 @@ public class Viewing{
     }
 
     public String toString(){
-        StringBuilder returnString = new StringBuilder();
-        returnString.append(this.getMovie().getTitle());
-        returnString.append(" at ");
-        returnString.append(this.getCinema().getName());
-        returnString.append(" at ");
-        returnString.append(this.getTimeOfDayName());
-        returnString.append(" in a ");
-        returnString.append(this.getScreenName());
-        returnString.append(" cinema.");
+        String returnString = 
+            this.getCinema().getName() + ": "+
+            this.getDay() +" "+ this.getTimeOfDayName() +
+            " ("+this.getScreenName()+" class) "+
+            this.getMovie().getTitle();
 
-        return returnString.toString();
+        return returnString;
     }
 
     public void setTimeOfDay(int i) {
