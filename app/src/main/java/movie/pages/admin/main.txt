@@ -1,6 +1,7 @@
 Greetings,
 
 What would you like to do today?
+
 (1) Display booking log
 (2) Edit movie information
 (3) View cancellations 
