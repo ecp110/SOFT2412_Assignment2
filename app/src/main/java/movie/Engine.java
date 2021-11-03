@@ -24,7 +24,7 @@ public class Engine {
     private boolean reboot = false;
     private boolean running = true;
 
-    private idleTimer idler = new idleTimer();
+    private IdleTimer idler = new IdleTimer();
     private User currentUser = null;
 
     public static void main(String[] args) {
@@ -45,10 +45,14 @@ public class Engine {
                 e = null;
                 e = new Engine();
                 e.reboot = false;
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                clearConsole();
             }
         }       
+    }
+
+    public static void clearConsole(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static void logCancellation(User user, String reason, String cancellationPath) {
@@ -67,9 +71,7 @@ public class Engine {
         boolean loginComplete = false;
         User currentUser = null;
         boolean running = true;
-        IdleTimer idler = new IdleTimer();
 
-        idler.stopTimer();
         try {
             FileWriter fw = new FileWriter(cancellationPath, true);
             fw.append(cancellationString);
@@ -170,13 +172,13 @@ public class Engine {
         boolean exit = false;
 
         // CLEAR CONSOLE
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clearConsole();
+        System.out.println(guest.displayInitial());
 
         while (!exit) {
             // DISPLAY INITIAL HOME PAGE
             System.out.println(guest.lineBreak());
-            System.out.println(guest.displayInitial());
+            
             response = scan.nextLine();
 
             // BLANK CHECKS
@@ -218,7 +220,10 @@ public class Engine {
                     System.out.println("something went wrong in engine guest filter");
                 }
             }
-
+            else if (response.toLowerCase().equals("h")) {
+                clearConsole();
+                System.out.println(guest.displayInitial());
+            }
             // REGISTRATION FUNCTIONALITY 
             else if (response.toLowerCase().equals("r")){
 
@@ -265,7 +270,8 @@ public class Engine {
                     //register() and book()
                     System.out.println(
                         "To book tickets to "+selectedMovie.getTitle()+", you must have an account."+
-                        "\n if you would like to proceed and register, type \"r\"." +"\nOtherwise if you would like to cancel, type anything.");
+                        "\n if you would like to proceed and register, type \"r\"." +
+                        "\nOtherwise if you would like to cancel, type anything.");
                     exit = true;
                 } else {
                     System.out.println("No movie selected, please select a movie and try again!");
@@ -296,9 +302,13 @@ public class Engine {
             else {
                 selectedMovie = guest.getMovieById(response);
                 if (selectedMovie != null){
+                    clearConsole();
                     System.out.println("Selected Movie: "+selectedMovie.getTitle()+"\n");
                     System.out.println(selectedMovie.getSynopsis());
-                    System.out.println("\nIf you would like to book this movie, type \"b\".\nTo view another movie, type in its ID.");
+                    System.out.println(
+                        "\nIf you would like to book this movie, type \"b\".\n"+
+                        "To view another movie, type in its ID.\n"+
+                        "To return to the home page, type \"h\".");
                 } else {
                     System.out.println("Movie not found! Please try again");
                 }
@@ -317,12 +327,12 @@ public class Engine {
         String response = "";
 
         // CLEAR CONSOLE
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clearConsole();
+        System.out.println(customer.lineBreak());
+        System.out.println(customer.displayInitial());
         
         while (!exit) {
-            System.out.println(customer.lineBreak());
-            System.out.println(customer.displayInitial());
+            
             response = scan.nextLine();
             
             // FILTERING
@@ -354,7 +364,11 @@ public class Engine {
                     System.out.println("something went wrong in engine guest filter");
                 }
             }
-
+            else if(response.toLowerCase().equals("h")){
+                clearConsole();
+                System.out.println(customer.lineBreak());
+                System.out.println(customer.displayInitial());
+            }
             // BOOKING - TBD
             else if(response.toLowerCase().equals("b")) {
                 //movie booking shit here
@@ -380,10 +394,14 @@ public class Engine {
             else {
                 selectedMovie = customer.getMovieById(response);
                 if (selectedMovie != null){
+                    clearConsole();
                     System.out.println("Selected Movie: "+selectedMovie.getTitle());
                     System.out.println("");
                     System.out.println(selectedMovie.getSynopsis());
-                    System.out.println("\nIf you would like to book this movie, type \"b\".\nTo view another movie, type in its ID.");
+                    System.out.println(
+                        "\nIf you would like to book this movie, type \"b\".\n"+
+                        "To view another movie, type in its ID.\n"+
+                        "To return to the home page, type \"h\".");
 
                 } else {
                     System.out.println("Movie not found! Please try again");
@@ -399,8 +417,7 @@ public class Engine {
     public void staffExperience(Scanner scan) {
         AdminPage admin = new AdminPage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, adminPagePath, currentUser);
         // CLEAR CONSOLE
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clearConsole();
 
         boolean exit = false;
         String response = "";
@@ -631,8 +648,9 @@ public class Engine {
 
 class IdleTimer {
     public Timer timer;
-    public IdleTimer() {
+    public IdleTimer () {
         this.timer = new java.util.Timer();
+        timer.cancel();
     }
 
     public void startTimer(){
