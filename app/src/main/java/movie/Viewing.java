@@ -5,12 +5,15 @@ import java.util.*;
 public class Viewing{
 
     private Movie movie;
+    private Cinema cinema;
     private int screenType; // 0, 1,2 - bronze, silver, gold
     private int timeOfDay; // 0, 1, 2 - morning, midday, evening
     private String day;
+    
 
 
-    public Viewing(Movie movie, int screenType, int timeOfDay, String day){
+    public Viewing(Cinema cinema, Movie movie, int screenType, int timeOfDay, String day){
+        this.cinema = cinema;
         this.movie = movie;
         this.screenType = screenType;
         this.timeOfDay = timeOfDay;
@@ -23,6 +26,10 @@ public class Viewing{
 
     public int getScreenType(){
         return this.screenType;
+    }
+
+    public Cinema getCinema(){
+        return this.cinema;
     }
 
     public String getScreenName() {
@@ -55,5 +62,19 @@ public class Viewing{
 
     public String getDay(){
         return this.day;
+    }
+
+    public String toString(){
+        StringBuilder returnString = new StringBuilder();
+        returnString.append(this.getMovie().getTitle());
+        returnString.append(" at ");
+        returnString.append(this.getCinema().getName());
+        returnString.append(" at ");
+        returnString.append(this.getTimeOfDayName());
+        returnString.append(" in a ");
+        returnString.append(this.getScreenName());
+        returnString.append(" cinema.");
+
+        return returnString.toString();
     }
 }

@@ -375,6 +375,10 @@ public class Engine {
                 if (selectedMovie != null) {
                     //book()
                     System.out.println("Booking "+selectedMovie.getTitle());
+                    ArrayList<Viewing> results = customer.filterViewings("",selectedMovie.getID(),-1,-1,"");
+                    for (Viewing result : results) {
+                        System.out.println(result);
+                    }
                     exit = true;
                 } else {
                     System.out.println("No movie selected, please select a movie and try again!");
