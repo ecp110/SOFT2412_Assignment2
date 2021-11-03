@@ -34,4 +34,8 @@ public class GiftCard  {
         return this.expiry.isBeforeNow();
     }
 
+    public String toString() {
+        return this.number + " | Redeemed: " + String.valueOf(this.redeemed) + " Issue: " + this.issue.getStringShort() + " Expiry: " + this.expiry.getStringShort();
+    }
+
 }

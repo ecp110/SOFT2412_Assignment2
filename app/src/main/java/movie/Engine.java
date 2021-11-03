@@ -5,6 +5,12 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.Console;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 public class Engine {
 
@@ -1642,6 +1648,181 @@ public class Engine {
                     Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
                     this.reboot = true;
                     return;
+                }
+        
+            // MODIFY GIFT CARD INFO
+            } else if (response.equals("6")) {
+                System.out.println(admin.displayGCPrompt());
+
+                while (true) {
+                    response = scan.nextLine();
+
+                    // ADD GC
+                    if (response.equals("1")) {
+                        System.out.println("Existing giftcards:\n");
+                        int i = 1;
+                        for (GiftCard gc : admin.giftCards) {
+                            System.out.print("(");
+                            System.out.print(i);
+                            System.out.print(") ");
+                            System.out.println(gc.toString());
+                            i += 1;
+                        }
+
+                        System.out.println();
+                        System.out.println("What is the card number which you would like to add? The \"GC\" suffix will be added automatically.");
+                        while (true) {
+                            response = scan.nextLine();
+
+                            if (response.equals("")) {
+                                System.out.println("Sorry, invalid input.");
+                                continue;
+
+                            } else if (response.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                this.reboot = true;
+                                return;
+                            }
+
+                            response += "GC";
+                            break;
+                        }
+
+                        boolean prexists = false;
+                        for (GiftCard gc : admin.giftCards) {
+                            if (gc.getNumber().equals(response)) {
+                                prexists = true;
+                                break;
+                            }
+                        }
+
+                        if (prexists) {
+                            System.out.println("Sorry, this card already exists in the system.");
+                            continue;
+                        }
+
+                        Calendar calNow = new Calendar();
+                        Calendar calPlusYear = new Calendar();
+                        calPlusYear.addTime(0,0,1);
+
+                        GiftCard toAdd = new GiftCard(response, false, calNow, calPlusYear);
+
+                        JSONParser parser = new JSONParser();
+
+                        try {
+                            JSONObject jsonObjectInput = (JSONObject) parser.parse(new FileReader(admin.GIFT_CARD_LOCATION));
+                            JSONArray gcArray = (JSONArray) jsonObjectInput.get("giftcards");
+                        
+                            JSONObject gcEntry = new JSONObject();
+                            JSONObject gc = new JSONObject();
+                    
+                    
+                            gcEntry.put("number",response);
+                            gcEntry.put("redeemed",0);
+                            gcEntry.put("issue",toAdd.getIssue().getDate());
+                            gcEntry.put("expiry",toAdd.getExpiry().getDate());
+                    
+                            gcArray.add(gcEntry);
+                    
+                            gc.put("giftcards",gcArray);
+                    
+                            try (FileWriter file = new FileWriter(admin.GIFT_CARD_LOCATION)) {
+                                file.write(gc.toJSONString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException p) {
+                            p.printStackTrace();
+                        }
+                        admin.parseAll();
+                        break;
+                    } else if (response.equals("2")) {
+                        // REMOVE
+
+                        int i = 1;
+                        System.out.println("Existing giftcards:\n");
+                        for (GiftCard gc : admin.giftCards) {
+                            System.out.print("(");
+                            System.out.print(i);
+                            System.out.print(") ");
+                            System.out.println(gc.toString());
+                            i += 1;
+                        }
+
+                        System.out.println();
+                        System.out.println("Which card would you like to remove?");
+                        
+                        int rep;
+                        while (true) {
+                            response = scan.nextLine();
+                            if (response.toLowerCase().equals("c")) {
+                                System.out.println("Cancelling, goodbye!");
+                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                this.reboot = true;
+                                return;
+                            }
+
+                            try {
+                                rep = Integer.valueOf(response) - 1;
+                                if (rep < 0 || rep >= (i-1)) {
+                                    System.out.println("Sorry, invalid input. Try again.");
+                                    continue; 
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Sorry, invalid input. Try again.");
+                                continue;
+                            }
+                            break;
+                        }
+
+                        GiftCard toRemove = admin.giftCards.get(rep);
+
+                        try {
+                            JSONParser parser = new JSONParser();
+                            JSONObject jsonObjectInput = (JSONObject) parser.parse(new FileReader(admin.GIFT_CARD_LOCATION));
+                            JSONArray movieArray = (JSONArray) jsonObjectInput.get("giftcards");
+                            JSONArray editedGCArray = (JSONArray) new JSONArray();
+                        
+                            JSONObject gcEntry = new JSONObject();
+                            JSONObject gcs = new JSONObject();
+                            JSONObject gc;
+                            for (Object o : movieArray) {
+                                gc = (JSONObject) o;
+                                if (!(gc.get("number").equals(toRemove.getNumber()))) {
+                                    editedGCArray.add(gc);
+                                }
+                            }
+                    
+                            gcs.put("giftcards",editedGCArray);
+                    
+                            try (FileWriter file = new FileWriter(admin.GIFT_CARD_LOCATION)) {
+                                file.write(gcs.toJSONString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    
+                       
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException p) {
+                            p.printStackTrace();
+                        }
+                        admin.parseAll();
+                        break;
+
+                    } else if (response.toLowerCase().equals("c")) {
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    } else {
+                        System.out.println("Invalid input. Try again.");
+                        continue;
+                    }
                 }
 
             // CANCELLATION

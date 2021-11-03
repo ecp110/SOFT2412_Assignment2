@@ -353,6 +353,10 @@ public class AdminPage extends Page {
     public String displayTimetablingMenu() {
         return this.parseTxt("/timetablingMenu.txt", 0);
     }
+
+    public String displayGCPrompt() {
+        return this.parseTxt("/gcPrompt.txt", 0);
+    }
     
     public HomePage cancel() {
         Engine.logCancellation(this.user, "user cancellation", this.cancellationPath);
