@@ -293,6 +293,7 @@ public abstract class Page {
         String name = user.getName();
         String password = user.getPassword();
         String status = user.getType();
+        this.users.add(user);
         /*
         JSONObject userEntry = new JSONObject({
             "name":name,
@@ -333,6 +334,7 @@ public abstract class Page {
     }
 
     public void removeUser(String username){
+        System.out.println("Removing "+username);
         //extracts all users from members.Json
         String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
         ArrayList<User> allUsers = storeUsers(usersJsonPath);
@@ -340,10 +342,10 @@ public abstract class Page {
         //extracts username if user exists
         
         String foundUserName = null;
-        int len = allUsers.size();
         int i = 0;
-        while (i < len){
+        while (i < allUsers.size()){
             if(allUsers.get(i).getName().toLowerCase().equals(username.toLowerCase())){
+                this.users.remove(allUsers.get(i));
                 allUsers.remove(i);
                 break;
             }
@@ -373,7 +375,7 @@ public abstract class Page {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Staff member "+username+" removed.");
     }
 
 
