@@ -762,6 +762,114 @@ public class Engine {
             } else if (response.equals("4") && currentUser.getType().equals("staff")) {
                 System.out.println("You do not have access to this function.");
 
+            // EDIT TIMETABLING
+            } else if (response.equals("5")) {
+                System.out.println(admin.displayInitialTimetableEdit());
+
+                response = scan.nextLine();
+                String loc = "";
+                boolean invalid = true;
+
+                while (invalid){
+                    if (response.equals("1")) {
+                        loc = "Bondi";
+                        invalid = false;
+                    } else if (response.equals("2")) {
+                        loc = "GeorgeStreet";
+                        invalid = false;
+                    } else if (response.equals("3")) {
+                        loc = "Chatswood";
+                        invalid = false;
+                    } else if (response.equals("4")) {
+                        loc = "Hurstville";
+                        invalid = false;
+                    } else if (response.toLowerCase().equals("c")) {
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        invalid = false;
+                        this.reboot = true;
+                        return;
+                    } else {
+                        System.out.println("Invalid input: try again.");
+                    }
+                }
+
+                String locPath = Paths.get(this.currentPath.toString(), "src", "main", "java", "movie", "Databases", loc).toString();
+
+                Cinema cThis = null;
+
+                ArrayList<Cinema> cinemas = admin.storeCinemas();
+                for (Cinema cinema : cinemas) {
+                    if (cinema.getName().equals(loc)) {
+                        cThis = cinema;
+                        break;
+                    }
+                }
+
+                int i = 1;
+                int dayNum = 0;
+                String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                ArrayList<Viewing> allViewings = new ArrayList<Viewing>();
+                for (ArrayList<Viewing> day : cThis.viewings) {
+                    System.out.println(dayName[dayNum]);
+                    for (Viewing viewing : day) {
+                        allViewings.append(viewing);
+                        System.out.print("(");
+                        System.out.print(i);
+                        System.out.print(") ");
+                        System.out.println(viewing.toString());
+                        i += 1;
+                    }
+                    System.out.println(admin.lineBreak());
+                    dayNum += 1;
+                }
+                int -= 1;
+
+                System.out.println("If you would like to edit a specific viewing, please type the number associated with it");
+
+                while (true){
+                    response = scan.nextLine();
+                    int checkNum = -1;
+                    try {
+                        checkNum = Integer.valueOf(response);
+                        if (checkNum > i) {
+                            System.out.println("Invalid input. Please try again.");
+                        } else if (checkNum == -1) {
+                            System.out.println("Invalid input. Please try again.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Please try again.");
+                    }
+                }
+
+                Viewing editingViewing = allViewing.get(checkNum);
+
+                System.out.println(admin.displayViewingSpecificEditPrompt());
+
+                response = scan.nextLine().toLowerCase();
+                boolean validInput = false;
+
+                while (!validInput){
+                    if (response.equals("1")) {
+
+                    } else if (response.equals("2")) {
+
+                    } else if (response.equals("3")) {
+
+                    } else if (response.equals("c")) {
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        validInput = true;
+                        this.reboot = true;
+                        return;
+                    } else {
+                        System.out.println("Sorry, not a valid input. Please try again.");
+                        continue;
+                    }
+                }
+
             // CANCELLATION
             } else if (response.equals("c")) {
                 System.out.println("Cancelling, goodbye!");

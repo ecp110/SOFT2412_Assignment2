@@ -1,0 +1,5 @@
+Where would you like to edit information from?
+(1) Bondi
+(2) George Street
+(3) Chatswood
+(4) Hurstville
