@@ -1,9 +1,10 @@
 Greetings,
 
 What would you like to do today?
+
 (1) Display booking log
 (2) Edit movie information
-(3) xxxxxxxxxx 
+(3) View cancellations 
 (4) Add/remove accounts
 
 Type "c" to cancel.

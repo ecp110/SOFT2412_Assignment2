@@ -4,4 +4,4 @@ If you would like to log-in, just type "l".
 If you would like to continue as a guest, type "g".
 
 Remember, if at any point in your process you would like to cancel and return to this main page, just type "c" and hit enter.
-If you would like to quit the program, type "c".
+If you would like to completely quit the program, type "q".

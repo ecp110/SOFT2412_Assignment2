@@ -237,6 +237,14 @@ public abstract class Page {
         return this.movies;
     }
 
+    public String displayInvalidInput() {
+        return "Sorry, that is not a valid input. Please try again.";
+    }
+
+    public String lineBreak() {
+        return "\n" + "------------------------------------------------------------------------" + "\n";
+    }
+
     //finds User object given username
     public String getUserByUsername(String username){
         //extracts all users from members.Json

@@ -4,3 +4,4 @@ As a guest user, you can explore all of the movies now showing.
 If you would like to select a movie, just type the number that is next to that movie listing and press enter.
 If you would like to filter the movies, type the 'f' key and press enter, and you'll be prompted to enter either a cinema or movie.
 If you would like to register for an account, type the 'r' key and press enter.
+If you already have an account and would like to login, type the 'l' key and press enter.
