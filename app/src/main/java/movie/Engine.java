@@ -37,7 +37,9 @@ public class Engine {
         boolean loginComplete = false;
         User currentUser = null;
         boolean running = true;
-        idleTimer idler = new idleTimer();
+        IdleTimer idler = new IdleTimer();
+
+        idler.stopTimer();
 
         // prompt for login
 
@@ -510,8 +512,11 @@ public class Engine {
     
 }
 
-class idleTimer {
-    public Timer timer = new java.util.Timer();
+class IdleTimer {
+    public Timer timer;
+    public IdleTimer() {
+        this.timer = new java.util.Timer();
+    }
 
     public void startTimer(){
         timer.schedule( 
