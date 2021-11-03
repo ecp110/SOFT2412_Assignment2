@@ -12,6 +12,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.text.NumberFormat;
+
 public abstract class Page {
     // Database locations
     protected final String MOVIE_LOCATION;
@@ -268,7 +270,39 @@ public abstract class Page {
     
     }
 
-    //public void book
+    public double getBookingPrice(String ticketType,String cinemaClass,int numTickets){
+        double basePrice = 20;
+        double typeMultiplier = 0;
+        double classMultiplier = 0;
+
+        if (ticketType.toLowerCase().equals("adult")) {
+            typeMultiplier = 1;
+        } else if (ticketType.toLowerCase().equals("child")) {
+            typeMultiplier = 0.5;
+        } else if (ticketType.toLowerCase().equals("student")) {
+            typeMultiplier = 0.8;
+        } else if (ticketType.toLowerCase().equals("pensioner")) {
+            typeMultiplier = 0.7;
+        }
+
+        if (cinemaClass.toLowerCase().equals("bronze")) {
+            classMultiplier = 1;
+        } else if (cinemaClass.toLowerCase().equals("silver")) {
+            classMultiplier = 1.5;
+        } else if (cinemaClass.toLowerCase().equals("gold")) {
+            classMultiplier = 2;
+        }
+
+        return (basePrice*typeMultiplier*classMultiplier*numTickets);
+        
+    }
+
+    public String formatCurrencyString(double amount){
+
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        String myCurrency = currency.format(amount);
+        return myCurrency;
+    }
 
     public String getStaffByUsername(String username){
         //extracts all users from members.Json
