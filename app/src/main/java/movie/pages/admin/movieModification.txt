@@ -1,0 +1,5 @@
+What would you like to modify?
+
+(1) Add a new movie
+(2) Remove an existing movie
+(3) Edit an existing movie

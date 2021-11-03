@@ -231,6 +231,54 @@ public class AdminPage extends Page {
         }
     }
 
+    public boolean addMovie(Movie movie) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObjectInput = (JSONObject) parser.parse(new FileReader(MOVIE_LOCATION));
+            JSONArray movieArray = (JSONArray) jsonObjectInput.get("movies");
+            JSONArray editedMovieArray = (JSONArray) new JSONArray();
+        
+            JSONObject movieEntry = new JSONObject();
+            JSONObject movies = new JSONObject();
+            JSONObject m;
+            for (Object o : movieArray) {
+                m = (JSONObject) o;
+                editedMovieArray.add(m);
+            }
+
+
+            movieEntry.put("name",movie.getTitle());
+            movieEntry.put("id",movie.getID());
+            movieEntry.put("classification",movie.getClassification());
+            movieEntry.put("runtime",movie.getRunTime());
+            movieEntry.put("director",movie.getDirector());
+            movieEntry.put("cast","TBD");
+            movieEntry.put("release date", movie.getReleaseDate().getDate());
+            movieEntry.put("synopsis",movie.getSynopsis());
+    
+           editedMovieArray.add(movieEntry);
+                    
+            movies.put("movies", editedMovieArray);
+    
+            try (FileWriter file = new FileWriter(MOVIE_LOCATION)) {
+                file.write(movies.toJSONString());
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+    
+       
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ParseException p) {
+            p.printStackTrace();
+            return false;
+        }
+
+    }
+
     public String displayCancellations() {
         String status = this.user.getType();
 
@@ -281,6 +329,10 @@ public class AdminPage extends Page {
         retString += "\n";
 
         return retString;
+    }
+
+    public String displayMovieModificationPrompt() {
+        return this.parseTxt("/movieModification.txt", 0);
     }
 
     
