@@ -9,6 +9,7 @@ public class Cinema {
     private final String LOCATION_PATH;
     private ArrayList<Movie> movies;
 
+    protected ArrayList<ArrayList<Viewing>> viewings = new ArrayList<ArrayList<Viewing>>();
     private ArrayList<Viewing> monday = new ArrayList<Viewing>();
     private ArrayList<Viewing> tuesday = new ArrayList<Viewing>();
     private ArrayList<Viewing> wednesday = new ArrayList<Viewing>();
@@ -31,10 +32,16 @@ public class Cinema {
         this.friday = new ArrayList<Viewing>();
         this.saturday = new ArrayList<Viewing>();
         this.sunday = new ArrayList<Viewing>();
-
         parseViewings();
 
-        
+        this.viewings.add(this.monday);
+        this.viewings.add(this.tuesday);
+        this.viewings.add(this.wednesday);
+        this.viewings.add(this.thursday);
+        this.viewings.add(this.friday);
+        this.viewings.add(this.saturday);
+        this.viewings.add(this.sunday);
+
     }
 
     public String getName(){

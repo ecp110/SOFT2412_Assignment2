@@ -335,6 +335,20 @@ public class AdminPage extends Page {
         return this.parseTxt("/movieModification.txt", 0);
     }
 
+    public String displayInitialTimetableEdit() {
+        return this.parseTxt("/initialTimetableEdit.txt", 0);
+    }
+    public String displayViewingSpecificEditPrompt() {
+        return this.parseTxt("/viewingSpecificEditPrompt.txt", 0);
+    }
+
+    public String displayTimeChecks() {
+        return this.parseTxt("/timeChecks.txt", 0);
+    }
+
+    public String displayScreenChecks() {
+        return this.parseTxt("/screenChecks.txt", 0);
+    }
     
     public HomePage cancel() {
         Engine.logCancellation(this.user, "user cancellation", this.cancellationPath);
