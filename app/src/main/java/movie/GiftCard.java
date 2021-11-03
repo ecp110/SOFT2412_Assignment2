@@ -30,4 +30,8 @@ public class GiftCard  {
         return this.issue;
     }
 
+    public boolean isExpired() {
+        return this.expiry.isBeforeNow();
+    }
+
 }
