@@ -63,6 +63,11 @@ public abstract class Page {
     //}
 
     protected void parseAll() {
+
+        this.users = new ArrayList<User>();
+        this.movies = new ArrayList<Movie>();
+        this.creditCards = new ArrayList<CreditCard>();
+        this.giftCards = new ArrayList<GiftCard>();
         this.parseUsers();
         this.parseMovies();
         this.parseCreditCards();
@@ -163,6 +168,7 @@ public abstract class Page {
             GiftCard gFull;
             
             for (Object card : giftCards) {
+                redeemed = false;
                 JSONObject g = (JSONObject) card;
 
                 number = (String) g.get("number");
