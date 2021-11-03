@@ -7,53 +7,53 @@ public class CalendarTests {
 
      @Test
      public void isBeforeTest() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cFeb = new Calendar(3, 2, 2021);
-      Calendar cMar = new Calendar(4, 3, 2021);
-      Calendar cJun = new Calendar(3, 6, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearAhead = new Calendar(21, 9, 2022);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+     Calendar cJan = new Calendar(1, 1, 2021);
+     Calendar cFeb = new Calendar(3, 2, 2021);
+     Calendar cMar = new Calendar(4, 3, 2021);
+     Calendar cJun = new Calendar(3, 6, 2021);
+     Calendar cDec = new Calendar(10, 12, 2021);
+     Calendar cYearAhead = new Calendar(21, 9, 2022);
+     Calendar cYearBehind = new Calendar(21, 9, 2020);
 
       // Positive test cases
-      assertTrue(cJan.isBefore(cFeb));
-      assertTrue(cFeb.isBefore(cMar));
-      assertTrue(cMar.isBefore(cDec));
-      assertTrue(cJan.isBefore(cDec));
-      assertTrue(cYearBehind.isBefore(cYearAhead));
-      assertTrue(cYearBehind.isBefore(cJan));
+     assertTrue(cJan.isBefore(cFeb));
+     assertTrue(cFeb.isBefore(cMar));
+     assertTrue(cMar.isBefore(cDec));
+     assertTrue(cJan.isBefore(cDec));
+     assertTrue(cYearBehind.isBefore(cYearAhead));
+     assertTrue(cYearBehind.isBefore(cJan));
 
       // Negative test cases
-      assertFalse(cJun.isBefore(cJan));
-      assertFalse(cFeb.isBefore(cJan));
-      assertFalse(cMar.isBefore(cYearBehind));
-      assertFalse(cYearAhead.isBefore(cYearBehind));
+     assertFalse(cJun.isBefore(cJan));
+     assertFalse(cFeb.isBefore(cJan));
+     assertFalse(cMar.isBefore(cYearBehind));
+     assertFalse(cYearAhead.isBefore(cYearBehind));
      }
 
      @Test
      public void isBeforeNow() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cJun = new Calendar(3, 6, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+     Calendar cJan = new Calendar(1, 1, 2021);
+     Calendar cJun = new Calendar(3, 6, 2021);
+     Calendar cYearBehind = new Calendar(21, 9, 2020);
 
       // These tests will all have to be positive as otherwise in the future these tests will fail due to time passing
-      assertTrue(cJan.isBeforeNow());
-      assertTrue(cJun.isBeforeNow());
-      assertTrue(cYearBehind.isBeforeNow());
+     assertTrue(cJan.isBeforeNow());
+     assertTrue(cJun.isBeforeNow());
+     assertTrue(cYearBehind.isBeforeNow());
      }
 
      @Test
      public void getDayTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getDay(), 1);
-      assertEquals(cApr.getDay(), 10);
-      assertEquals(cDec.getDay(), 10);
-      assertEquals(cYearBehind.getDay(), 21);
+          // No other possible cases than positive
+          assertEquals(cJan.getDay(), 1);
+          assertEquals(cApr.getDay(), 10);
+          assertEquals(cDec.getDay(), 10);
+          assertEquals(cYearBehind.getDay(), 21);
      }
 
      @Test
@@ -202,17 +202,17 @@ public class CalendarTests {
 
       // No other possible cases than positive
          
-      Calendar cJanEquivalent = Calendar.stringToCalendar("01012021");
-      assertEquals(cJanEquivalent.getDate(), cJan.getDate());
+          Calendar cJanEquivalent = Calendar.stringToCalendar("01012021");
+          assertEquals(cJanEquivalent.getDate(), cJan.getDate());
 
-      Calendar cOctEquivalent = Calendar.stringToCalendar("03102021");
-      assertEquals(cOctEquivalent.getDate(), cOct.getDate());
+          Calendar cOctEquivalent = Calendar.stringToCalendar("03102021");
+          assertEquals(cOctEquivalent.getDate(), cOct.getDate());
 
-      Calendar cAprEquivalent = Calendar.stringToCalendar("10042021");
-      assertEquals(cAprEquivalent.getDate(), cApr.getDate());
+          Calendar cAprEquivalent = Calendar.stringToCalendar("10042021");
+          assertEquals(cAprEquivalent.getDate(), cApr.getDate());
 
-      Calendar cYearBehindEquivalent = Calendar.stringToCalendar("21092020");
-      assertEquals(cYearBehindEquivalent.getDate(), cYearBehind.getDate());
+          Calendar cYearBehindEquivalent = Calendar.stringToCalendar("21092020");
+          assertEquals(cYearBehindEquivalent.getDate(), cYearBehind.getDate());
      }
      
 }

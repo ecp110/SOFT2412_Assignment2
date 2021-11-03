@@ -25,6 +25,4 @@ public class GuestPage extends Page {
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION, this.PAGE_PATH
             );
     }
-
-      
 }
