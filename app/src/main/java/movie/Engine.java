@@ -175,37 +175,59 @@ public class Engine {
             }
             
             // FILTER FUNCTIONALITY
-            if (response.toLowerCase().equals("f")) {   
-                try {
-                    while ( true ) {
-                        guest.displayFilterMessage();
-                        ArrayList<String> filteredInput = guest.readFilterInput();
-                        if (filteredInput == null){
-                            System.out.println("Would you like to filter again?\nPress y to filter again or any key to quit filter");
-                            //reads user filter input
-                            Scanner nullInputScan = new Scanner(System.in);
-                            String option = nullInputScan.nextLine();
-
-                            if (option.equals("") || option == null) {
-                                System.out.println(guest.displayInvalidInput());
-                                continue;
-                            }
-                            if (option.toLowerCase().equals("y")){
-                                continue;
-                            }
-                            else{
-                                exit = false;
-                                break;
-                            }
+            if (response.toLowerCase().equals("f")) {
+                boolean correctMovie = false;
+                String movieID = "";
+                while(!correctMovie) {
+                    System.out.println("Please enter move ID you wish to filter by (enter \"n\" for no preference): ");
+                    movieID = scan.next();
+                    clearConsole();
+                    selectedMovie = guest.getMovieById(movieID);
+                    if((selectedMovie != null) || (movieID.equals("n"))) {
+                        correctMovie = true;
+                        response = movieID;
+                        if (movieID.equals("n")){
+                            movieID = "";
                         }
-                        else if (filteredInput != null){
-                            guest.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
-                            System.out.println("If you would like to book a movie, please exit the filter page and login.\n\n");
-                        }
+                        
+                    } else {
+                        System.out.println("Invalid movie ID.");
                     }
-                } catch (Exception e){
-                    System.out.println("something went wrong in engine guest filter");
                 }
+
+                System.out.println(guest.lineBreak());
+                System.out.println("Please enter one of the following locations (enter \"n\" for no preference): ");
+                System.out.println(guest.listLocations());
+                String location = scan.next();
+                if(!( 
+                    (location.toLowerCase().equals("bondi"))||
+                    (location.toLowerCase().equals("chatswood"))||
+                    (location.toLowerCase().equals("georgestreet"))||
+                    (location.toLowerCase().equals("hurstville"))  
+                )) {
+                    location = "";
+                }
+                clearConsole();
+
+                System.out.println(guest.lineBreak());
+                System.out.println("Please enter the the number corresponding to your preferred screen size (enter -1 for no preference): ");
+                System.out.println("(0) Bronze\n(1) Silver\n(2) Gold");
+                int screenSize = -1;
+                try {
+                    screenSize = scan.nextInt();
+                    assert ( (screenSize == 0) || (screenSize == 1) || (screenSize == 2) );
+                } catch (Exception e) {
+                    screenSize = -1;
+                }
+                ArrayList<Viewing> results = guest.filterViewings(location,movieID,screenSize,-1,"");
+                clearConsole();
+
+
+                System.out.println(guest.lineBreak());
+                for (Viewing result : results) {
+                    System.out.println(result);
+                }
+                System.out.println(guest.lineBreak());
             }
             else if (response.toLowerCase().equals("h")) {
                 clearConsole();
@@ -319,37 +341,62 @@ public class Engine {
         System.out.println(customer.displayInitial());
         
         while (!exit) {
-            
             response = scan.nextLine();
             
             // FILTERING
             if (response.toLowerCase().equals("f")) {
-                exit = true;
-                try{
-
-                    while (true){
-                        customer.displayFilterMessage();
-                        ArrayList<String> filteredInput = customer.readFilterInput();
-                        if (filteredInput == null){
-                            System.out.println("Would you like to filter again?\nPress y to filter again or any key to quit filter");
-                            //reads user filter input
-                            Scanner nullInputScan = new Scanner(System.in);
-                            String option = nullInputScan.nextLine();
-                            if (option.toLowerCase().equals("y")){
-                                continue;
-                            }
-                            else {
-                                break;
-                            }
+                boolean correctMovie = false;
+                String movieID = "";
+                while(!correctMovie) {
+                    System.out.println("Please enter move ID you wish to filter by (enter \"n\" for no preference): ");
+                    movieID = scan.next();
+                    clearConsole();
+                    selectedMovie = customer.getMovieById(movieID);
+                    if((selectedMovie != null) || (movieID.equals("n"))) {
+                        correctMovie = true;
+                        response = movieID;
+                        if (movieID.equals("n")){
+                            movieID = "";
                         }
-                        else if (filteredInput != null){
-                            customer.filterMovies(filteredInput.get(0), filteredInput.get(1), filteredInput.get(2));
-                            System.out.println("If you would like to book a movie, please exit the filter page and login.\n\n");
-                        }
+                        
+                    } else {
+                        System.out.println("Invalid movie ID.");
                     }
-                } catch (Exception e){
-                    System.out.println("something went wrong in engine guest filter");
                 }
+
+                System.out.println(customer.lineBreak());
+                System.out.println("Please enter one of the following locations (enter \"n\" for no preference): ");
+                System.out.println(customer.listLocations());
+                String location = scan.next();
+                if(!( 
+                    (location.toLowerCase().equals("bondi"))||
+                    (location.toLowerCase().equals("chatswood"))||
+                    (location.toLowerCase().equals("georgestreet"))||
+                    (location.toLowerCase().equals("hurstville"))  
+                )) {
+                    location = "";
+                }
+                clearConsole();
+
+                System.out.println(customer.lineBreak());
+                System.out.println("Please enter the the number corresponding to your preferred screen size (enter -1 for no preference): ");
+                System.out.println("(0) Bronze\n(1) Silver\n(2) Gold");
+                int screenSize = -1;
+                try {
+                    screenSize = scan.nextInt();
+                    assert ( (screenSize == 0) || (screenSize == 1) || (screenSize == 2) );
+                } catch (Exception e) {
+                    screenSize = -1;
+                }
+                ArrayList<Viewing> results = customer.filterViewings(location,movieID,screenSize,-1,"");
+                clearConsole();
+
+
+                System.out.println(customer.lineBreak());
+                for (Viewing result : results) {
+                    System.out.println(result);
+                }
+                System.out.println(customer.lineBreak());
             }
             else if(response.toLowerCase().equals("h")){
                 clearConsole();
@@ -372,7 +419,6 @@ public class Engine {
                 }
                 
             }
-
             // CANCELLATION
             else if (response.toLowerCase().equals("c")) {
                 System.out.println("Quitting. Goodbye!");
@@ -380,10 +426,9 @@ public class Engine {
                 this.reboot = true;
                 exit = true;
             }
-
             // LOOKUP MOVIE FROM PROVIDED RESPONSE
             else {
-                selectedMovie = customer.getMovieById(response);
+                    selectedMovie = customer.getMovieById(response);
                 if (selectedMovie != null){
                     clearConsole();
                     System.out.println("Selected Movie: "+selectedMovie.getTitle());
