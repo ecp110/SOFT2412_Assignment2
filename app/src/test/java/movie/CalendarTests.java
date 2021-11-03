@@ -7,39 +7,39 @@ public class CalendarTests {
 
      @Test
      public void isBeforeTest() {
-     Calendar cJan = new Calendar(1, 1, 2021);
-     Calendar cFeb = new Calendar(3, 2, 2021);
-     Calendar cMar = new Calendar(4, 3, 2021);
-     Calendar cJun = new Calendar(3, 6, 2021);
-     Calendar cDec = new Calendar(10, 12, 2021);
-     Calendar cYearAhead = new Calendar(21, 9, 2022);
-     Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cFeb = new Calendar(3, 2, 2021);
+          Calendar cMar = new Calendar(4, 3, 2021);
+          Calendar cJun = new Calendar(3, 6, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearAhead = new Calendar(21, 9, 2022);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // Positive test cases
-     assertTrue(cJan.isBefore(cFeb));
-     assertTrue(cFeb.isBefore(cMar));
-     assertTrue(cMar.isBefore(cDec));
-     assertTrue(cJan.isBefore(cDec));
-     assertTrue(cYearBehind.isBefore(cYearAhead));
-     assertTrue(cYearBehind.isBefore(cJan));
+          // Positive test cases
+          assertTrue(cJan.isBefore(cFeb));
+          assertTrue(cFeb.isBefore(cMar));
+          assertTrue(cMar.isBefore(cDec));
+          assertTrue(cJan.isBefore(cDec));
+          assertTrue(cYearBehind.isBefore(cYearAhead));
+          assertTrue(cYearBehind.isBefore(cJan));
 
-      // Negative test cases
-     assertFalse(cJun.isBefore(cJan));
-     assertFalse(cFeb.isBefore(cJan));
-     assertFalse(cMar.isBefore(cYearBehind));
-     assertFalse(cYearAhead.isBefore(cYearBehind));
+          // Negative test cases
+          assertFalse(cJun.isBefore(cJan));
+          assertFalse(cFeb.isBefore(cJan));
+          assertFalse(cMar.isBefore(cYearBehind));
+          assertFalse(cYearAhead.isBefore(cYearBehind));
      }
 
      @Test
      public void isBeforeNow() {
-     Calendar cJan = new Calendar(1, 1, 2021);
-     Calendar cJun = new Calendar(3, 6, 2021);
-     Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cJun = new Calendar(3, 6, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // These tests will all have to be positive as otherwise in the future these tests will fail due to time passing
-     assertTrue(cJan.isBeforeNow());
-     assertTrue(cJun.isBeforeNow());
-     assertTrue(cYearBehind.isBeforeNow());
+          // These tests will all have to be positive as otherwise in the future these tests will fail due to time passing
+          assertTrue(cJan.isBeforeNow());
+          assertTrue(cJun.isBeforeNow());
+          assertTrue(cYearBehind.isBeforeNow());
      }
 
      @Test
@@ -58,88 +58,88 @@ public class CalendarTests {
 
      @Test
      public void getMonthTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getMonth(), 1);
-      assertEquals(cApr.getMonth(), 4);
-      assertEquals(cDec.getMonth(), 12);
-      assertEquals(cYearBehind.getMonth(), 9);
-   }
+          // No other possible cases than positive
+          assertEquals(cJan.getMonth(), 1);
+          assertEquals(cApr.getMonth(), 4);
+          assertEquals(cDec.getMonth(), 12);
+          assertEquals(cYearBehind.getMonth(), 9);
+     }
 
      @Test
      public void getYearTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearAhead = new Calendar(21, 9, 2022);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearAhead = new Calendar(21, 9, 2022);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getYear(), 2021);
-      assertEquals(cApr.getYear(), 2021);
-      assertEquals(cDec.getYear(), 2021);
-      assertEquals(cYearBehind.getYear(), 2020);
-      assertEquals(cYearAhead.getYear(), 2022);
+          // No other possible cases than positive
+          assertEquals(cJan.getYear(), 2021);
+          assertEquals(cApr.getYear(), 2021);
+          assertEquals(cDec.getYear(), 2021);
+          assertEquals(cYearBehind.getYear(), 2020);
+          assertEquals(cYearAhead.getYear(), 2022);
      }
 
      @Test
      public void getMonthNameTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getMonthName(), "Jan");
-      assertEquals(cApr.getMonthName(), "Apr");
-      assertEquals(cDec.getMonthName(), "Dec");
-      assertEquals(cYearBehind.getMonthName(), "Sep");
+          // No other possible cases than positive
+          assertEquals(cJan.getMonthName(), "Jan");
+          assertEquals(cApr.getMonthName(), "Apr");
+          assertEquals(cDec.getMonthName(), "Dec");
+          assertEquals(cYearBehind.getMonthName(), "Sep");
      }
 
      @Test
      public void getDateTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getDate(), "01012021");
-      assertEquals(cApr.getDate(), "10042021");
-      assertEquals(cDec.getDate(), "10122021");
-      assertEquals(cYearBehind.getDate(), "21092020");
+          // No other possible cases than positive
+          assertEquals(cJan.getDate(), "01012021");
+          assertEquals(cApr.getDate(), "10042021");
+          assertEquals(cDec.getDate(), "10122021");
+          assertEquals(cYearBehind.getDate(), "21092020");
      }
 
      @Test
      public void getStringShortTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
       // No other possible cases than positive
-      assertEquals(cJan.getStringShort(), "01Jan2021");
-      assertEquals(cApr.getStringShort(), "10Apr2021");
-      assertEquals(cDec.getStringShort(), "10Dec2021");
-      assertEquals(cYearBehind.getStringShort(), "21Sep2020");
+          assertEquals(cJan.getStringShort(), "01Jan2021");
+          assertEquals(cApr.getStringShort(), "10Apr2021");
+          assertEquals(cDec.getStringShort(), "10Dec2021");
+          assertEquals(cYearBehind.getStringShort(), "21Sep2020");
      }
      
      @Test
      public void getStringFormattedTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cDec = new Calendar(10, 12, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cDec = new Calendar(10, 12, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-      assertEquals(cJan.getStringFormatted(), "01-Jan-2021");
-      assertEquals(cApr.getStringFormatted(), "10-Apr-2021");
-      assertEquals(cDec.getStringFormatted(), "10-Dec-2021");
-      assertEquals(cYearBehind.getStringFormatted(), "21-Sep-2020");
+          // No other possible cases than positive
+          assertEquals(cJan.getStringFormatted(), "01-Jan-2021");
+          assertEquals(cApr.getStringFormatted(), "10-Apr-2021");
+          assertEquals(cDec.getStringFormatted(), "10-Dec-2021");
+          assertEquals(cYearBehind.getStringFormatted(), "21-Sep-2020");
      }
 
      @Test
