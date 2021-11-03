@@ -92,14 +92,6 @@ public class CinemaTests{
         ArrayList<Movie> movies = new ArrayList<Movie>();
         Cinema test = new Cinema("George Street", chatswoodLoc, movies);
         
-        assertTrue(test.dayToString("Monday") != null);
-        assertTrue(test.dayToString("Tuesday") != null);
-        assertTrue(test.dayToString("Wednesday") != null);
-        assertTrue(test.dayToString("Thursday") != null);
-        assertTrue(test.dayToString("Friday") != null);
-        assertTrue(test.dayToString("Saturday") != null);
-        assertTrue(test.dayToString("Sunday") != null);
-
         assertNull(test.dayToString(""));
         assertNull(test.dayToString(null));
 

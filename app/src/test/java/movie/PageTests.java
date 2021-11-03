@@ -388,6 +388,54 @@ public class PageTests{
         assertNull(gPage.findAllMoviesGivenAllFilters("000", "Bondi", "7").get("1")); // negative
     }
 
+    @Test
+    public void testRemoveMovie(){
+        GuestPage gPage = new GuestPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            guestPagePath
+            );
+
+        Calendar cal = new Calendar(1, 1, 2021);
+        ArrayList<String> cast = new ArrayList<String>();
+        Movie movie1 = new Movie("movie", "yeet420", 69, "PG", cast, "peter", "1234", cal);
+
+        assertFalse(gPage.removeMovie(movie1));
+    }
+
+    @Test
+    public void testStoreViewings(){
+
+        GuestPage gPage = new GuestPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            guestPagePath
+            );
+
+        assertNotNull(gPage.storeViewings());
+    }
+
+    @Test
+    public void testStoreCinemas(){
+
+        GuestPage gPage = new GuestPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            guestPagePath
+            );
+
+        assertNotNull(gPage.storeCinemas());
+    }
+
 
     
 
