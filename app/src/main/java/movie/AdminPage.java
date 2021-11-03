@@ -278,7 +278,7 @@ public class AdminPage extends Page {
         retString += user;
         retString += " cancelled the trasaction because ";
         retString += reason + ".";
-        retString += "/n";
+        retString += "\n";
 
         return retString;
     }
