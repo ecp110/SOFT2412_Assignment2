@@ -4,6 +4,7 @@ import java.io.*;
 import org.json.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -376,6 +377,140 @@ public abstract class Page {
             e.printStackTrace();
         }
         System.out.println("Staff member "+username+" removed.");
+    }
+
+    /** Viewings and stuff */
+
+    public String displayViewing(Viewing viewing){
+        StringBuilder returnString = new StringBuilder();
+
+        returnString.append(viewing.getMovie().getTitle());
+        returnString.append(" at ");
+        returnString.append(viewing.getCinema().getName());
+        returnString.append(" at ");
+        returnString.append(viewing.getTimeOfDayName());
+        returnString.append(" in a ");
+        returnString.append(viewing.getScreenName());
+        returnString.append(" cinema.");
+
+        return returnString.toString();
+    }
+
+    public ArrayList<Viewing> storeViewings() {
+        ArrayList<Viewing> viewings = new ArrayList<Viewing>();
+
+        for(Cinema cinema : storeCinemas()) {
+            viewings.addAll(cinema.getAllDays());
+        }
+
+
+        return viewings;
+    }
+
+    public ArrayList<Cinema> storeCinemas() {
+        File locationsFolder =  new File(CINEMAS_LOCATION);
+
+        //GET ALL CINEMA LOCATION FOLDERS
+        String[] locations = locationsFolder.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+
+        ArrayList<Movie> movies = storeMovies(MOVIE_LOCATION);
+
+        ArrayList<Cinema> cinemas = new ArrayList<Cinema>();
+
+        for(String location : locations) {
+            String cinemaPath = CINEMAS_LOCATION+"/"+location+"/Timetable.csv";
+            
+            Cinema cinema = new Cinema(location,cinemaPath,movies);
+
+            cinemas.add(cinema);
+            /*
+            try {
+                File timetable = new File(cinemaPath+"/Timetable.csv");
+                FileReader fr = new FileReader(timetable);
+                BufferedReader br = new BufferedReader(fr);
+
+                String line;
+                while((line=br.readLine()) != null) {
+                    if (line.equals("start,day,id,screen_num")) {
+                        continue;
+                    }
+                    List<String> lineArgs = Arrays.asList(line.split(","));
+                    System.out.println(lineArgs.get(1));
+                }
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+            */
+
+            //Cinema cinema = new Cinema(location, cinemaPath, )   
+            //System.out.println(cinemaPath); 
+        }
+
+        return cinemas;
+    }
+
+    /* New filter stuff */
+
+    public ArrayList<Viewing> filterViewings(String cinemaName, String movieID, int screenType, int timeOfDay, String day) {
+        ArrayList<Viewing> results = storeViewings();
+
+        if (!cinemaName.equals("")) {
+            ArrayList<Viewing> instResults = new ArrayList<Viewing>();
+            for(Viewing viewing : results) {
+                if (viewing.getCinema().getName().toLowerCase().equals(cinemaName.toLowerCase())) {
+                    instResults.add(viewing);
+                }
+            }
+            results = instResults;
+        }
+
+        if(!movieID.equals("")) {
+            ArrayList<Viewing> instResults = new ArrayList<Viewing>();
+            for(Viewing viewing : results) {
+                if (viewing.getMovie().getID().equals(movieID)) {
+                    instResults.add(viewing);
+                }
+            }
+            results = instResults;
+        }
+
+        if(screenType != -1) {
+            ArrayList<Viewing> instResults = new ArrayList<Viewing>();
+            for(Viewing viewing : results) {
+                if (viewing.getScreenType() == screenType) {
+                    instResults.add(viewing);
+                }
+            }
+            results = instResults;    
+        }
+
+        if(timeOfDay != -1) {
+            ArrayList<Viewing> instResults = new ArrayList<Viewing>();
+            for(Viewing viewing : results) {
+                if (viewing.getTimeOfDay() == timeOfDay) {
+                    instResults.add(viewing);
+                }
+            }
+            results = instResults;    
+        }
+
+        if(!day.equals("")) {
+            ArrayList<Viewing> instResults = new ArrayList<Viewing>();
+            for(Viewing viewing : results) {
+                if (viewing.getDay().toLowerCase().equals(day.toLowerCase())) {
+                    instResults.add(viewing);
+                }
+            }
+            results = instResults;
+        }
+
+
+        return results;
     }
 
 

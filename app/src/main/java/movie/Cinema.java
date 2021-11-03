@@ -23,7 +23,18 @@ public class Cinema {
         this.name = name;
         this.LOCATION_PATH = locationPath;
         this.movies = movies;
+
+        this.monday = new ArrayList<Viewing>();
+        this.tuesday = new ArrayList<Viewing>();
+        this.wednesday = new ArrayList<Viewing>();
+        this.thursday = new ArrayList<Viewing>();
+        this.friday = new ArrayList<Viewing>();
+        this.saturday = new ArrayList<Viewing>();
+        this.sunday = new ArrayList<Viewing>();
+
         parseViewings();
+
+        
     }
 
     public String getName(){
@@ -66,6 +77,20 @@ public class Cinema {
         return this.sunday;
     }
 
+    public ArrayList<Viewing> getAllDays(){
+        ArrayList<Viewing> all = new ArrayList<Viewing>();
+        
+        all.addAll(getMonday());
+        all.addAll(getTuesday());
+        all.addAll(getWednesday());
+        all.addAll(getThursday());
+        all.addAll(getFriday());
+        all.addAll(getSaturday());
+        all.addAll(getSunday());
+        
+        return all;
+    }
+
     private void parseViewings(){
         // Initiates scanner for users file
         try {
@@ -92,33 +117,34 @@ public class Cinema {
                         targetMovie = movie;
                     }
                 }
-                
+
+                Viewing viewingInstance = new Viewing(this, targetMovie, screenType, timeOfDay, day);
                 if (day.equals("Monday")){
-                    this.monday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    monday.add(viewingInstance);
                 }
 
                 else if (day.equals("Tuesday")){
-                    this.tuesday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.tuesday.add(viewingInstance);
                 }
 
                 else if (day.equals("Wednesday")){
-                    this.wednesday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.wednesday.add(viewingInstance);
                 }
 
                 else if (day.equals("Thursday")){
-                    this.thursday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.thursday.add(viewingInstance);
                 }
 
                 else if (day.equals("Friday")){
-                    this.friday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.friday.add(viewingInstance);
                 }
 
                 else if (day.equals("Saturday")){
-                    this.saturday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.saturday.add(viewingInstance);
                 }
 
                 else if (day.equals("Sunday")){
-                    this.sunday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.sunday.add(viewingInstance);
                 }
                 
             }
@@ -204,5 +230,9 @@ public class Cinema {
 
         return retString;
 
+    }
+
+    public String toString(){
+        return this.getName();
     }
 }

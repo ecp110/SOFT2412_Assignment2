@@ -1,1 +1,201 @@
-{"movies":[{"cast":["Russell Crowe","Joaquin Phoenix","Connie Nielsen","Oliver Reed","Derek Jacobi","Djimon Hounsou","Richard Harris","Tommy Flanagan"],"director":"Ridley Scott","name":"Gladiator","runtime":155,"id":"000","synopsis":"Set in Roman times, the story of a once-powerful general forced to become a common gladiator. The emperor's son is enraged when he is passed over as heir in favour of his father's favourite general. He kills his father and arranges the murder of the general's family, and the general is sold into slavery to be trained as a gladiator - but his subsequent popularity in the arena threatens the throne.","classification":"MA15+","release date":"01052000"},{"cast":["Ben Stiller","Chris Rock","David Schwimmer","Jada Pinkett Smith","Sascha Baron Cohen","Cedric the Entertainer","Andy Richter","Tom McGrath","Jessica Chastain","Bryan Cranston","Martin Short","Frances McDormand"],"director":"Eric Darnell","name":"Madagascar 3: Europe's Most Wanted","runtime":93,"id":"634","synopsis":"Animal pals Alex (Ben Stiller), Marty (Chris Rock), Melman (David Schwimmer) and Gloria (Jada Pinkett Smith) are still trying to make it back to New York's Central Park Zoo. They are forced to take a detour to Europe to find the penguins and chimps who broke the bank at a Monte Carlo casino. When French animal-control officer Capitaine Chantel DuBois (Frances McDormand) picks up their scent, Alex and company are forced to hide out in a traveling circus.","classification":"G","release date":"18052012"},{"cast":["Keanu Reeves","Michael Nyqvist","Alfie Allen","Adrianne Palicki","Bridget Moynahan","Dean Winters","Ian McShane","John Leguizamo","Willem Dafoe"],"director":"Chad Stahelski","name":"John Wick","runtime":101,"id":"234","synopsis":"After the sudden death of his beloved wife, John Wick receives one last gift from her, a beagle puppy named Daisy, and a note imploring him not to forget how to love. But John's mourning is interrupted when his 1969 Boss Mustang catches the eye of sadistic thug Iosef Tarasov who breaks into his house and steals it, beating John unconscious and leaving Daisy dead. Unwittingly, they have just reawakened one of the most brutal assassins the underworld has ever seen.","classification":"R","release date":"19092014"},{"cast":["Eddie Redmayne","Felicity Jones","Charlie Cox","Emily Watson","Simon McBurney","David Thewlis","Maxine Peake"],"director":"James Marsh","name":"The Theory of Everthing","runtime":123,"id":"958","synopsis":"In the 1960s, Cambridge University student and future physicist Stephen Hawking (Eddie Redmayne) falls in love with fellow collegian Jane Wilde (Felicity Jones). At 21, Hawking learns that he has motor neuron disease. Despite this -- and with Jane at his side -- he begins an ambitious study of time, of which he has very little left, according to his doctor. He and Jane defy terrible odds and break new ground in the fields of medicine and science, achieving more than either could hope to imagine.","classification":"PG","release date":"07122014"},{"cast":["Georgie Henley","Skandar Keynes","Ben Barnes","Will Poulter","Tilda Swinton"],"director":"Michael Apted","name":"The Chronicles of Narnia: The Voyage of the Dawn Treader","runtime":115,"id":"387","synopsis":"Visiting their annoying cousin, Eustace, Lucy (Georgie Henley) and Edmund Pevensie (Skandar Keynes) come across a painting of a majestic ship called the Dawn Treader. Suddenly, the painting comes to life and draws the youths into Narnia, where they meet their old friend, King Caspian (Ben Barnes). Caspian is on a quest to find the seven lost Lords of Telmar, whose swords will save Narnia from an evil green mist that enslaves men's minds and bodies.","classification":"M","release date":"30112010"},{"cast":["Jay Baruchel","Gerard Butler","Craig Ferguson","America Ferrera","Jonah Hill","Christopher Mintz-Plasse","T. J. Miller","Kristen Wiig","David Tennant"],"director":"Chris Sanders","name":"How to Train your Dragon","runtime":98,"id":"394","synopsis":"Hiccup is a Norse teenager from the island of Berk, where fighting dragons are a way of life. His progressive views and weird sense of humor make him a misfit, despite the fact that his father is chief of the clan. Tossed into dragon-fighting school, he endeavors to prove himself as a true Viking. When he befriends an injured dragon he names Toothless, he has the chance to plot a new course for his people's future.","classification":"G","release date":"21032010"},{"cast":["Mark Hamill","Harrison Ford","Carrie Fisher","Peter Cushing","Alec Guiness","David Prowse"],"director":"George Lucas","name":"Star Wars: A New Hope","runtime":121,"id":"243","synopsis":"The Imperial Forces -- under orders from cruel Darth Vader (David Prowse) -- hold Princess Leia (Carrie Fisher) hostage, in their efforts to quell the rebellion against the Galactic Empire. Luke Skywalker (Mark Hamill) and Han Solo (Harrison Ford), captain of the Millennium Falcon, work together with the companionable droid duo R2-D2 (Kenny Baker) and C-3PO (Anthony Daniels) to rescue the beautiful princess, help the Rebel Alliance, and restore freedom and justice to the Galaxy.","classification":"PG","release date":"25051977"},{"cast":["Robert Downey Jr.","Terrence Howard","Jeff Bridges","Shaun Toub","Gwyneth Paltrow"],"director":"Jon Favreau","name":"Iron Man","runtime":179,"id":"230","synopsis":"A billionaire industrialist and genius inventor, Tony Stark (Robert Downey Jr.), is conducting weapons tests overseas, but terrorists kidnap him to force him to build a devastating weapon. Instead, he builds an armored suit and upends his captors. Returning to America, Stark refines the suit and uses it to combat crime and terrorism.","classification":"M","release date":"14042008"},{"cast":["Leonardo DiCaprio","Jonah Hill","Margot Robbie","Matthew McConaughey","Kyle Chandler","Rob Reiner","Jon Favreau","Jeau Dujardin","Jon Bernthal"],"director":"Martin Scorcese","name":"The Wolf of Wall Street","runtime":179,"id":"999","synopsis":"In 1987, Jordan Belfort (Leonardo DiCaprio) takes an entry-level job at a Wall Street brokerage firm. By the early 1990s, while still in his 20s, Belfort founds his own firm, Stratton Oakmont. Together with his trusted lieutenant (Jonah Hill) and a merry band of brokers, Belfort makes a huge fortune by defrauding wealthy investors out of millions. However, while Belfort and his cronies partake in a hedonistic brew of sex, drugs and thrills, the SEC and the FBI close in on his empire of excess.","classification":"R","release date":"17122013"},{"cast":"TBD","director":"Poopieface","name":"Gang Shit My Brother","runtime":210,"id":"696","synopsis":"A gang dude has a gang fight and hes like bang bang papapah bang bang brr skrrrrt pop popo pop","classification":"R","release date":"TBD"}]}
+{
+    "movies": [
+        {
+            "cast": [
+                "Russell Crowe",
+                "Joaquin Phoenix",
+                "Connie Nielsen",
+                "Oliver Reed",
+                "Derek Jacobi",
+                "Djimon Hounsou",
+                "Richard Harris",
+                "Tommy Flanagan"
+            ],
+            "director": "Ridley Scott",
+            "name": "Gladiator",
+            "runtime": 155,
+            "id": "000",
+            "synopsis": "Set in Roman times, the story of a once-powerful general forced to become a common gladiator. The emperor's son is enraged when he is passed over as heir in favour of his father's favourite general. He kills his father and arranges the murder of the general's family, and the general is sold into slavery to be trained as a gladiator - but his subsequent popularity in the arena threatens the throne.",
+            "classification": "MA15+",
+            "release date": "01052000"
+        },
+        {
+            "cast": [
+                "Daniel Craig",
+                "Léa Seydoux ",
+                "Rami Malek",
+                "Lashana Lynch",
+                "Relph Fiennes",
+                "Ben Whishaw",
+                "Naomie Harris"
+            ],
+            "director": "Cary Joji Fukunaga",
+            "name": "No Time to Die",
+            "runtime": 163,
+            "id": "570",
+            "synopsis": "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
+            "classification": "M",
+            "release date": "11112021"
+        },
+        {
+            "cast": [
+                "Ben Stiller",
+                "Chris Rock",
+                "David Schwimmer",
+                "Jada Pinkett Smith",
+                "Sascha Baron Cohen",
+                "Cedric the Entertainer",
+                "Andy Richter",
+                "Tom McGrath",
+                "Jessica Chastain",
+                "Bryan Cranston",
+                "Martin Short",
+                "Frances McDormand"
+            ],
+            "director": "Eric Darnell",
+            "name": "Madagascar 3: Europe's Most Wanted",
+            "runtime": 93,
+            "id": "634",
+            "synopsis": "Animal pals Alex (Ben Stiller), Marty (Chris Rock), Melman (David Schwimmer) and Gloria (Jada Pinkett Smith) are still trying to make it back to New York's Central Park Zoo. They are forced to take a detour to Europe to find the penguins and chimps who broke the bank at a Monte Carlo casino. When French animal-control officer Capitaine Chantel DuBois (Frances McDormand) picks up their scent, Alex and company are forced to hide out in a traveling circus.",
+            "classification": "G",
+            "release date": "18052012"
+        },
+        {
+            "cast": [
+                "Keanu Reeves",
+                "Michael Nyqvist",
+                "Alfie Allen",
+                "Adrianne Palicki",
+                "Bridget Moynahan",
+                "Dean Winters",
+                "Ian McShane",
+                "John Leguizamo",
+                "Willem Dafoe"
+            ],
+            "director": "Chad Stahelski",
+            "name": "John Wick",
+            "runtime": 101,
+            "id": "234",
+            "synopsis": "After the sudden death of his beloved wife, John Wick receives one last gift from her, a beagle puppy named Daisy, and a note imploring him not to forget how to love. But John's mourning is interrupted when his 1969 Boss Mustang catches the eye of sadistic thug Iosef Tarasov who breaks into his house and steals it, beating John unconscious and leaving Daisy dead. Unwittingly, they have just reawakened one of the most brutal assassins the underworld has ever seen.",
+            "classification": "R",
+            "release date": "19092014"
+        },
+        {
+            "cast": [
+                "Eddie Redmayne",
+                "Felicity Jones",
+                "Charlie Cox",
+                "Emily Watson",
+                "Simon McBurney",
+                "David Thewlis",
+                "Maxine Peake"
+            ],
+            "director": "James Marsh",
+            "name": "The Theory of Everthing",
+            "runtime": 123,
+            "id": "958",
+            "synopsis": "In the 1960s, Cambridge University student and future physicist Stephen Hawking (Eddie Redmayne) falls in love with fellow collegian Jane Wilde (Felicity Jones). At 21, Hawking learns that he has motor neuron disease. Despite this -- and with Jane at his side -- he begins an ambitious study of time, of which he has very little left, according to his doctor. He and Jane defy terrible odds and break new ground in the fields of medicine and science, achieving more than either could hope to imagine.",
+            "classification": "PG",
+            "release date": "07122014"
+        },
+        {
+            "cast": [
+                "Georgie Henley",
+                "Skandar Keynes",
+                "Ben Barnes",
+                "Will Poulter",
+                "Tilda Swinton"
+            ],
+            "director": "Michael Apted",
+            "name": "The Chronicles of Narnia: The Voyage of the Dawn Treader",
+            "runtime": 115,
+            "id": "387",
+            "synopsis": "Visiting their annoying cousin, Eustace, Lucy (Georgie Henley) and Edmund Pevensie (Skandar Keynes) come across a painting of a majestic ship called the Dawn Treader. Suddenly, the painting comes to life and draws the youths into Narnia, where they meet their old friend, King Caspian (Ben Barnes). Caspian is on a quest to find the seven lost Lords of Telmar, whose swords will save Narnia from an evil green mist that enslaves men's minds and bodies.",
+            "classification": "M",
+            "release date": "30112010"
+        },
+        {
+            "cast": [
+                "Jay Baruchel",
+                "Gerard Butler",
+                "Craig Ferguson",
+                "America Ferrera",
+                "Jonah Hill",
+                "Christopher Mintz-Plasse",
+                "T. J. Miller",
+                "Kristen Wiig",
+                "David Tennant"
+            ],
+            "director": "Chris Sanders",
+            "name": "How to Train your Dragon",
+            "runtime": 98,
+            "id": "394",
+            "synopsis": "Hiccup is a Norse teenager from the island of Berk, where fighting dragons are a way of life. His progressive views and weird sense of humor make him a misfit, despite the fact that his father is chief of the clan. Tossed into dragon-fighting school, he endeavors to prove himself as a true Viking. When he befriends an injured dragon he names Toothless, he has the chance to plot a new course for his people's future.",
+            "classification": "G",
+            "release date": "21032010"
+        },
+        {
+            "cast": [
+                "Mark Hamill",
+                "Harrison Ford",
+                "Carrie Fisher",
+                "Peter Cushing",
+                "Alec Guiness",
+                "David Prowse"
+            ],
+            "director": "George Lucas",
+            "name": "Star Wars: A New Hope",
+            "runtime": 121,
+            "id": "243",
+            "synopsis": "The Imperial Forces -- under orders from cruel Darth Vader (David Prowse) -- hold Princess Leia (Carrie Fisher) hostage, in their efforts to quell the rebellion against the Galactic Empire. Luke Skywalker (Mark Hamill) and Han Solo (Harrison Ford), captain of the Millennium Falcon, work together with the companionable droid duo R2-D2 (Kenny Baker) and C-3PO (Anthony Daniels) to rescue the beautiful princess, help the Rebel Alliance, and restore freedom and justice to the Galaxy.",
+            "classification": "PG",
+            "release date": "25051977"
+        },
+        {
+            "cast": [
+                "Robert Downey Jr.",
+                "Terrence Howard",
+                "Jeff Bridges",
+                "Shaun Toub",
+                "Gwyneth Paltrow"
+            ],
+            "director": "Jon Favreau",
+            "name": "Iron Man",
+            "runtime": 179,
+            "id": "230",
+            "synopsis": "A billionaire industrialist and genius inventor, Tony Stark (Robert Downey Jr.), is conducting weapons tests overseas, but terrorists kidnap him to force him to build a devastating weapon. Instead, he builds an armored suit and upends his captors. Returning to America, Stark refines the suit and uses it to combat crime and terrorism.",
+            "classification": "M",
+            "release date": "14042008"
+        },
+        {
+            "cast": [
+                "Leonardo DiCaprio",
+                "Jonah Hill",
+                "Margot Robbie",
+                "Matthew McConaughey",
+                "Kyle Chandler",
+                "Rob Reiner",
+                "Jon Favreau",
+                "Jeau Dujardin",
+                "Jon Bernthal"
+            ],
+            "director": "Martin Scorcese",
+            "name": "The Wolf of Wall Street",
+            "runtime": 179,
+            "id": "999",
+            "synopsis": "In 1987, Jordan Belfort (Leonardo DiCaprio) takes an entry-level job at a Wall Street brokerage firm. By the early 1990s, while still in his 20s, Belfort founds his own firm, Stratton Oakmont. Together with his trusted lieutenant (Jonah Hill) and a merry band of brokers, Belfort makes a huge fortune by defrauding wealthy investors out of millions. However, while Belfort and his cronies partake in a hedonistic brew of sex, drugs and thrills, the SEC and the FBI close in on his empire of excess.",
+            "classification": "R",
+            "release date": "17122013"
+        },
+        {
+            "cast": "TBD",
+            "director": "Poopieface",
+            "name": "Gang Shit My Brother",
+            "runtime": 210,
+            "id": "696",
+            "synopsis": "A gang dude has a gang fight and hes like bang bang papapah bang bang brr skrrrrt pop popo pop",
+            "classification": "R",
+            "release date": "TBD"
+        }
+    ]
+}
