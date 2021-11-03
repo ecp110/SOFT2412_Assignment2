@@ -149,59 +149,59 @@ public class CalendarTests {
           Calendar cApr = new Calendar(10, 4, 2021);
           Calendar cOct = new Calendar(3, 10, 2021);
 
-      // Positive test cases
-      cApr.addTime(3, 1, 0);
-      assertEquals(cApr.getDate(), "13052021");
+          // Positive test cases
+          cApr.addTime(3, 1, 0);
+          assertEquals(cApr.getDate(), "13052021");
 
-      cOct.addTime(5, 1, 9);
-      assertEquals(cOct.getDate(), "08112030");
+          cOct.addTime(5, 1, 9);
+          assertEquals(cOct.getDate(), "08112030");
 
-      // Edge test cases
-      cJan.addTime(0, 0, 0);
-      assertEquals(cJan.getDate(), "01012021");
-      
-      cJan.addTime(140, 0, 0);
-      assertEquals(cJan.getDate(), "21052021");
+          // Edge test cases
+          cJan.addTime(0, 0, 0);
+          assertEquals(cJan.getDate(), "01012021");
+          
+          cJan.addTime(140, 0, 0);
+          assertEquals(cJan.getDate(), "21052021");
 
-      cJan2.addTime(0, 13, 0);
-      assertEquals(cJan2.getDate(), "01022022");
+          cJan2.addTime(0, 13, 0);
+          assertEquals(cJan2.getDate(), "01022022");
      }
 
      @Test
      public void subtractTimeTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cJan2 = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cOct = new Calendar(3, 10, 2021);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cJan2 = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cOct = new Calendar(3, 10, 2021);
 
-      // Positive test cases
-      cApr.subtractTime(3, 1, 0);
-      assertEquals(cApr.getDate(), "07032021");
+          // Positive test cases
+          cApr.subtractTime(3, 1, 0);
+          assertEquals(cApr.getDate(), "07032021");
 
-      cOct.subtractTime(5, 1, 9);
-      assertEquals(cOct.getDate(), "29082012");
+          cOct.subtractTime(5, 1, 9);
+          assertEquals(cOct.getDate(), "29082012");
 
-      // Edge test cases
-      cJan.subtractTime(0, 0, 0);
-      assertEquals(cJan.getDate(), "01012021");
+          // Edge test cases
+          cJan.subtractTime(0, 0, 0);
+          assertEquals(cJan.getDate(), "01012021");
 
-      cJan.subtractTime(0, 13, 0);
-      assertEquals(cJan.getDate(), "01122020");
+          cJan.subtractTime(0, 13, 0);
+          assertEquals(cJan.getDate(), "01122020");
 
-      cJan2.subtractTime(140, 0, 0);
-      assertEquals(cJan2.getDate(), "14082020");
+          cJan2.subtractTime(140, 0, 0);
+          assertEquals(cJan2.getDate(), "14082020");
      }
 
      @Test
      public void stringToCalendarTests() {
 
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cOct = new Calendar(3, 10, 2021);
-      Calendar cYearBehind = new Calendar(21, 9, 2020);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cOct = new Calendar(3, 10, 2021);
+          Calendar cYearBehind = new Calendar(21, 9, 2020);
 
-      // No other possible cases than positive
-         
+          // No other possible cases than positive
+          
           Calendar cJanEquivalent = Calendar.stringToCalendar("01012021");
           assertEquals(cJanEquivalent.getDate(), cJan.getDate());
 
