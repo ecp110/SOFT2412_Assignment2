@@ -268,6 +268,8 @@ public abstract class Page {
     
     }
 
+    //public void book
+
     public String getStaffByUsername(String username){
         //extracts all users from members.Json
         String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
@@ -388,6 +390,22 @@ public abstract class Page {
 
 
         return viewings;
+    }
+
+    public String listLocations() {
+        File locationsFolder =  new File(CINEMAS_LOCATION);
+        String[] locations = locationsFolder.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+        StringBuilder locationString = new StringBuilder();
+        for(String location : locations) {
+            locationString.append(location+"\n");
+        }
+        return locationString.toString();
+        
     }
 
     public ArrayList<Cinema> storeCinemas() {
@@ -547,6 +565,7 @@ public abstract class Page {
         }
 
     }
+
 
 
     /*
