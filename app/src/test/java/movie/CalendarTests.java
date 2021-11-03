@@ -144,10 +144,10 @@ public class CalendarTests {
 
      @Test
      public void addTimeTests() {
-      Calendar cJan = new Calendar(1, 1, 2021);
-      Calendar cJan2 = new Calendar(1, 1, 2021);
-      Calendar cApr = new Calendar(10, 4, 2021);
-      Calendar cOct = new Calendar(3, 10, 2021);
+          Calendar cJan = new Calendar(1, 1, 2021);
+          Calendar cJan2 = new Calendar(1, 1, 2021);
+          Calendar cApr = new Calendar(10, 4, 2021);
+          Calendar cOct = new Calendar(3, 10, 2021);
 
       // Positive test cases
       cApr.addTime(3, 1, 0);
