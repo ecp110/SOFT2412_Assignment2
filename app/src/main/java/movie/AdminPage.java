@@ -97,7 +97,7 @@ public class AdminPage extends Page {
         return retString;
     }
 
-    private String formatLog(String time, String customerName, String cardNum, String numSeats, String movieId, String screenType) {
+    public String formatLog(String time, String customerName, String cardNum, String numSeats, String movieId, String screenType) {
         String retString = "";
         // Format: [ID] (MovName): [Name] booked for [numSeats] in the [time] with card [cardNum] in the [screenType] screen.
 
@@ -311,7 +311,7 @@ public class AdminPage extends Page {
         return retString;
     }
 
-    private String formatCancellation(String datetime, String user, String reason) {
+    public String formatCancellation(String datetime, String user, String reason) {
         if (datetime == null || user == null || reason == null) {
             return "";
         } else if (datetime.equals("") || user.equals("") || reason.equals("")) {

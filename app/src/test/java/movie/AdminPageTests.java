@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.*;
+
 class AdminPageTests {
 
     @Test
@@ -215,5 +217,168 @@ class AdminPageTests {
 
         assertNotNull(retPage.displayInitial());
         assertNotNull(aPage.getUsers());
+    }
+
+    @Test
+    public void testDisplayManageStaffPrompt(){
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "admin"));
+        
+        String assertString = "Greetings,\n\nPlease select an option\n(1) Add staff account\n(2) Remove staff account";
+        assertNotEquals(assertString, aPage.displayManageStaffPrompt());
+
+    }
+
+    @Test
+    public void testAddMovie(){
+
+        ArrayList<String> cast = new ArrayList<String>();
+        Calendar cal = new Calendar(1, 1, 2021);
+        Movie movie1 = new Movie("movie", "yeet420", 69, "PG", cast, "peter", "1234", cal);
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "admin"));
+
+        assertTrue(aPage.addMovie(movie1));
+        aPage.removeMovie(movie1);  
+    }
+
+    @Test
+    public void testFormatCancellation(){
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "admin"));
+        
+        assertEquals(aPage.formatCancellation(null, null, null), "");
+        assertEquals(aPage.formatCancellation("", "", ""), "");
+        assertNotNull(aPage.formatCancellation("1st", "Sameer", "manual"));
+
+
+    }
+
+    @Test
+    public void testFormatLog(){
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "admin"));
+
+        assertNotNull(aPage.formatLog("morning", "Sameer", "0000", "3", "000", "0"));
+        assertNotNull(aPage.formatLog("morning", "Sameer", "0000", "3", "000", "1"));
+        assertNotNull(aPage.formatLog("morning", "Sameer", "0000", "3", "000", "2"));
+    }
+
+    @Test
+    public void testDisplayBookingReceipts(){
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "admin"));
+
+        assertNull(aPage.displayBookingReciepts(""));
+        assertNotNull(aPage.displayBookingReciepts("Bondi"));
+    }
+
+    @Test
+    public void testDisplayCancellations(){
+
+        Path currentPath = Paths.get(System.getProperty("user.dir"));
+        String movieLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Movies.json").toString();
+        String cinemasLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations").toString();
+        String creditCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "credit_cards.json").toString();
+        String giftCardLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        String usersLocationPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "members.json").toString();
+        String adminPagePath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "pages", "admin").toString();
+
+        AdminPage aPage = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "customer"));
+
+        assertEquals(aPage.displayCancellations(), "Sorry, you are not a manager. This functionality is not available to you.");
+
+        AdminPage aPage2 = new AdminPage(
+            movieLocationPath,
+            cinemasLocationPath,
+            creditCardLocationPath,
+            giftCardLocationPath,
+            usersLocationPath,
+            adminPagePath,
+            new User("user", "user", "manager"));
+
+            assertNotNull(aPage2.displayCancellations());
     }
 }
