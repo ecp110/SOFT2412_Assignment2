@@ -9,13 +9,13 @@ public class Cinema {
     private final String LOCATION_PATH;
     private ArrayList<Movie> movies;
 
-    private ArrayList<Viewing> monday;
-    private ArrayList<Viewing> tuesday;
-    private ArrayList<Viewing> wednesday;
-    private ArrayList<Viewing> thursday;
-    private ArrayList<Viewing> friday;
-    private ArrayList<Viewing> saturday;
-    private ArrayList<Viewing> sunday;
+    private ArrayList<Viewing> monday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> tuesday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> wednesday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> thursday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> friday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> saturday = new ArrayList<Viewing>();
+    private ArrayList<Viewing> sunday = new ArrayList<Viewing>();
     
 
 
@@ -94,7 +94,7 @@ public class Cinema {
                 }
                 
                 if (day.equals("Monday")){
-                    this.monday.add(new Viewing(targetMovie, screenType, timeOfDay, day));
+                    this.monday.add(new Viewing(targetMovie, screenType, timeOfDay, day)); // null pointer
                 }
 
                 else if (day.equals("Tuesday")){

@@ -23,18 +23,18 @@ public class CinemaTests{
     @Test
     public void testGetLocationPath(){
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "timetable.csv").toString();
+        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "Timetable.csv").toString();
 
         ArrayList<Movie> movies = new ArrayList<Movie>();
         Cinema test = new Cinema("George Street", chatswoodLoc, movies);
 
-        assertEquals(test.getLocationPath(), currentPath);
+        assertEquals(test.getLocationPath(), chatswoodLoc);
     }
 
     @Test
     public void testGetMovies(){
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "timetable.csv").toString();
+        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "Timetable.csv").toString();
         
         ArrayList<Movie> movies = new ArrayList<Movie>();
         Cinema test = new Cinema("George Street", chatswoodLoc, movies);
@@ -45,9 +45,14 @@ public class CinemaTests{
     @Test
     public void testParseViewings(){
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "timetable.csv").toString();
+        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "Timetable.csv").toString();
+        Calendar cal = new Calendar(1, 1, 2021);
+        ArrayList<String> cast = new ArrayList<String>();
+        Movie movie1 = new Movie("movie", "yeet420", 69, "PG", cast, "peter", "1234", cal);
 
         ArrayList<Movie> movies = new ArrayList<Movie>();
+        movies.add(movie1);
+
         Cinema test = new Cinema("George Street", chatswoodLoc, movies);
         
         for (Viewing v : test.getMonday()) {
@@ -82,7 +87,7 @@ public class CinemaTests{
     @Test
     public void dayToStringTest() {
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "timetable.csv").toString();
+        String chatswoodLoc = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", "Chatswood", "Timetable.csv").toString();
 
         ArrayList<Movie> movies = new ArrayList<Movie>();
         Cinema test = new Cinema("George Street", chatswoodLoc, movies);

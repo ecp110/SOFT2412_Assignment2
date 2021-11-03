@@ -67,7 +67,7 @@ class MovieTests {
         Calendar cal = new Calendar(1, 1, 2021);
         Movie movie1 = new Movie("movie", "69", 69, "PG", cast, "peter", "1234", cal);
 
-        String returned = "Name: " + movie1.getTitle() + "Run time: " + movie1.getRunTime() + "Rating: " + movie1.getClassification();
+        String returned = "(" + movie1.getID() + ") > " + movie1.getTitle() + " (" + movie1.getDirector() + "). Run time: " + movie1.getRunTime() + ". Rating: " + movie1.getClassification();
 
         assertEquals(movie1.toString(), returned);
 
