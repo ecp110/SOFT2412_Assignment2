@@ -31,7 +31,7 @@ public class GiftCard  {
     }
 
     public boolean isExpired() {
-        return this.expiry.isBeforeNow();
+        return !this.expiry.isBeforeNow();
     }
 
 }

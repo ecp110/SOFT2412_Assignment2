@@ -412,6 +412,46 @@ public abstract class Page {
         System.out.println("Staff member " + username + " removed.");
     }
 
+    public void useGiftCard(String giftCardNumber){
+        //extracts all users from members.Json
+        int i = 0;
+        for (GiftCard card : giftCards) {
+            if(card.getNumber().equals(giftCardNumber)){
+                GiftCard instCard = new GiftCard(
+                    card.getNumber(),
+                    true,
+                    card.getExpiry(),
+                    card.getIssue()
+                );
+                giftCards.set(i,instCard);
+            }
+            i++; 
+        }
+
+        String usersJsonPath = Paths.get(currentPath.toString(), "src", "main", "java", "movie", "Databases", "gift_cards.json").toString();
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObjectInput = new JSONObject();
+        JSONArray giftCardsArray = new JSONArray();
+        JSONObject giftCardsJson = new JSONObject();
+
+        for(GiftCard card : giftCards) {
+            JSONObject giftCardEntry = new JSONObject();
+            giftCardEntry.put("number",card.getNumber());
+            giftCardEntry.put("redeemed",(card.isRedeemed() ? 1 : 0));
+            giftCardEntry.put("issue",card.getIssue().getDate());
+            giftCardEntry.put("expiry",card.getExpiry().getDate());
+
+            giftCardsArray.add(giftCardEntry);
+        }
+        giftCardsJson.put("giftcards",giftCardsArray);
+
+        try (FileWriter file = new FileWriter(GIFT_CARD_LOCATION)) {
+            file.write(giftCardsJson.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /** Viewings and stuff */
 
 
@@ -440,6 +480,27 @@ public abstract class Page {
         }
         return locationString.toString();
         
+    }
+
+    public void book(Viewing session, int tickets, User user, String cardNum){
+        int time = session.getTimeOfDay();
+        String customer = user.getName();
+        String movieID = session.getMovie().getID();
+        int screen = session.getScreenType();
+
+        String location = session.getCinema().getName();
+        String bookingLogPath = CINEMAS_LOCATION+"/"+location+"/"+"bookingLog.csv";
+
+
+        String entry = "\n"+time+","+customer+","+cardNum+","+tickets+","+movieID+","+screen;
+        try {
+            FileWriter fw = new FileWriter(bookingLogPath, true);
+            fw.append(entry);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {}
+
+
     }
 
     public ArrayList<Cinema> storeCinemas() {
@@ -688,6 +749,34 @@ public abstract class Page {
             }
 
         return films;
+    }
+
+    public boolean verifyCreditCard(String creditCardNumber,String cardHolder) {
+
+
+        for(CreditCard card : creditCards) {
+            if (
+                (card.getName().toLowerCase().equals(cardHolder.toLowerCase())) &&
+                (card.getNumber().equals(creditCardNumber))
+                ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verifyGiftCard(String giftCardNumber) {
+        for (GiftCard card : giftCards) {
+
+            if (
+                (card.getNumber().equals(giftCardNumber)) &&
+                (!card.isRedeemed())
+                ) {
+                System.out.println("Match!");
+                return true;
+            }
+        }
+        return false;
     }
 
     //finds movieID given movie title

@@ -7,7 +7,10 @@ public class GuestPage extends Page {
     }
 
     public String displayInitial() {
-        return this.parseTxt("/main.txt", 0) + "\n" + this.displayMovies();
+        return this.parseTxt("/main.txt", 0) + "\n" +
+        "\n------------------------------------------------------------------------" + "\n" +
+        this.displayMovies()+
+        "------------------------------------------------------------------------" + "\n";
     }
 
     /**

@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.Console;
+import java.util.Random;
 
 public class Engine {
 
@@ -24,7 +25,6 @@ public class Engine {
     private boolean reboot = false;
     private boolean running = true;
 
-    private IdleTimer idler = new IdleTimer();
     private User currentUser = null;
 
     public static void main(String[] args) {
@@ -36,12 +36,12 @@ public class Engine {
             e.mainLoop();
 
             if (!e.running) {
-                e.idler.stopTimer();
+
                 return;
             }
 
             if (e.reboot) {
-                e.idler.stopTimer();
+
                 e = null;
                 e = new Engine();
                 e.reboot = false;
@@ -54,6 +54,11 @@ public class Engine {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
+    public static void printLineBreak(){
+        System.out.print("------------------------------------------------------------------------" + "\n");
+    }
+    
 
     public static void logCancellation(User user, String reason, String cancellationPath) {
         String userName;
@@ -84,7 +89,9 @@ public class Engine {
         HomePage home = new HomePage(movieLocationPath, cinemasLocationPath, creditCardLocationPath, giftCardLocationPath, usersLocationPath, homePagePath);
 
         // DISPLAY INITIAL HOME PAGE
+        clearConsole();
         System.out.println(home.displayInitial());
+
         
         // INITIALISE USER, SCANNER FOR USER INPUT AND INITIAL RESPONSE
         Scanner scan = new Scanner(System.in);
@@ -131,13 +138,17 @@ public class Engine {
      * LOGIN CAPABILITY
      */
     public User login(HomePage home, Scanner scan) {
-
-        System.out.println(home.displayLogIn());
+        clearConsole();
+        printLineBreak();
+        System.out.println("\n"+home.displayLogIn());
+        printLineBreak();
         String username = scan.nextLine();
 
         // masking password
-        System.out.println(home.displayLogIn());
-
+        clearConsole();
+        printLineBreak();
+        System.out.println("\n"+home.displayLogIn());
+        printLineBreak();
 
         String password = PasswordField.readPassword();
         
@@ -164,7 +175,7 @@ public class Engine {
 
         while (!exit) {
             // DISPLAY INITIAL HOME PAGE
-            System.out.println(guest.lineBreak());
+
             
             response = scan.nextLine();
 
@@ -179,7 +190,8 @@ public class Engine {
                 boolean correctMovie = false;
                 String movieID = "";
                 while(!correctMovie) {
-                    System.out.println("Please enter move ID you wish to filter by (enter \"n\" for no preference): ");
+                    System.out.println("Please enter the movie ID you wish to filter by (enter \'n\' for no preference): ");
+                    System.out.println(guest.lineBreak());
                     movieID = scan.next();
                     clearConsole();
                     selectedMovie = guest.getMovieById(movieID);
@@ -195,9 +207,11 @@ public class Engine {
                     }
                 }
 
+                
+                System.out.println("Please enter one of the following locations (enter anything else for no preference): ");
                 System.out.println(guest.lineBreak());
-                System.out.println("Please enter one of the following locations (enter \"n\" for no preference): ");
-                System.out.println(guest.listLocations());
+                System.out.print(guest.listLocations());
+                System.out.println(guest.lineBreak());
                 String location = scan.next();
                 if(!( 
                     (location.toLowerCase().equals("bondi"))||
@@ -209,9 +223,11 @@ public class Engine {
                 }
                 clearConsole();
 
+                
+                System.out.println("Please enter the the number corresponding to your preferred screen size (enter anything else for no preference): ");
                 System.out.println(guest.lineBreak());
-                System.out.println("Please enter the the number corresponding to your preferred screen size (enter -1 for no preference): ");
                 System.out.println("(0) Bronze\n(1) Silver\n(2) Gold");
+                System.out.println(guest.lineBreak());
                 int screenSize = -1;
                 try {
                     screenSize = scan.nextInt();
@@ -227,7 +243,12 @@ public class Engine {
                 for (Viewing result : results) {
                     System.out.println(result);
                 }
+                if(results.size()== 0) {
+                    System.out.println("No matching sessions found! Type \'f\' to search again.");
+                }
                 System.out.println(guest.lineBreak());
+                System.out.println("As a guest, you cannot book a ticket, and must first register an account.\nType \'r\' to register!");
+                response = scan.nextLine();
             }
             else if (response.toLowerCase().equals("h")) {
                 clearConsole();
@@ -276,7 +297,6 @@ public class Engine {
             else if(response.toLowerCase().equals("b")) {
                
                 if (selectedMovie != null) {
-                    //register() and book()
                     System.out.println(
                         "To book tickets to "+selectedMovie.getTitle()+", you must have an account."+
                         "\n if you would like to proceed and register, type \"r\"." +
@@ -313,7 +333,9 @@ public class Engine {
                 if (selectedMovie != null){
                     clearConsole();
                     System.out.println("Selected Movie: "+selectedMovie.getTitle()+"\n");
+                    printLineBreak();
                     System.out.println(selectedMovie.getSynopsis());
+                    printLineBreak();
                     System.out.println(
                         "To view another movie, type in its ID.\n"+
                         "To return to the home page, type \"h\".");
@@ -349,8 +371,15 @@ public class Engine {
                 boolean correctMovie = false;
                 String movieID = "";
                 while(!correctMovie) {
-                    System.out.println("Please enter move ID you wish to filter by (enter \"n\" for no preference): ");
+                    System.out.println("Please enter the movie ID you wish to filter by (enter \"n\" for no preference): ");
+                    customer.lineBreak();
                     movieID = scan.next();
+                    if(movieID.equals("c")){
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    }
                     clearConsole();
                     selectedMovie = customer.getMovieById(movieID);
                     if((selectedMovie != null) || (movieID.equals("n"))) {
@@ -365,10 +394,18 @@ public class Engine {
                     }
                 }
 
+                
+                System.out.println("Please enter one of the following locations (enter anything else for no preference): ");
                 System.out.println(customer.lineBreak());
-                System.out.println("Please enter one of the following locations (enter \"n\" for no preference): ");
-                System.out.println(customer.listLocations());
+                System.out.print(customer.listLocations());
+                System.out.println(customer.lineBreak());
                 String location = scan.next();
+                if(location.equals("c")){
+                    System.out.println("Cancelling, goodbye!");
+                    Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                    this.reboot = true;
+                    return;
+                }
                 if(!( 
                     (location.toLowerCase().equals("bondi"))||
                     (location.toLowerCase().equals("chatswood"))||
@@ -379,12 +416,15 @@ public class Engine {
                 }
                 clearConsole();
 
+                
+                System.out.println("Please enter the the number corresponding to your preferred screen size (enter anything else for no preference): ");
                 System.out.println(customer.lineBreak());
-                System.out.println("Please enter the the number corresponding to your preferred screen size (enter -1 for no preference): ");
                 System.out.println("(0) Bronze\n(1) Silver\n(2) Gold");
+                System.out.println(customer.lineBreak());
                 int screenSize = -1;
                 try {
                     screenSize = scan.nextInt();
+
                     assert ( (screenSize == 0) || (screenSize == 1) || (screenSize == 2) );
                 } catch (Exception e) {
                     screenSize = -1;
@@ -399,6 +439,9 @@ public class Engine {
                     System.out.println("("+index+") "+result);
                     index++;
                 }
+                if(results.size() == 0) {
+                    System.out.println("No matching sessions found! Type \'f\' to search again.");
+                }
                 System.out.println(customer.lineBreak());
                 System.out.println("To book one of these sessions, enter its corresponding number.");
                 boolean correctNumber = false;
@@ -406,6 +449,12 @@ public class Engine {
                 Scanner bookingScanner = new Scanner(System.in);
                 while(!correctNumber){
                     number = bookingScanner.nextLine();
+                    if(number.equals("c")){
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    }
                     try {
                         int numberInt = Integer.valueOf(number);
                         if ((numberInt <= 0) || (numberInt >= index)) {
@@ -425,12 +474,20 @@ public class Engine {
                 Viewing selectedSession = results.get(Integer.valueOf(number)-1);
                 System.out.println(selectedSession);
                 System.out.println(customer.lineBreak());
+
                 System.out.println("How many tickets do you require? ");
                 correctNumber = false;
                 int numberInt = 0;
                 while(!correctNumber){
                     
                     number = bookingScanner.nextLine();
+                    if(number.equals("c")){
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    }
+
                     try {
                         numberInt = Integer.valueOf(number);
                         if ((numberInt <= 0) || (numberInt > 10)){
@@ -454,6 +511,12 @@ public class Engine {
                 int adultTicketsInt = 0;
                 while(!correctNumber){
                     String adultTickets = bookingScanner.nextLine();
+                    if(adultTickets.equals("c")){
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    }
                     
                     try {
                         adultTicketsInt = Integer.valueOf(adultTickets);
@@ -471,12 +534,19 @@ public class Engine {
                     selectedTickets += adultTicketsInt;
                 }
                 int childTicketsInt = 0;
-                System.out.println(customer.lineBreak());
-                System.out.println("How many child tickets do you require?");
+                
                 if(totalTickets > selectedTickets) {
+                    System.out.println(customer.lineBreak());
+                    System.out.println("How many child tickets do you require?");
                     correctNumber = false;
                     while(!correctNumber){
                         String childTickets = bookingScanner.nextLine();
+                        if(childTickets.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
                         
                         try {
                             childTicketsInt = Integer.valueOf(childTickets);
@@ -495,12 +565,19 @@ public class Engine {
                     }  
                 }
                 int studentTicketsInt = 0;
-                System.out.println(customer.lineBreak());
-                System.out.println("How many student tickets do you require?");
+                
                 if(totalTickets > selectedTickets) {
+                    System.out.println(customer.lineBreak());
+                    System.out.println("How many student tickets do you require?");
                     correctNumber = false;
                     while(!correctNumber){
                         String studentTickets = bookingScanner.nextLine();
+                        if(studentTickets.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
                         
                         try {
                             studentTicketsInt = Integer.valueOf(studentTickets);
@@ -519,16 +596,23 @@ public class Engine {
                     }  
                 }
                 int pensionerTicketsInt = 0;
-                System.out.println(customer.lineBreak());
-                System.out.println("How many pensioner tickets do you require?");
+                
                 if(totalTickets > selectedTickets) {
+                    System.out.println(customer.lineBreak());
+                    System.out.println("How many pensioner tickets do you require?");
                     correctNumber = false;
                     while(!correctNumber){
                         String pensionerTickets = bookingScanner.nextLine();
+                        if(pensionerTickets.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
                         
                         try {
                             pensionerTicketsInt = Integer.valueOf(pensionerTickets);
-                            if ((pensionerTicketsInt < 0) || (pensionerTicketsInt > (totalTickets-selectedTickets))){
+                            if (pensionerTicketsInt != (totalTickets-selectedTickets)){
                                 throw new IllegalArgumentException("Invalid number of tickets");
                             }
                         } catch (IllegalArgumentException it) {
@@ -549,6 +633,12 @@ public class Engine {
                 boolean correctSelection = false;
                 while (!correctSelection){
                     seatingPosition = bookingScanner.nextLine().toLowerCase();
+                    if(seatingPosition.equals("c")){
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        this.reboot = true;
+                        return;
+                    }
                     if (
                         (seatingPosition.equals("front")) ||
                         (seatingPosition.equals("middle")) ||
@@ -566,7 +656,9 @@ public class Engine {
                 double studentTicketsAmount = customer.getBookingPrice("student",selectedSession.getScreenName(),studentTicketsInt);
                 double pensionerTicketsAmount = customer.getBookingPrice("pensioner",selectedSession.getScreenName(),pensionerTicketsInt);
                 double totalAmount = adultTicketsAmount+childTicketsAmount+studentTicketsAmount+pensionerTicketsAmount;
-
+                
+                clearConsole();
+                System.out.println(customer.lineBreak());
                 System.out.println(
                     "Booking Summary: \n\n"+
                     selectedSession+"\n\n"+
@@ -578,9 +670,116 @@ public class Engine {
                     customer.lineBreak()+"\n"+
                     "Total: "+customer.formatCurrencyString(totalAmount)
                     );
-                
-                
+                System.out.println(customer.lineBreak());
+                System.out.println(
+                    "\nHow would you like to pay?\n"+
+                    "Enter \'e\' to pay by EFT\n"+
+                    "Enter \'g\' to pay by gift card\n"+
+                    "Enter \'c\' to cancel this transaction and return to the main page.\n"+
+                    customer.lineBreak()
+                    );
+                boolean correctInput = false;
+                String input = "";
+                boolean paymentSuccessful = false;
+                String referenceCardNumber = "";
+                while (!correctInput){
+                    input = bookingScanner.nextLine().toLowerCase();
+                    if ( (input.equals("c")) || (input.equals("e")) || (input.equals("g"))) {
+                        correctInput = true;
+                    } else {
+                        System.out.println("Invalid input.");
+                        continue;
+                    }
+                }
+                if(input.equals("c")){
+                    System.out.println("Cancelling, goodbye!");
+                    Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                    this.reboot = true;
+                    return;
 
+                } else if (input.equals("e")) {
+                    correctInput = false;
+                    String cardHolderName = "";
+                    String creditCardNumber = "";
+                    clearConsole();
+                    System.out.println(customer.lineBreak());
+                    System.out.println("SECURE CHECKOUT");
+                    System.out.println(customer.lineBreak());
+                    while(!correctInput){
+                        System.out.println("Please enter the name on your credit card: ");
+                        cardHolderName = bookingScanner.nextLine();
+                        if(cardHolderName.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
+
+                        System.out.println("Please your credit card number:");
+                        //creditCardNumber = bookingScanner.nextLine();
+                        creditCardNumber = PasswordField.readPassword();
+                        if(creditCardNumber.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
+                        if (customer.verifyCreditCard(creditCardNumber,cardHolderName)) {
+                            correctInput = true;
+                        } else {
+                            System.out.println("Invalid card details. Please try again.");
+                            System.out.println(customer.lineBreak());
+                            continue;
+                        }
+                    }
+                    System.out.println("Charging "+customer.formatCurrencyString(totalAmount)+" to your credit card.");
+                    paymentSuccessful = true;
+                    referenceCardNumber = creditCardNumber;
+                } else if (input.equals("g")) {
+                    correctInput = false;
+                    String giftCardNumber = "";
+                    clearConsole();
+                    System.out.println(customer.lineBreak());
+                    System.out.println("SECURE CHECKOUT");
+                    System.out.println(customer.lineBreak());
+                    while(!correctInput){
+
+                        System.out.println("Please enter your gift card number: ");
+                        giftCardNumber = bookingScanner.nextLine();
+                        if(seatingPosition.equals("c")){
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            this.reboot = true;
+                            return;
+                        }
+                        if (customer.verifyGiftCard(giftCardNumber)) {
+                            correctInput = true;
+                        } else {
+                            System.out.println("Gift card number is incorrect, or gift card has been used already.\nPlease try again.");
+                            System.out.println(customer.lineBreak());
+                            continue;
+                        }
+                    }
+                    customer.useGiftCard(giftCardNumber);
+                    System.out.println("Your gift card has now been used.");
+                    paymentSuccessful = true;
+                    referenceCardNumber = giftCardNumber;
+                }
+                if(paymentSuccessful){
+                    customer.book(selectedSession,totalTickets,currentUser,referenceCardNumber);
+                }
+                clearConsole();
+                System.out.println(customer.lineBreak());
+                System.out.println("Thank you for your booking!");
+                System.out.println(customer.lineBreak());
+                Random rnd = new Random();
+                int receiptNum = 100000000 + rnd.nextInt(900000000);
+                System.out.println("Receipt Number: "+receiptNum);
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ie) {}
+                this.reboot = true;
+                return;
 
                 
                 
@@ -589,22 +788,6 @@ public class Engine {
                 clearConsole();
                 System.out.println(customer.lineBreak());
                 System.out.println(customer.displayInitial());
-            }
-            // BOOKING - TBD
-            else if(response.toLowerCase().equals("b")) {
-                //movie booking shit here
-                if (selectedMovie != null) {
-                    //book()
-                    System.out.println("Booking "+selectedMovie.getTitle());
-                    ArrayList<Viewing> results = customer.filterViewings("",selectedMovie.getID(),-1,-1,"");
-                    for (Viewing result : results) {
-                        System.out.println(result);
-                    }
-                    exit = true;
-                } else {
-                    System.out.println("No movie selected, please select a movie and try again!");
-                }
-                
             }
             // CANCELLATION
             else if (response.toLowerCase().equals("c")) {
@@ -618,9 +801,11 @@ public class Engine {
                     selectedMovie = customer.getMovieById(response);
                 if (selectedMovie != null){
                     clearConsole();
+                    
                     System.out.println("Selected Movie: "+selectedMovie.getTitle());
-                    System.out.println("");
+                    printLineBreak();
                     System.out.println(selectedMovie.getSynopsis());
+                    printLineBreak();
                     System.out.println(
                         "To view another movie, type in its ID.\n"+
                         "To return to the home page, type \"h\".");
@@ -693,6 +878,7 @@ public class Engine {
 
                     System.out.println("What's the name of the movie you'd like to add:");
                     title = scan.nextLine();
+                    
 
                     System.out.println("ID:");
                     id = scan.nextLine();
@@ -1660,7 +1846,6 @@ class IdleTimer {
     public Timer timer;
     public IdleTimer () {
         this.timer = new java.util.Timer();
-        timer.cancel();
     }
 
     public void startTimer(){
@@ -1668,7 +1853,7 @@ class IdleTimer {
             new java.util.TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("You have been logged in for 5 seconds");
+
                     timer.cancel();
                 }
             }, 
