@@ -349,6 +349,10 @@ public class AdminPage extends Page {
     public String displayScreenChecks() {
         return this.parseTxt("/screenChecks.txt", 0);
     }
+
+    public String displayTimetablingMenu() {
+        return this.parseTxt("/timetablingMenu.txt", 0);
+    }
     
     public HomePage cancel() {
         Engine.logCancellation(this.user, "user cancellation", this.cancellationPath);
@@ -356,7 +360,7 @@ public class AdminPage extends Page {
         return new HomePage(
             this.MOVIE_LOCATION, this.CINEMAS_LOCATION, this.CREDIT_CARD_LOCATION,
             this.GIFT_CARD_LOCATION, this.USERS_LOCATION, this.PAGE_PATH
-            );
+        );
     }
 
 }
