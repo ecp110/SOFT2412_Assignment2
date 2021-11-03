@@ -848,7 +848,7 @@ public class Engine {
                 System.out.println(admin.displayBookingLogPrompt());
                 response = scan.nextLine();
                 if (response.equals("1")) {
-                    System.out.println(admin.displayBookingReciepts("George Street"));
+                    System.out.println(admin.displayBookingReciepts("GeorgeStreet"));
                 } else if (response.equals("2")) {
                     System.out.println(admin.displayBookingReciepts("Chatswood"));
                 } else if (response.equals("3")) {
