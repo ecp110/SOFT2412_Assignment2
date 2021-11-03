@@ -315,7 +315,6 @@ public class Engine {
                     System.out.println("Selected Movie: "+selectedMovie.getTitle()+"\n");
                     System.out.println(selectedMovie.getSynopsis());
                     System.out.println(
-                        "\nIf you would like to book this movie, type \"b\".\n"+
                         "To view another movie, type in its ID.\n"+
                         "To return to the home page, type \"h\".");
                 } else {
@@ -341,7 +340,9 @@ public class Engine {
         System.out.println(customer.displayInitial());
         
         while (!exit) {
+            
             response = scan.nextLine();
+            
             
             // FILTERING
             if (response.toLowerCase().equals("f")) {
@@ -393,10 +394,196 @@ public class Engine {
 
 
                 System.out.println(customer.lineBreak());
+                int index = 1;
                 for (Viewing result : results) {
-                    System.out.println(result);
+                    System.out.println("("+index+") "+result);
+                    index++;
                 }
                 System.out.println(customer.lineBreak());
+                System.out.println("To book one of these sessions, enter its corresponding number.");
+                boolean correctNumber = false;
+                String number = "";
+                Scanner bookingScanner = new Scanner(System.in);
+                while(!correctNumber){
+                    number = bookingScanner.nextLine();
+                    try {
+                        int numberInt = Integer.valueOf(number);
+                        if ((numberInt <= 0) || (numberInt >= index)) {
+                            System.out.println("Invalid number");
+                            continue;
+                        } else {
+                            correctNumber = true;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid number");
+                        continue;
+                    }
+
+                    
+                }
+                System.out.println("Selected session: ");
+                Viewing selectedSession = results.get(Integer.valueOf(number)-1);
+                System.out.println(selectedSession);
+                System.out.println(customer.lineBreak());
+                System.out.println("How many tickets do you require? ");
+                correctNumber = false;
+                int numberInt = 0;
+                while(!correctNumber){
+                    
+                    number = bookingScanner.nextLine();
+                    try {
+                        numberInt = Integer.valueOf(number);
+                        if ((numberInt <= 0) || (numberInt > 10)){
+                            throw new IllegalArgumentException("Invalid number of tickets");
+                        }
+                    } catch (IllegalArgumentException it) {
+                        System.out.println("Please select an amount of tickets between 1 and 10.");
+                        continue;
+                    } catch (Exception e) {
+                        System.out.println("Invalid input.");
+                        continue;
+                    }
+                    correctNumber = true;
+                }
+                correctNumber = false;
+                int totalTickets = numberInt;
+                System.out.println("You have selected "+ totalTickets + " tickets.");
+                System.out.println(customer.lineBreak());
+                System.out.println("How many adult tickets do you require?");
+                int selectedTickets = 0;
+                int adultTicketsInt = 0;
+                while(!correctNumber){
+                    String adultTickets = bookingScanner.nextLine();
+                    
+                    try {
+                        adultTicketsInt = Integer.valueOf(adultTickets);
+                        if ((adultTicketsInt < 0) || (adultTicketsInt > (totalTickets-selectedTickets))){
+                            throw new IllegalArgumentException("Invalid number of tickets");
+                        }
+                    } catch (IllegalArgumentException it) {
+                        System.out.println("Please select an amount of tickets between 0 and "+(totalTickets-selectedTickets));
+                        continue;
+                    } catch (Exception e) {
+                        System.out.println("Invalid input.");
+                        continue;
+                    }
+                    correctNumber = true;
+                    selectedTickets += adultTicketsInt;
+                }
+                int childTicketsInt = 0;
+                System.out.println(customer.lineBreak());
+                System.out.println("How many child tickets do you require?");
+                if(totalTickets > selectedTickets) {
+                    correctNumber = false;
+                    while(!correctNumber){
+                        String childTickets = bookingScanner.nextLine();
+                        
+                        try {
+                            childTicketsInt = Integer.valueOf(childTickets);
+                            if ((childTicketsInt < 0) || (childTicketsInt > (totalTickets-selectedTickets))){
+                                throw new IllegalArgumentException("Invalid number of tickets");
+                            }
+                        } catch (IllegalArgumentException it) {
+                            System.out.println("Please select an amount of tickets between 0 and "+(totalTickets-selectedTickets));
+                            continue;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input.");
+                            continue;
+                        }
+                        correctNumber = true;
+                        selectedTickets += childTicketsInt;
+                    }  
+                }
+                int studentTicketsInt = 0;
+                System.out.println(customer.lineBreak());
+                System.out.println("How many student tickets do you require?");
+                if(totalTickets > selectedTickets) {
+                    correctNumber = false;
+                    while(!correctNumber){
+                        String studentTickets = bookingScanner.nextLine();
+                        
+                        try {
+                            studentTicketsInt = Integer.valueOf(studentTickets);
+                            if ((studentTicketsInt < 0) || (studentTicketsInt > (totalTickets-selectedTickets))){
+                                throw new IllegalArgumentException("Invalid number of tickets");
+                            }
+                        } catch (IllegalArgumentException it) {
+                            System.out.println("Please select an amount of tickets between 0 and "+(totalTickets-selectedTickets));
+                            continue;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input.");
+                            continue;
+                        }
+                        correctNumber = true;
+                        selectedTickets += studentTicketsInt;
+                    }  
+                }
+                int pensionerTicketsInt = 0;
+                System.out.println(customer.lineBreak());
+                System.out.println("How many pensioner tickets do you require?");
+                if(totalTickets > selectedTickets) {
+                    correctNumber = false;
+                    while(!correctNumber){
+                        String pensionerTickets = bookingScanner.nextLine();
+                        
+                        try {
+                            pensionerTicketsInt = Integer.valueOf(pensionerTickets);
+                            if ((pensionerTicketsInt < 0) || (pensionerTicketsInt > (totalTickets-selectedTickets))){
+                                throw new IllegalArgumentException("Invalid number of tickets");
+                            }
+                        } catch (IllegalArgumentException it) {
+                            System.out.println("Please select an amount of tickets between "+(totalTickets-selectedTickets)+" and "+(totalTickets-selectedTickets));
+                            continue;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input.");
+                            continue;
+                        }
+                        correctNumber = true;
+                        selectedTickets += pensionerTicketsInt;
+                    }  
+                }
+
+                String seatingPosition = "";
+                System.out.println(customer.lineBreak());
+                System.out.println("Would you like to sit in the front, middle, or back?");
+                boolean correctSelection = false;
+                while (!correctSelection){
+                    seatingPosition = bookingScanner.nextLine().toLowerCase();
+                    if (
+                        (seatingPosition.equals("front")) ||
+                        (seatingPosition.equals("middle")) ||
+                        (seatingPosition.equals("back"))
+                    ) {
+                        correctSelection = true;
+                    } else {
+                        System.out.println("Please enter either \'front\', \'middle\', or \'back\'");
+                        continue;
+                    }
+                }
+
+                double adultTicketsAmount = customer.getBookingPrice("adult",selectedSession.getScreenName(),adultTicketsInt);
+                double childTicketsAmount = customer.getBookingPrice("child",selectedSession.getScreenName(),childTicketsInt);
+                double studentTicketsAmount = customer.getBookingPrice("student",selectedSession.getScreenName(),studentTicketsInt);
+                double pensionerTicketsAmount = customer.getBookingPrice("pensioner",selectedSession.getScreenName(),pensionerTicketsInt);
+                double totalAmount = adultTicketsAmount+childTicketsAmount+studentTicketsAmount+pensionerTicketsAmount;
+
+                System.out.println(
+                    "Booking Summary: \n\n"+
+                    selectedSession+"\n\n"+
+                    "Adult Tickets: "+adultTicketsInt+" ("+customer.formatCurrencyString(adultTicketsAmount)+")\n"+
+                    "Child Tickets: "+childTicketsInt+" ("+customer.formatCurrencyString(childTicketsAmount)+")\n"+
+                    "Student Tickets: "+studentTicketsInt+" ("+customer.formatCurrencyString(studentTicketsAmount)+")\n"+
+                    "Pensioner Tickets: "+pensionerTicketsInt+" ("+customer.formatCurrencyString(pensionerTicketsAmount)+")\n"+
+                    "Seating Location: "+seatingPosition+"\n"+
+                    customer.lineBreak()+"\n"+
+                    "Total: "+customer.formatCurrencyString(totalAmount)
+                    );
+                
+                
+
+
+                
+                
             }
             else if(response.toLowerCase().equals("h")){
                 clearConsole();
@@ -435,7 +622,6 @@ public class Engine {
                     System.out.println("");
                     System.out.println(selectedMovie.getSynopsis());
                     System.out.println(
-                        "\nIf you would like to book this movie, type \"b\".\n"+
                         "To view another movie, type in its ID.\n"+
                         "To return to the home page, type \"h\".");
 
