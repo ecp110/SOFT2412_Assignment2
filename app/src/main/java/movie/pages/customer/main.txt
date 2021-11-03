@@ -2,6 +2,6 @@ Welcome back,
 
 We hope that you can enjoy one of the listed movies below today! 
 
-If you'd like to select a movie, just type the number that is next to that movie listing.
+To PREVIEW a movie's synopsis, enter its corresponding number.
 
-If you'd like to filter the movies, press the 'f' key and hit enter, and you'll be prompted to enter either a cinema or movie.
+To FILTER movies for booking, enter 'f'

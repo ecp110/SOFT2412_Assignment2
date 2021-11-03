@@ -37,7 +37,9 @@ public class CustomerPage extends Page {
         }
 
         output += this.parseTxt("/main.txt", 1);
+        output += "\n------------------------------------------------------------------------" + "\n";
         output += this.displayMovies();
+        output += "------------------------------------------------------------------------" + "\n";
         return output;
     }
 

@@ -1,40 +1,40 @@
 {
-    "giftcards" : [
+    "giftcards": [
         {
             "number": "0000000000000000GC",
+            "issue": "12122021",
             "redeemed": 0,
-            "issue": "12122020",
-            "expiry": "12122021"
+            "expiry": "12122025"
         },
         {
             "number": "1234567890123456GC",
-            "redeemed": 0,
-            "issue": "08112020",
-            "expiry": "08112021"
+            "issue": "08112021",
+            "redeemed": 1,
+            "expiry": "08112024"
         },
         {
             "number": "2345232534540980GC",
+            "issue": "10092021",
             "redeemed": 0,
-            "issue": "10092020",
-            "expiry": "10092021"
+            "expiry": "10092023"
         },
         {
             "number": "2346072396842372GC",
+            "issue": "23042021",
             "redeemed": 1,
-            "issue": "23042020",
-            "expiry": "23042021"
+            "expiry": "23042027"
         },
         {
             "number": "8950239845702398GC",
-            "redeemed": 0,
-            "issue": "01012020",
-            "expiry": "01012021"
+            "issue": "01012021",
+            "redeemed": 1,
+            "expiry": "01012022"
         },
         {
             "number": "5464564569084304GC",
+            "issue": "11112021",
             "redeemed": 1,
-            "issue": "11112020",
-            "expiry": "11112021"
+            "expiry": "11112023"
         }
     ]
 }
