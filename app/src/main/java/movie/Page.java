@@ -353,11 +353,8 @@ public abstract class Page {
         }
 
         JSONParser parser = new JSONParser();
-
-
         JSONObject jsonObjectInput = new JSONObject();
         JSONArray usersArray = new JSONArray();
-    
         JSONObject users = new JSONObject();
 
         for (User user : allUsers) {
@@ -375,18 +372,61 @@ public abstract class Page {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Staff member "+username+" removed.");
+        System.out.println("Staff member " + username + " removed.");
     }
 
+    public boolean removeMovie(Movie movie) {
+        ArrayList<Movie> curMovies = this.storeMovies(this.MOVIE_LOCATION);
+        boolean found = false;
+        for (Movie m : curMovies) {
+            if (m.getID().equals(movie.getID())) {
+                found = true;
+                this.movies.remove(movie);
+                break;
+            }
+        }
 
-        /*
-        JSONObject userEntry = new JSONObject({
-            "name":name,
-            "password":password,
-            "status":status
-            }); 
+        if (!found) {
+            return false;
+        } 
+        
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObjectInput = (JSONObject) parser.parse(new FileReader(MOVIE_LOCATION));
+            JSONArray movieArray = (JSONArray) jsonObjectInput.get("movies");
+            JSONArray editedMovieArray = (JSONArray) new JSONArray();
+        
+            JSONObject movieEntry = new JSONObject();
+            JSONObject movies = new JSONObject();
+            JSONObject m;
+            for (Object o : movieArray) {
+                m = (JSONObject) o;
+                if (!(m.get("id").equals(movie.getID()))) {
+                    editedMovieArray.add(m);
+                }
+            }
+    
+            movies.put("movies",editedMovieArray);
+    
+            try (FileWriter file = new FileWriter(MOVIE_LOCATION)) {
+                file.write(movies.toJSONString());
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+    
+       
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ParseException p) {
+            p.printStackTrace();
+            return false;
+        }
 
-        */
+    }
+
 
     /*
     ************** All methods in the section below are for the filter method **************

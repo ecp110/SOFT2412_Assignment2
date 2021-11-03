@@ -425,129 +425,252 @@ public class Engine {
 
             // EDIT MOVIE INFORMATION
             } else if (response.equals("2")) {
-                System.out.println(admin.displayMovieEditPrompt());
-                System.out.println(admin.displayMovies());
-                System.out.println();
-                String movieID = scan.nextLine();
-
-                if (movieID.toLowerCase().equals("c")) {
+                System.out.println(admin.displayMovieModificationPrompt());
+                response = scan.nextLine().toLowerCase();
+                if (response.equals("c")) {
                     System.out.println("Cancelling, goodbye!");
                     Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
                     exit = true;
                     this.reboot = true;
                     return;
-                }
 
-                Movie toEdit = null;
-                for (Movie movie : admin.getMovies()) {
-                    if (movie.getID().equals(movieID)) {
-                        toEdit = movie;
-                        System.out.println(admin.displayFoundEditableMovie());
-                        System.out.println(movie.toString());
-                    }
-                }
-                if (toEdit == null) {
-                    System.out.println("Sorry, that is not a valid movie ID.");
-                } else {
-                    System.out.println(admin.displayEditStringPrompt());
-                    String editString = "";
+                // ADD NEW MOVIE
+                } else if (response.equals("1")) {
+                    String title;
+                    String id;
+                    String synop;
+                    int runtime;
+                    String classification;
+                    String director;
+                    Calendar releaseDate;
 
-                    System.out.print("Title: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
+                    System.out.println("What's the name of the movie you'd like to add:");
+                    title = scan.nextLine();
 
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
-                    }
+                    System.out.println("ID:");
+                    id = scan.nextLine();
 
-                    editString += ",";
+                    System.out.println("What's the synopsis:");
+                    synop = scan.nextLine();
 
-                    System.out.print("ID: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
-
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
+                    while (true) {
+                        try {
+                            System.out.println("How long does it run for (in minutes):");
+                            runtime = Integer.valueOf(scan.nextLine());
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Sorry, invalid input. Please try again.");
+                            continue;
+                        }
                     }
 
-                    editString += ",";
+                    System.out.println("What's its rating (classification):");
+                    classification = scan.nextLine();
 
-                    System.out.print("Classification: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
+                    System.out.println("Who's the director:");
+                    director = scan.nextLine();
 
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
+                    while (true) {
+                        try {
+                            System.out.println("When was it released (ddmmyyyy):");
+                            char[] date = scan.nextLine().toCharArray();
+                            if (date.length != 8) {
+                                System.out.println("Invalid input. Please try again.");
+                                continue;
+                            }
+
+                            int day = Integer.valueOf(String.valueOf(date[0]) + String.valueOf(date[1]));
+                            int month = Integer.valueOf(String.valueOf(date[2]) + String.valueOf(date[3]));
+                            int year = Integer.valueOf(String.valueOf(date[4]) + String.valueOf(date[5]) + String.valueOf(date[6]) + String.valueOf(date[7]));
+
+                            releaseDate = new Calendar(day, month, year);
+
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input. Please try again.");
+                            continue;
+                        }
                     }
 
-                    editString += ",";
+                    System.out.println("Who is in the cast? If there are no more to add, please just hit enter.");
+                    String actor;
+                    ArrayList<String> cast = new ArrayList<String>();
 
-                    System.out.print("Runtime: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
-
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
+                    while (true) {
+                        actor = scan.nextLine();
+                        if (actor == null || actor.equals("")) {
+                            break;
+                        } else {
+                            cast.add(actor);
+                        }
                     }
 
-                            editString += ",";
+                    Movie newMovie = new Movie(title, synop, runtime, classification, cast, director, id, releaseDate);
 
-                    System.out.print("Director: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
-
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
-                    }
-
-                    editString += ",";
-
-                    //Cast = TODO
-                    editString += ",";
-
-                    System.out.print("Release Date (ddmmyyyy): ");
-                    editString += scan.nextLine().replaceAll("\n", "");
-
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
-                    }
-
-                    editString += ",";
-
-                    System.out.print("Synopsis: ");
-                    editString += scan.nextLine().replaceAll("\n", "");
-
-                    if (editString.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        exit = true;
-                        this.reboot = true;
-                        return;
-                    }
-
-                    if (admin.editMovie(toEdit, editString)) {
-                        System.out.println(admin.displayCompletedEdit()); 
-                    } else {
+                    if (!admin.addMovie(newMovie)) {
                         System.out.println("ERROR");
+                    }
+
+                // REMOVE MOVIE
+                } else if (response.equals("2")) {
+                    boolean removed = false;
+                    while (!removed) {
+                        System.out.println("Which movie would you like to delete (ID)?");
+                        System.out.println(admin.displayMovies());
+                        System.out.println("");
+
+                        response = scan.nextLine().toLowerCase();
+
+                        if (response.equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        Movie foundMovie = admin.getMovieById(response);
+
+                        if (foundMovie == null) {
+                            System.out.println("No movie found with that ID. Please try again.");
+                            continue;
+                        } else {
+                            System.out.println("Deleting movie " + foundMovie.getTitle() + "...");
+                            if (admin.removeMovie(foundMovie)) {
+                                removed = true;
+                            } else {
+                                System.out.println("ERROR");
+                            }
+                        }
+                    }
+
+                // EDIT EXISTING MOVIE 
+                } else if (response.equals("3")) {
+                    System.out.println(admin.displayMovieEditPrompt());
+                    System.out.println(admin.displayMovies());                
+
+                    System.out.println();
+                    String movieID = scan.nextLine();
+
+                    if (movieID.toLowerCase().equals("c")) {
+                        System.out.println("Cancelling, goodbye!");
+                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                        exit = true;
+                        this.reboot = true;
+                        return;
+                    }
+
+                    Movie toEdit = null;
+                    for (Movie movie : admin.getMovies()) {
+                        if (movie.getID().equals(movieID)) {
+                            toEdit = movie;
+                            System.out.println(admin.displayFoundEditableMovie());
+                            System.out.println(movie.toString());
+                        }
+                    }
+                    if (toEdit == null) {
+                        System.out.println("Sorry, that is not a valid movie ID.");
+                    } else {
+                        System.out.println(admin.displayEditStringPrompt());
+                        String editString = "";
+
+                        System.out.print("Title: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        editString += ",";
+
+                        System.out.print("ID: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        editString += ",";
+
+                        System.out.print("Classification: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        editString += ",";
+
+                        System.out.print("Runtime: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                                editString += ",";
+
+                        System.out.print("Director: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        editString += ",";
+
+                        //Cast = TODO
+                        editString += ",";
+
+                        System.out.print("Release Date (ddmmyyyy): ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        editString += ",";
+
+                        System.out.print("Synopsis: ");
+                        editString += scan.nextLine().replaceAll("\n", "");
+
+                        if (editString.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            exit = true;
+                            this.reboot = true;
+                            return;
+                        }
+
+                        if (admin.editMovie(toEdit, editString)) {
+                            System.out.println(admin.displayCompletedEdit()); 
+                        } else {
+                            System.out.println("ERROR");
+                        }
                     }
                 }
             
