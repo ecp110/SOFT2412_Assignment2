@@ -77,4 +77,16 @@ public class Viewing{
 
         return returnString.toString();
     }
+
+    public void setTimeOfDay(int i) {
+        this.timeOfDay = i;
+    }
+
+    public void setScreen(int i) {
+        this.screenType = i;
+    }
+
+    public void setMovie(Movie mov) {
+        this.movie = mov;
+    }
 }

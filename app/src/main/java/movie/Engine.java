@@ -796,209 +796,666 @@ public class Engine {
 
             // EDIT TIMETABLING
             } else if (response.equals("5")) {
-                System.out.println(admin.displayInitialTimetableEdit());
 
+                System.out.println(admin.displayTimetablingMenu());
                 response = scan.nextLine();
-                String loc = "";
-                boolean invalid = true;
 
-                while (invalid){
-                    if (response.equals("1")) {
-                        loc = "Bondi";
-                        invalid = false;
-                    } else if (response.equals("2")) {
-                        loc = "GeorgeStreet";
-                        invalid = false;
-                    } else if (response.equals("3")) {
-                        loc = "Chatswood";
-                        invalid = false;
-                    } else if (response.equals("4")) {
-                        loc = "Hurstville";
-                        invalid = false;
-                    } else if (response.toLowerCase().equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        invalid = false;
-                        this.reboot = true;
-                        return;
-                    } else {
-                        System.out.println("Invalid input: try again.");
-                    }
-                }
 
-                String locPath = Paths.get(this.currentPath.toString(), "src", "main", "java", "movie", "Databases", loc).toString();
+                // EDIT TIMETABLE
+                if (response.equals("1")) {
+                    System.out.println(admin.displayInitialTimetableEdit());
 
-                Cinema cThis = null;
+                    String loc = "";
+                    boolean invalid = true;
 
-                ArrayList<Cinema> cinemas = admin.storeCinemas();
-                for (Cinema cinema : cinemas) {
-                    if (cinema.getName().equals(loc)) {
-                        cThis = cinema;
-                        break;
-                    }
-                }
-
-                int i = 1;
-                int dayNum = 0;
-                String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-                ArrayList<Viewing> allViewings = new ArrayList<Viewing>();
-                for (ArrayList<Viewing> day : cThis.viewings) {
-                    System.out.println(dayName[dayNum]);
-                    for (Viewing viewing : day) {
-                        allViewings.add(viewing);
-                        System.out.print("(");
-                        System.out.print(i);
-                        System.out.print(") ");
-                        System.out.println(viewing.toString());
-                        i += 1;
-                    }
-                    System.out.println(admin.lineBreak());
-                    dayNum += 1;
-                }
-                i -= 1;
-
-                System.out.println("If you would like to edit a specific viewing, please type the number associated with it");
-                int checkNum = -1;
-                while (true){
-                    response = scan.nextLine();
-                    checkNum = -1;
-                    try {
-                        checkNum = Integer.valueOf(response);
-                        if (checkNum > i) {
-                            System.out.println("Invalid input. Please try again.");
-                        } else if (checkNum == -1) {
-                            System.out.println("Invalid input. Please try again.");
+                    while (invalid){
+                        response = scan.nextLine();
+                        if (response.equals("1")) {
+                            loc = "Bondi";
+                            invalid = false;
+                        } else if (response.equals("2")) {
+                            loc = "GeorgeStreet";
+                            invalid = false;
+                        } else if (response.equals("3")) {
+                            loc = "Chatswood";
+                            invalid = false;
+                        } else if (response.equals("4")) {
+                            loc = "Hurstville";
+                            invalid = false;
+                        } else if (response.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            invalid = false;
+                            this.reboot = true;
+                            return;
                         } else {
+                            System.out.println("Invalid input: try again.");
+                        }
+                    }
+
+                    Cinema cThis = null;
+
+                    ArrayList<Cinema> cinemas = admin.storeCinemas();
+                    for (Cinema cinema : cinemas) {
+                        if (cinema.getName().equals(loc)) {
+                            cThis = cinema;
                             break;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Invalid input. Please try again.");
                     }
-                }
 
-                Viewing editingViewing = allViewings.get(checkNum);
+                    int i = 1;
+                    int dayNum = 0;
+                    String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                    ArrayList<Viewing> allViewings = new ArrayList<Viewing>();
+                    for (ArrayList<Viewing> day : cThis.viewings) {
+                        System.out.println(dayName[dayNum]);
+                        for (Viewing viewing : day) {
+                            allViewings.add(viewing);
+                            System.out.print("(");
+                            System.out.print(i);
+                            System.out.print(") ");
+                            System.out.println(viewing.toString());
+                            i += 1;
+                        }
+                        System.out.println(admin.lineBreak());
+                        dayNum += 1;
+                    }
+                    i -= 1;
 
-                System.out.println(admin.displayViewingSpecificEditPrompt());
+                    System.out.println("If you would like to edit a specific viewing, please type the number associated with it");
+                    int checkNum = -1;
+                    while (true){
+                        response = scan.nextLine();
+                        checkNum = -1;
+                        try {
+                            checkNum = Integer.valueOf(response);
+                            if (checkNum > i) {
+                                System.out.println("Invalid input. Please try again.");
+                            } else if (checkNum < 0) {
+                                System.out.println("Invalid input. Please try again.");
+                            } else {
+                                break;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Invalid input. Please try again.");
+                        }
+                    }
 
-                response = scan.nextLine().toLowerCase();
-                boolean finished = false;
+                    Viewing editingViewing = allViewings.get(checkNum - 1);
 
-                while (!finished){
+                    String existingViewingString = "";
+                    existingViewingString += editingViewing.getTimeOfDay();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getDay();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getMovie().getID();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getScreenType();
+
+                    System.out.println();
+                    System.out.print("You have selected: ");
+                    System.out.println(editingViewing.toString());
+                    
+                
+                    boolean finished = false;
                     int time = -1;
                     Movie mov = null;
                     int screen = -1;
+                    while (!finished){
+                        System.out.println(admin.displayViewingSpecificEditPrompt());
+                        response = scan.nextLine().toLowerCase();
 
-                    if (response.equals("1")) {
-                        
-                        System.out.println(admin.displayMovies());
-                        System.out.println("Which movie would you like to change to? (ID)");    
+                        if (response.equals("1")) {
+                            
+                            System.out.println(admin.displayMovies());
+                            System.out.println("Which movie would you like to change to? (ID)");    
 
-                        response = scan.nextLine();
+                            while (true) {
+                                response = scan.nextLine();
 
-                        mov = admin.getMovieById(response);
-                        if (mov == null) {
-                            System.out.println("Invalid movie selection.");
+                                mov = admin.getMovieById(response);
+                                if (mov == null) {
+                                    System.out.println("Invalid movie selection.");
+                                    continue;
+                                } else {
+                                    break;
+                                }
+                            }
+                            
+                        } else if (response.equals("2")) {
+                            System.out.println("What time would you like to change it to?");
+                            System.out.println(admin.displayTimeChecks());
+                            
+                            while (true) {
+                                response = scan.nextLine();
+                                if (response.equals("1")) {
+                                    time = 0;
+                                    break;
+                                } else if (response.equals("2")) {
+                                    time = 1;
+                                    break;
+                                } else if (response.equals("3")) {
+                                    time = 2;
+                                    break;
+                                } else if (response.toLowerCase().equals("c")) {
+                                    System.out.println("Cancelling, goodbye!");
+                                    Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                    this.reboot = true;
+                                    return;
+                                } else {
+                                    System.out.println("Invalid input. Please try again.");
+                                    continue;
+                                }
+                            }
+
+                        } else if (response.equals("3")) {
+                            System.out.println("What screen would you like to change it to?");
+                            System.out.println(admin.displayScreenChecks());
+                            
+                            while (true) {
+                                response = scan.nextLine();
+                                if (response.equals("1")) {
+                                    screen = 0;
+                                    break;
+                                } else if (response.equals("2")) {
+                                    screen = 1;
+                                    break;
+                                } else if (response.equals("3")) {
+                                    screen = 2;
+                                    break;
+                                } else if (response.toLowerCase().equals("c")) {
+                                    System.out.println("Cancelling, goodbye!");
+                                    Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                                    this.reboot = true;
+                                    return;
+                                } else {
+                                    System.out.println("Invalid input. Please try again.");
+                                    continue;
+                                }
+                            }
+
+                        } else if (response.equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            finished = true;
+                            this.reboot = true;
+                            return;
+
+                        } else if (response.equals("r")) {
+                            finished = true;
+                            System.out.println("CONFIRMATION - Changes to be made are: ");
+
+                            System.out.print("Movie: ");
+                            try {
+                                System.out.println(mov.getTitle());
+                            } catch (NullPointerException e) {
+                                System.out.println("No change");
+                            }
+
+                            System.out.print("Time: ");
+                            if (time == 0) {
+                                System.out.println("Morning");
+                            } else if (time == 1) {
+                                System.out.println("Midday");
+                            } else if (time == 2) {
+                                System.out.println("Evening");
+                            } else {
+                                System.out.println("No change");
+                            }
+
+                            System.out.print("Screen: ");
+                            if (screen == 0) {
+                                System.out.println("Bronze");
+                            } else if (time == 1) {
+                                System.out.println("Silver");
+                            } else if (time == 2) {
+                                System.out.println("Gold");
+                            } else {
+                                System.out.println("No change");
+                            }
+
+                            // MAKE ALL CHANGES IN DATABASE & CHECK IF VALID
+                            String locPath = Paths.get(this.currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", loc, "Timetable.csv").toString();
+                            if (time >= 0 && time <= 2) {
+                            editingViewing.setTimeOfDay(time);
+                            }
+
+                            if (screen >= 0 && screen <= 2) {
+                                editingViewing.setScreen(screen);
+                            }
+
+                            if (mov != null) {
+                                editingViewing.setMovie(mov);
+                            }
+
+                            String timetableString = "";
+                            timetableString += editingViewing.getTimeOfDay();
+                            timetableString += ",";
+                            timetableString += editingViewing.getDay();
+                            timetableString += ",";
+                            timetableString += editingViewing.getMovie().getID();
+                            timetableString += ",";
+                            timetableString += editingViewing.getScreenType();
+
+                            try {
+                                Scanner sc = new Scanner(new File(locPath));
+                                sc.nextLine();
+                                String next;
+                                String checkTime;
+                                String checkDay;
+                                String checkScreen;
+                                boolean addition = true;
+                                while (sc.hasNextLine()) {
+                                    next = sc.nextLine();
+
+                                    if (next.equals(existingViewingString)) {
+                                        continue;
+                                    }
+
+                                    checkTime = next.split(",")[0];
+                                    checkDay = next.split(",")[1];
+                                    checkScreen = next.split(",")[3];
+
+                                    if (checkTime.equals(String.valueOf(editingViewing.getTimeOfDay())) &&
+                                        checkDay.equals(editingViewing.getDay()) &&
+                                        checkScreen.equals(String.valueOf(editingViewing.getScreenType()))) {
+                                        
+                                            addition = false;
+                                            break;
+
+                                    }
+                                }
+
+                                if (!addition) {
+                                    System.out.println("Sorry, this viewing conflicts with an existing viewing. Please try again.");
+                                } else {
+                                    try {
+                                        String csv = "";
+                                        try {
+                                            Scanner sc2 = new Scanner(new File(locPath));
+                                            String line;
+                                            while (sc2.hasNextLine()) {
+                                                line = sc2.nextLine().trim();
+                                                if (!(line.equals(existingViewingString))) {
+                                                    csv += line;
+                                                    csv += "\n";
+                                                }
+                                            }
+                                            csv += timetableString;
+                                            csv += "\n";
+                                        } catch (IOException e) {
+                                            System.out.println(e);
+                                        }
+
+                                        FileWriter fw = new FileWriter(locPath, false);
+                                        fw.append(csv);
+                                        fw.flush();
+                                        fw.close();
+                                        admin.parseAll();
+                                    } catch (IOException e) {
+                                        System.out.println(e);
+                                    }
+                                }
+
+
+                            } catch (IOException e) {
+                                System.out.println(e);
+                            }
+
+                        } else {
+                            System.out.println("Sorry, not a valid input. Please try again.");
                             continue;
                         }
-                        
-                    } else if (response.equals("2")) {
-                        System.out.println("What time would you like to change it to?");
-                        System.out.println(admin.displayTimeChecks());
-                        response = scan.nextLine();
-
-                        while (true) {
-                            if (response.equals("1")) {
-                                time = 0;
-                                break;
-                            } else if (response.equals("2")) {
-                                time = 1;
-                                break;
-                            } else if (response.equals("3")) {
-                                time = 2;
-                                break;
-                            } else if (response.toLowerCase().equals("c")) {
-                                System.out.println("Cancelling, goodbye!");
-                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                                this.reboot = true;
-                                return;
-                            } else {
-                                System.out.println("Invalid input. Please try again.");
-                                continue;
-                            }
-                        }
-
-                    } else if (response.equals("3")) {
-                        System.out.println("What screen would you like to change it to?");
-                        System.out.println(admin.displayScreenChecks());
-                        response = scan.nextLine();
-                        
-                        while (true) {
-                            if (response.equals("1")) {
-                                screen = 0;
-                                break;
-                            } else if (response.equals("2")) {
-                                screen = 1;
-                                break;
-                            } else if (response.equals("3")) {
-                                screen = 2;
-                                break;
-                            } else if (response.toLowerCase().equals("c")) {
-                                System.out.println("Cancelling, goodbye!");
-                                Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                                this.reboot = true;
-                                return;
-                            } else {
-                                System.out.println("Invalid input. Please try again.");
-                                continue;
-                            }
-                        }
-
-                    } else if (response.equals("c")) {
-                        System.out.println("Cancelling, goodbye!");
-                        Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
-                        finished = true;
-                        this.reboot = true;
-                        return;
-
-                    } else if (response.equals("r")) {
-                        finished = true;
-                        System.out.println("CONFIRMATION - Changes to be made are: ");
-
-                        System.out.print("Movie: ");
-                        try {
-                            System.out.println(mov.getTitle());
-                        } catch (NullPointerException e) {
-                            System.out.println("No change");
-                        }
-
-                        System.out.print("Time: ");
-                        if (time == 0) {
-                            System.out.println("Morning");
-                        } else if (time == 1) {
-                            System.out.println("Midday");
-                        } else if (time == 2) {
-                            System.out.println("Evening");
-                        } else {
-                            System.out.println("No change");
-                        }
-
-                        System.out.print("Screen: ");
-                        if (screen == 0) {
-                            System.out.println("Bronze");
-                        } else if (time == 1) {
-                            System.out.println("Silver");
-                        } else if (time == 2) {
-                            System.out.println("Gold");
-                        } else {
-                            System.out.println("No change");
-                        }
-
-                        // TODO - MAKE ALL CHANGES IN DATABASE
-
-                    } else {
-                        System.out.println("Sorry, not a valid input. Please try again.");
-                        continue;
                     }
+
+                    // ADD NEW MOVIE
+                } else if (response.equals("2")) {
+                    
+                    
+                    System.out.println(admin.displayInitialTimetableEdit());
+
+                    String loc = "";
+                    boolean invalid = true;
+
+                    while (invalid){
+                        response = scan.nextLine();
+                        if (response.equals("1")) {
+                            loc = "Bondi";
+                            invalid = false;
+                        } else if (response.equals("2")) {
+                            loc = "GeorgeStreet";
+                            invalid = false;
+                        } else if (response.equals("3")) {
+                            loc = "Chatswood";
+                            invalid = false;
+                        } else if (response.equals("4")) {
+                            loc = "Hurstville";
+                            invalid = false;
+                        } else if (response.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            invalid = false;
+                            this.reboot = true;
+                            return;
+                        } else {
+                            System.out.println("Invalid input: try again.");
+                        }
+                    }
+
+                    Cinema cThis = null;
+
+                    ArrayList<Cinema> cinemas = admin.storeCinemas();
+                    for (Cinema cinema : cinemas) {
+                        if (cinema.getName().equals(loc)) {
+                            cThis = cinema;
+                            break;
+                        }
+                    }
+
+                    int i = 1;
+                    int dayNum = 0;
+                    String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                    ArrayList<Viewing> allViewings = new ArrayList<Viewing>();
+                    for (ArrayList<Viewing> day : cThis.viewings) {
+                        System.out.println(dayName[dayNum]);
+                        for (Viewing viewing : day) {
+                            allViewings.add(viewing);
+                            System.out.print("(");
+                            System.out.print(i);
+                            System.out.print(") ");
+                            System.out.println(viewing.toString());
+                            i += 1;
+                        }
+                        System.out.println(admin.lineBreak());
+                        dayNum += 1;
+                    }
+                    i -= 1;
+
+                    System.out.println();
+
+                    String id;
+                    String time;
+                    String day;
+                    String screen;
+
+                    int timeInt;
+                    int screenInt;
+
+                    Movie movThis;
+
+                    while (true) {
+                        id = null;
+                        time = null;
+                        day = null;
+                        screen = null;
+                        timeInt = -1;
+                        screenInt = -1;
+                        movThis = null;
+
+                        System.out.println("What movie would you like to add? (ID)");
+                        id = scan.nextLine();
+
+                        System.out.println("When would you like this movie to screen? (Morning, Midday or Evening)");
+                        time = scan.nextLine();
+
+                        System.out.println("What day would you like this to screen on? (Monday, Tuesday etc.)");
+                        day = scan.nextLine();
+
+                        System.out.println("What screen would you like this to screen on? (Bronze, Silver, Gold)?");
+                        screen = scan.nextLine();
+
+                        if (time.toLowerCase().equals("morning")) {
+                            timeInt = 0;
+                        } else if (time.toLowerCase().equals("midday")) {
+                            timeInt = 1;
+                        } else if (time.toLowerCase().equals("evening")) {
+                            timeInt = 2;
+                        } else {
+                            System.out.println("Not a valid input. Try again.");
+                            continue;
+                        }
+
+                        if (screen.toLowerCase().equals("bronze")) {
+                            screenInt = 0;
+                        } else if (screen.toLowerCase().equals("silver")) {
+                            screenInt = 1;
+                        } else if (screen.toLowerCase().equals("gold")) {
+                            screenInt = 2;
+                        } else {
+                            System.out.println("Not a valid input. Try again.");
+                            continue;
+                        }
+
+                        for (Movie movie : admin.movies) {
+                            if (movie.getID().equals(id)) {
+                                movThis = movie;
+                                break;
+                            }
+                        }
+
+                        if (movThis == null) {
+                            System.out.println("Movie not found. Try again.");
+                            continue;
+                        }
+
+                        if (id.equals("") || time.equals("") || day.equals("") || screen.equals("")) {
+                            System.out.println("Not a valid input. Try again.");
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    Viewing newViewing = new Viewing(cThis, movThis, screenInt, timeInt, day);
+
+                    String newViewingString = "";
+                    newViewingString += newViewing.getTimeOfDay();
+                    newViewingString += ",";
+                    newViewingString += newViewing.getDay();
+                    newViewingString += ",";
+                    newViewingString += newViewing.getMovie().getID();
+                    newViewingString += ",";
+                    newViewingString += newViewing.getScreenType();
+
+                    System.out.println();
+                    System.out.print("You are going to add: ");
+                    System.out.println(newViewing.toString());
+                    
+                    // MAKE ALL CHANGES IN DATABASE & CHECK IF VALID
+                    String locPath = Paths.get(this.currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", loc, "Timetable.csv").toString();
+
+                    try {
+                        Scanner sc = new Scanner(new File(locPath));
+                        sc.nextLine();
+                        String next;
+                        String checkTime;
+                        String checkDay;
+                        String checkScreen;
+                        boolean addition = true;
+                        while (sc.hasNextLine()) {
+                            next = sc.nextLine();
+
+                            if (next.equals(newViewingString)) {
+                                continue;
+                            }
+
+                            checkTime = next.split(",")[0];
+                            checkDay = next.split(",")[1];
+                            checkScreen = next.split(",")[3];
+
+                            if (checkTime.equals(String.valueOf(newViewing.getTimeOfDay())) &&
+                                checkDay.equals(newViewing.getDay()) &&
+                                checkScreen.equals(String.valueOf(newViewing.getScreenType()))) {
+                                    addition = false;
+                                    break;
+
+                            }
+                        }
+
+                        if (!addition) {
+                            System.out.println("Sorry, this viewing conflicts with an existing viewing. Please try again.");
+                        } else {
+                            try {
+                                String csv = "";
+                                try {
+                                    Scanner sc2 = new Scanner(new File(locPath));
+                                    String line;
+                                    while (sc2.hasNextLine()) {
+                                        line = sc2.nextLine().trim();
+                                        if (!(line.equals(newViewingString))) {
+                                            csv += line;
+                                            csv += "\n";
+                                        }
+                                    }
+                                    csv += newViewingString;
+                                    csv += "\n";
+                                } catch (IOException e) {
+                                    System.out.println(e);
+                                }
+
+                                FileWriter fw = new FileWriter(locPath, false);
+                                fw.append(csv);
+                                fw.flush();
+                                fw.close();
+                                admin.parseAll();
+                            } catch (IOException e) {
+                                System.out.println(e);
+                            }
+                        }
+
+
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+
+
+                } else if (response.equals("3")) {
+
+                    System.out.println(admin.displayInitialTimetableEdit());
+
+                    String loc = "";
+                    boolean invalid = true;
+
+                    while (invalid){
+                        response = scan.nextLine();
+                        if (response.equals("1")) {
+                            loc = "Bondi";
+                            invalid = false;
+                        } else if (response.equals("2")) {
+                            loc = "GeorgeStreet";
+                            invalid = false;
+                        } else if (response.equals("3")) {
+                            loc = "Chatswood";
+                            invalid = false;
+                        } else if (response.equals("4")) {
+                            loc = "Hurstville";
+                            invalid = false;
+                        } else if (response.toLowerCase().equals("c")) {
+                            System.out.println("Cancelling, goodbye!");
+                            Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                            invalid = false;
+                            this.reboot = true;
+                            return;
+                        } else {
+                            System.out.println("Invalid input: try again.");
+                        }
+                    }
+
+                    Cinema cThis = null;
+
+                    ArrayList<Cinema> cinemas = admin.storeCinemas();
+                    for (Cinema cinema : cinemas) {
+                        if (cinema.getName().equals(loc)) {
+                            cThis = cinema;
+                            break;
+                        }
+                    }
+
+                    int i = 1;
+                    int dayNum = 0;
+                    String[] dayName = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                    ArrayList<Viewing> allViewings = new ArrayList<Viewing>();
+                    for (ArrayList<Viewing> day : cThis.viewings) {
+                        System.out.println(dayName[dayNum]);
+                        for (Viewing viewing : day) {
+                            allViewings.add(viewing);
+                            System.out.print("(");
+                            System.out.print(i);
+                            System.out.print(") ");
+                            System.out.println(viewing.toString());
+                            i += 1;
+                        }
+                        System.out.println(admin.lineBreak());
+                        dayNum += 1;
+                    }
+                    i -= 1;
+
+                    System.out.println("Type the number of the viewing you would like to remove");
+                    int checkNum = -1;
+                    while (true){
+                        response = scan.nextLine();
+                        checkNum = -1;
+                        try {
+                            checkNum = Integer.valueOf(response);
+                            if (checkNum > i) {
+                                System.out.println("Invalid input. Please try again.");
+                            } else if (checkNum < 0) {
+                                System.out.println("Invalid input. Please try again.");
+                            } else {
+                                break;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Invalid input. Please try again.");
+                        }
+                    }
+
+                    Viewing editingViewing = allViewings.get(checkNum - 1);
+
+                    String existingViewingString = "";
+                    existingViewingString += editingViewing.getTimeOfDay();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getDay();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getMovie().getID();
+                    existingViewingString += ",";
+                    existingViewingString += editingViewing.getScreenType();
+                    String locPath = Paths.get(this.currentPath.toString(), "src", "main", "java", "movie", "Databases", "Locations", loc, "Timetable.csv").toString();
+
+                    try {
+                        String csv = "";
+                        try {
+                            Scanner sc2 = new Scanner(new File(locPath));
+                            String line;
+                            while (sc2.hasNextLine()) {
+                                line = sc2.nextLine().trim();
+                                if (!(line.equals(existingViewingString))) {
+                                    csv += line;
+                                    csv += "\n";
+                                }
+                            }
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
+
+                        System.out.print("Removing ");
+                        System.out.print(editingViewing.toString());
+                        System.out.println("...");
+
+                        FileWriter fw = new FileWriter(locPath, false);
+                        fw.append(csv);
+                        fw.flush();
+                        fw.close();
+                        admin.parseAll();
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+
+
+                } else if (response.toLowerCase().equals("c")) {
+                    System.out.println("Cancelling, goodbye!");
+                    Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
+                    this.reboot = true;
+                    return;
                 }
 
             // CANCELLATION
@@ -1007,6 +1464,7 @@ public class Engine {
                 Engine.logCancellation(currentUser, "user cancellation", cancellationPath);
                 exit = true;
                 this.reboot = true;
+                return;
             }
         }
     }  
