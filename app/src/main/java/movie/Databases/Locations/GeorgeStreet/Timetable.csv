@@ -9,7 +9,9 @@ start,day,id,screen_num
 2,Monday,387,1
 2,Monday,243,2
 0,Tuesday,387,0
+0,Tuesday,000,0
 0,Tuesday,000,1
+0,Tuesday,000,2
 0,Tuesday,234,2
 1,Tuesday,634,0
 1,Tuesday,958,1
