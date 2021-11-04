@@ -252,7 +252,7 @@ public class Engine {
                     System.out.println(result);
                 }
                 if(results.size()== 0) {
-                    System.out.println("No matching sessions found! Type \'f\' to search again.");
+                    System.out.println("No matching sessions found! Type \'c\' to go back.");
                 }
                 System.out.println(guest.lineBreak());
                 System.out.println("As a guest, you cannot book a ticket, and must first register an account.\nType \'r\' to register!");
@@ -448,7 +448,7 @@ public class Engine {
                     index++;
                 }
                 if(results.size() == 0) {
-                    System.out.println("No matching sessions found! Type \'f\' to search again.");
+                    System.out.println("No matching sessions found! Type \'c\' to go back.");
                 }
                 System.out.println(customer.lineBreak());
                 System.out.println("To book one of these sessions, enter its corresponding number.");
