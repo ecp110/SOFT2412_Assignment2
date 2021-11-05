@@ -71,8 +71,16 @@ Locate your OS in the link below and follow instructions carefully - once both G
 **C. Testing the Program:**
 
 - In your terminal, locate the directory, and enter the directory `assignment-2`
-- Run the command `gradle test`
+
+- Run the command `gradle test`, or if you would like to view code coverage, run
+
+   `gradle test jacocotestreport`
+
 - The program will run its test suite, indicating any failed tests
+
+- The JUnit test results can be viewed by opening `app/build/html/index.html`
+
+- The JaCoCo test results can be viewed by opening `app/build/jacocoHtml/index.html` 
 
 **D. Contributing to the Codebase:**
 
