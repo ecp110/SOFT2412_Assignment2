@@ -1,0 +1,5 @@
+Select functionality.
+
+(1) Edit existing viewing sessions
+(2) Add new viewing session
+(3) Remove existing viewing session

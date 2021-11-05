@@ -1,0 +1,7 @@
+Welcome back,
+
+We hope that you can enjoy one of the listed movies below today! 
+
+To PREVIEW a movie's synopsis, enter its corresponding number.
+
+To FILTER movies for booking, enter 'f'

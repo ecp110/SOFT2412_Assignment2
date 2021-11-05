@@ -1,0 +1,10 @@
+Welcome, esteemed guest! Thank you for choosing XYZ cinemas.
+As a guest user, you can explore all of the movies now showing.
+
+To SELECT a movie, enter its corresponding number
+
+To FILTER movies, enter 'f'
+
+To REGISTER for an account, enter 'r'
+
+To LOGIN, enter 'l'

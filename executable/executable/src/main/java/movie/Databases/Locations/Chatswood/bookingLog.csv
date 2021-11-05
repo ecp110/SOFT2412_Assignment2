@@ -1,0 +1,9 @@
+time,customer,cardnum,seats,movie,screen
+0,Stacey,12345,2,634,2
+1,Jimmy,12345,2,000,0
+2,Alex,12345,2,234,1
+1,Charles,12345,2,999,2
+2,Ethan,12345,2,394,2
+0,Scrum Master,12345,2,243,2
+1,Ed,55134,1,230,1
+0,Ed,0000000000000000GC,10,000,2

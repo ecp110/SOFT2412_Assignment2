@@ -1,0 +1,5 @@
+What location would you like to see bookings for?
+(1) George St
+(2) Chatswood
+(3) Bondi
+(4) Hurstville

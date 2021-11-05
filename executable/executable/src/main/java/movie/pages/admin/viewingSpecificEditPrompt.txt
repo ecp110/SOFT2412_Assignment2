@@ -1,0 +1,6 @@
+What would you like to edit? 
+(1) Movie
+(2) Time
+(3) Screen
+
+If you would like to finish editing, hit "r" and then enter.
